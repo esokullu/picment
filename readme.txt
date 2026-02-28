@@ -4,7 +4,7 @@ Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        1.0.1
+Stable tag:        1.0.2
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,7 +127,7 @@ Click **Manage Subscription** on the **AI Image Gen → Billing** page. This ope
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.2 =
 * Fixed escaping and sanitization issues for WordPress.org compliance
 * Replaced mt_rand() with wp_rand() for improved security
 * Updated text domain to match plugin slug
@@ -139,7 +139,7 @@ Click **Manage Subscription** on the **AI Image Gen → Billing** page. This ope
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.2 =
 Security and compliance fixes for WordPress.org submission.
 
 = 1.0.0 =

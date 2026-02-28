@@ -3,7 +3,7 @@
  * Plugin Name:       Zero-Key AI Images
  * Plugin URI:        https://wordpress.org/plugins/zero-key-ai-images/
  * Description:       Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPAIIMAGE_VERSION', '1.0.1' );
+define( 'WPAIIMAGE_VERSION', '1.0.2' );
 define( 'WPAIIMAGE_PLUGIN_FILE', __FILE__ );
 define( 'WPAIIMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPAIIMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
