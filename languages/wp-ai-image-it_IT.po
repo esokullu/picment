@@ -1,0 +1,386 @@
+# Italian translation for AI Featured Image Generator.
+# Copyright (C) 2026 Barack Sokullu
+# This file is distributed under the same license as the AI Featured Image Generator package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
+"POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-02-23T00:00:00+00:00\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: wp-ai-image\n"
+
+msgid "AI Featured Image Generator"
+msgstr "Generatore di immagini in evidenza con IA"
+
+msgid "AI Image Gen"
+msgstr "Gen. immagini IA"
+
+msgid "Generate Images"
+msgstr "Genera immagini"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Billing"
+msgstr "Fatturazione"
+
+msgid "API Configuration"
+msgstr "Configurazione API"
+
+msgid "OpenAI API Key"
+msgstr "Chiave API OpenAI"
+
+msgid "Image Settings"
+msgstr "Impostazioni immagine"
+
+msgid "Image Size"
+msgstr "Dimensione immagine"
+
+msgid "Image Quality"
+msgstr "Qualità immagine"
+
+msgid "Image Style"
+msgstr "Stile immagine"
+
+msgid "Custom Prompt Template"
+msgstr "Modello di prompt personalizzato"
+
+msgid "Automation"
+msgstr "Automazione"
+
+msgid "Auto-generate on Publish"
+msgstr "Genera automaticamente alla pubblicazione"
+
+msgid "Overwrite Existing Images"
+msgstr "Sovrascrivi le immagini esistenti"
+
+msgid "Get your API key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr "Ottieni la tua chiave API su <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+
+msgid "1792 × 1024 — Landscape (recommended for blog posts)"
+msgstr "1792 × 1024 — Orizzontale (consigliato per i post del blog)"
+
+msgid "1024 × 1024 — Square"
+msgstr "1024 × 1024 — Quadrata"
+
+msgid "1024 × 1792 — Portrait"
+msgstr "1024 × 1792 — Verticale"
+
+msgid "HD — higher detail, higher cost"
+msgstr "HD — più dettagli, costo maggiore"
+
+msgid "Standard"
+msgstr "Standard"
+
+msgid "Vivid — hyper-real and dramatic"
+msgstr "Vivace — iperrealistica e drammatica"
+
+msgid "Natural — more realistic tones"
+msgstr "Naturale — toni più realistici"
+
+msgid "Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt."
+msgstr "Usa <code>{title}</code> e <code>{content}</code> come segnaposto. Lascia vuoto per usare il prompt integrato."
+
+msgid "<strong>Default:</strong> <em>%s</em>"
+msgstr "<strong>Predefinito:</strong> <em>%s</em>"
+
+msgid "(post title)"
+msgstr "(titolo del post)"
+
+msgid "(post content)"
+msgstr "(contenuto del post)"
+
+msgid "Automatically generate a featured image when a post is published (if none exists)"
+msgstr "Genera automaticamente un'immagine in evidenza quando un post viene pubblicato (se non esiste)"
+
+msgid "Overwrite existing featured images when regenerating via the admin page"
+msgstr "Sovrascrivi le immagini in evidenza esistenti durante la rigenerazione dalla pagina di amministrazione"
+
+msgid "AI Featured Image Generator — Settings"
+msgstr "Generatore di immagini in evidenza con IA — Impostazioni"
+
+msgid "Save Settings"
+msgstr "Salva impostazioni"
+
+msgid "Image generation is not available. <a href=\"%s\">Configure billing →</a>"
+msgstr "La generazione di immagini non è disponibile. <a href=\"%s\">Configura fatturazione →</a>"
+
+msgid "AI Featured Image Generator — Generate"
+msgstr "Generatore di immagini in evidenza con IA — Genera"
+
+msgid "Select All"
+msgstr "Seleziona tutto"
+
+msgid "Deselect All"
+msgstr "Deseleziona tutto"
+
+msgid "Select Posts Without Image"
+msgstr "Seleziona post senza immagine"
+
+msgid "Generate for Selected"
+msgstr "Genera per i selezionati"
+
+msgid "Post Title"
+msgstr "Titolo del post"
+
+msgid "Published"
+msgstr "Pubblicato"
+
+msgid "Thumbnail"
+msgstr "Miniatura"
+
+msgid "AI Status"
+msgstr "Stato IA"
+
+msgid "Action"
+msgstr "Azione"
+
+msgid "No published posts found."
+msgstr "Nessun post pubblicato trovato."
+
+msgid "Regenerate"
+msgstr "Rigenera"
+
+msgid "Generate"
+msgstr "Genera"
+
+msgid "Generated"
+msgstr "Generata"
+
+msgid "Pending&hellip;"
+msgstr "In attesa&hellip;"
+
+msgid "Generating&hellip;"
+msgstr "Generazione in corso&hellip;"
+
+msgid "Failed"
+msgstr "Fallita"
+
+msgid "Done"
+msgstr "Fatto"
+
+msgid "This post already has a featured image. Overwrite it?"
+msgstr "Questo post ha già un'immagine in evidenza. Sovrascriverla?"
+
+msgid "Please select at least one post."
+msgstr "Seleziona almeno un post."
+
+msgid "Processing %1$d of %2$d&hellip;"
+msgstr "Elaborazione %1$d di %2$d&hellip;"
+
+msgid "Done! %d image(s) generated."
+msgstr "Fatto! %d immagine/i generata/e."
+
+msgid "Image generated — refresh to see the thumbnail."
+msgstr "Immagine generata — aggiorna per vedere la miniatura."
+
+msgid "BYOK mode is active but no API key is configured. <a href=\"%s\">Add your key →</a>"
+msgstr "La modalità BYOK è attiva ma nessuna chiave API è configurata. <a href=\"%s\">Aggiungi la tua chiave →</a>"
+
+msgid "Your free trial image has been used. <a href=\"%s\">Subscribe or enter your own API key →</a>"
+msgstr "La tua immagine di prova gratuita è stata utilizzata. <a href=\"%s\">Abbonati o inserisci la tua chiave API →</a>"
+
+msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan →</a>"
+msgstr "Nessun credito immagine rimanente questo mese. <a href=\"%s\">Aggiorna il tuo piano →</a>"
+
+msgid "AI Featured Image Generator:"
+msgstr "Generatore di immagini in evidenza con IA:"
+
+msgid "AI Featured Image"
+msgstr "Immagine in evidenza con IA"
+
+msgid "Auto-generate on publish"
+msgstr "Genera automaticamente alla pubblicazione"
+
+msgid "Status:"
+msgstr "Stato:"
+
+msgid "Regenerate Image"
+msgstr "Rigenera immagine"
+
+msgid "Generate Image Now"
+msgstr "Genera immagine ora"
+
+msgid "Powered by DALL-E 3. <a href=\"%s\" target=\"_blank\">Settings</a>"
+msgstr "Basato su DALL-E 3. <a href=\"%s\" target=\"_blank\">Impostazioni</a>"
+
+msgid "Post not found."
+msgstr "Post non trovato."
+
+msgid "OpenAI API key is not configured. Go to AI Image Gen → Billing."
+msgstr "La chiave API OpenAI non è configurata. Vai su Gen. immagini IA → Fatturazione."
+
+msgid "OpenAI API error (HTTP %1$d): %2$s"
+msgstr "Errore API OpenAI (HTTP %1$d): %2$s"
+
+msgid "OpenAI API returned HTTP %d."
+msgstr "L'API OpenAI ha restituito HTTP %d."
+
+msgid "OpenAI returned no image URL."
+msgstr "OpenAI non ha restituito nessun URL immagine."
+
+msgid "AI generated image for: %s"
+msgstr "Immagine generata da IA per: %s"
+
+msgid "AI generated image"
+msgstr "Immagine generata da IA"
+
+msgid "Permission denied."
+msgstr "Permesso negato."
+
+msgid "Invalid post ID."
+msgstr "ID post non valido."
+
+msgid "You do not have permission to edit this post."
+msgstr "Non hai il permesso di modificare questo post."
+
+msgid "Image generated successfully."
+msgstr "Immagine generata con successo."
+
+msgid "Invalid plan selected."
+msgstr "Piano selezionato non valido."
+
+msgid "No Stripe customer found. Please subscribe first."
+msgstr "Nessun cliente Stripe trovato. Abbonati prima."
+
+msgid "API key cannot be empty."
+msgstr "La chiave API non può essere vuota."
+
+msgid "Saved. Switched to BYOK mode."
+msgstr "Salvato. Passato alla modalità BYOK."
+
+msgid "No subscription found to sync."
+msgstr "Nessun abbonamento trovato da sincronizzare."
+
+msgid "Subscription synced."
+msgstr "Abbonamento sincronizzato."
+
+msgid "Subscription activated! Welcome aboard."
+msgstr "Abbonamento attivato! Benvenuto."
+
+msgid "Checkout cancelled — no charge was made."
+msgstr "Checkout annullato — non è stato addebitato nulla."
+
+msgid "Free Trial"
+msgstr "Prova gratuita"
+
+msgid "BYOK — Your API Key"
+msgstr "BYOK — La tua chiave API"
+
+msgid "%s Plan"
+msgstr "Piano %s"
+
+msgid "Paid Plan"
+msgstr "Piano a pagamento"
+
+msgid "AI Featured Image Generator — Billing"
+msgstr "Generatore di immagini in evidenza con IA — Fatturazione"
+
+msgid "Current Plan"
+msgstr "Piano attuale"
+
+msgid "Mode"
+msgstr "Modalità"
+
+msgid "Not configured"
+msgstr "Non configurato"
+
+msgid "Trial Credits"
+msgstr "Crediti di prova"
+
+msgid "(used)"
+msgstr "(usato)"
+
+msgid "Credits"
+msgstr "Crediti"
+
+msgid "this month"
+msgstr "questo mese"
+
+msgid "Status"
+msgstr "Stato"
+
+msgid "Renews"
+msgstr "Rinnovo"
+
+msgid "Manage Subscription →"
+msgstr "Gestisci abbonamento →"
+
+msgid "Sync Status"
+msgstr "Sincronizza stato"
+
+msgid "Use Your Own API Key (Free)"
+msgstr "Usa la tua chiave API (gratuito)"
+
+msgid "Enter your OpenAI API key. We never see it — it stays in your WordPress database. No monthly charge from us."
+msgstr "Inserisci la tua chiave API OpenAI. Non la vediamo mai — rimane nel tuo database WordPress. Nessun addebito mensile da parte nostra."
+
+msgid "Save &amp; Switch to BYOK"
+msgstr "Salva &amp; passa a BYOK"
+
+msgid "Get a key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr "Ottieni una chiave su <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+
+msgid "Active mode"
+msgstr "Modalità attiva"
+
+msgid "Rate-limited to 10 images/min."
+msgstr "Limitato a 10 immagini/min."
+
+msgid "Subscribe to a Managed Plan"
+msgstr "Abbonati a un piano gestito"
+
+msgid "We provide the OpenAI key — no setup needed. Credits reset on your monthly renewal date. No carry-over."
+msgstr "Forniamo noi la chiave OpenAI — nessuna configurazione necessaria. I crediti si azzerano alla data di rinnovo mensile. Nessun riporto."
+
+msgid "Current"
+msgstr "Attuale"
+
+msgid "%d image credits / month"
+msgstr "%d crediti immagine / mese"
+
+msgid "Your plan"
+msgstr "Il tuo piano"
+
+msgid "Switch Plan"
+msgstr "Cambia piano"
+
+msgid "Subscribe"
+msgstr "Abbonati"
+
+msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgstr "La fatturazione è gestita in modo sicuro da Stripe. Il Generatore di immagini in evidenza con IA non memorizza i dati di pagamento."
+
+msgid "No API key configured. <a href=\"%s\">Add your key or subscribe →</a>"
+msgstr "Nessuna chiave API configurata. <a href=\"%s\">Aggiungi la tua chiave o abbonati →</a>"
+
+msgid "Subscription inactive. <a href=\"%s\">Manage billing →</a>"
+msgstr "Abbonamento inattivo. <a href=\"%s\">Gestisci fatturazione →</a>"
+
+msgid "Too many requests. Please wait a moment and try again."
+msgstr "Troppe richieste. Attendi un momento e riprova."
+
+msgid "Image service temporarily unavailable. Please try again shortly."
+msgstr "Servizio immagini temporaneamente non disponibile. Riprova a breve."
+
+msgid "Plugin not yet configured. <a href=\"%s\">Go to Billing →</a>"
+msgstr "Plugin non ancora configurato. <a href=\"%s\">Vai a Fatturazione →</a>"
+
+msgid "Image generation is not available."
+msgstr "La generazione di immagini non è disponibile."
+
+msgid "Stripe price ID for plan \"%s\" not configured in wp-config.php."
+msgstr "L'ID prezzo Stripe per il piano \"%s\" non è configurato in wp-config.php."
+
+msgid "Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php."
+msgstr "Chiave segreta Stripe non configurata. Aggiungi STRIPE_SECRET_KEY a wp-config.php."
+
+msgid "Stripe API error (HTTP %d)."
+msgstr "Errore API Stripe (HTTP %d)."

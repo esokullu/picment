@@ -1,0 +1,386 @@
+# Dutch translation for AI Featured Image Generator.
+# Copyright (C) 2026 Barack Sokullu
+# This file is distributed under the same license as the AI Featured Image Generator package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
+"POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-02-23T00:00:00+00:00\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Dutch\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: wp-ai-image\n"
+
+msgid "AI Featured Image Generator"
+msgstr "AI Uitgelichte Afbeelding Generator"
+
+msgid "AI Image Gen"
+msgstr "AI Afb. Gen."
+
+msgid "Generate Images"
+msgstr "Afbeeldingen genereren"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Billing"
+msgstr "Facturering"
+
+msgid "API Configuration"
+msgstr "API-configuratie"
+
+msgid "OpenAI API Key"
+msgstr "OpenAI API-sleutel"
+
+msgid "Image Settings"
+msgstr "Afbeeldingsinstellingen"
+
+msgid "Image Size"
+msgstr "Afbeeldingsgrootte"
+
+msgid "Image Quality"
+msgstr "Afbeeldingskwaliteit"
+
+msgid "Image Style"
+msgstr "Afbeeldingsstijl"
+
+msgid "Custom Prompt Template"
+msgstr "Aangepaste promptsjabloon"
+
+msgid "Automation"
+msgstr "Automatisering"
+
+msgid "Auto-generate on Publish"
+msgstr "Automatisch genereren bij publicatie"
+
+msgid "Overwrite Existing Images"
+msgstr "Bestaande afbeeldingen overschrijven"
+
+msgid "Get your API key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr "Haal uw API-sleutel op bij <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+
+msgid "1792 × 1024 — Landscape (recommended for blog posts)"
+msgstr "1792 × 1024 — Liggend (aanbevolen voor blogberichten)"
+
+msgid "1024 × 1024 — Square"
+msgstr "1024 × 1024 — Vierkant"
+
+msgid "1024 × 1792 — Portrait"
+msgstr "1024 × 1792 — Staand"
+
+msgid "HD — higher detail, higher cost"
+msgstr "HD — meer detail, hogere kosten"
+
+msgid "Standard"
+msgstr "Standaard"
+
+msgid "Vivid — hyper-real and dramatic"
+msgstr "Levendig — hyperrealistisch en dramatisch"
+
+msgid "Natural — more realistic tones"
+msgstr "Natuurlijk — meer realistische tinten"
+
+msgid "Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt."
+msgstr "Gebruik <code>{title}</code> en <code>{content}</code> als tijdelijke aanduidingen. Laat leeg om de ingebouwde prompt te gebruiken."
+
+msgid "<strong>Default:</strong> <em>%s</em>"
+msgstr "<strong>Standaard:</strong> <em>%s</em>"
+
+msgid "(post title)"
+msgstr "(berichttitel)"
+
+msgid "(post content)"
+msgstr "(berichtinhoud)"
+
+msgid "Automatically generate a featured image when a post is published (if none exists)"
+msgstr "Automatisch een uitgelichte afbeelding genereren wanneer een bericht wordt gepubliceerd (als er geen bestaat)"
+
+msgid "Overwrite existing featured images when regenerating via the admin page"
+msgstr "Bestaande uitgelichte afbeeldingen overschrijven bij het opnieuw genereren via de beheerpagina"
+
+msgid "AI Featured Image Generator — Settings"
+msgstr "AI Uitgelichte Afbeelding Generator — Instellingen"
+
+msgid "Save Settings"
+msgstr "Instellingen opslaan"
+
+msgid "Image generation is not available. <a href=\"%s\">Configure billing →</a>"
+msgstr "Afbeeldingen genereren is niet beschikbaar. <a href=\"%s\">Facturering configureren →</a>"
+
+msgid "AI Featured Image Generator — Generate"
+msgstr "AI Uitgelichte Afbeelding Generator — Genereren"
+
+msgid "Select All"
+msgstr "Alles selecteren"
+
+msgid "Deselect All"
+msgstr "Alles deselecteren"
+
+msgid "Select Posts Without Image"
+msgstr "Berichten zonder afbeelding selecteren"
+
+msgid "Generate for Selected"
+msgstr "Genereren voor geselecteerde"
+
+msgid "Post Title"
+msgstr "Berichttitel"
+
+msgid "Published"
+msgstr "Gepubliceerd"
+
+msgid "Thumbnail"
+msgstr "Miniatuur"
+
+msgid "AI Status"
+msgstr "AI-status"
+
+msgid "Action"
+msgstr "Actie"
+
+msgid "No published posts found."
+msgstr "Geen gepubliceerde berichten gevonden."
+
+msgid "Regenerate"
+msgstr "Opnieuw genereren"
+
+msgid "Generate"
+msgstr "Genereren"
+
+msgid "Generated"
+msgstr "Gegenereerd"
+
+msgid "Pending&hellip;"
+msgstr "In behandeling&hellip;"
+
+msgid "Generating&hellip;"
+msgstr "Genereren&hellip;"
+
+msgid "Failed"
+msgstr "Mislukt"
+
+msgid "Done"
+msgstr "Klaar"
+
+msgid "This post already has a featured image. Overwrite it?"
+msgstr "Dit bericht heeft al een uitgelichte afbeelding. Overschrijven?"
+
+msgid "Please select at least one post."
+msgstr "Selecteer ten minste één bericht."
+
+msgid "Processing %1$d of %2$d&hellip;"
+msgstr "Verwerken %1$d van %2$d&hellip;"
+
+msgid "Done! %d image(s) generated."
+msgstr "Klaar! %d afbeelding(en) gegenereerd."
+
+msgid "Image generated — refresh to see the thumbnail."
+msgstr "Afbeelding gegenereerd — ververs de pagina om de miniatuur te zien."
+
+msgid "BYOK mode is active but no API key is configured. <a href=\"%s\">Add your key →</a>"
+msgstr "BYOK-modus is actief maar er is geen API-sleutel geconfigureerd. <a href=\"%s\">Sleutel toevoegen →</a>"
+
+msgid "Your free trial image has been used. <a href=\"%s\">Subscribe or enter your own API key →</a>"
+msgstr "Uw gratis proefafbeelding is gebruikt. <a href=\"%s\">Abonneer of voer uw eigen API-sleutel in →</a>"
+
+msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan →</a>"
+msgstr "Geen afbeeldingstegoed meer deze maand. <a href=\"%s\">Upgrade uw abonnement →</a>"
+
+msgid "AI Featured Image Generator:"
+msgstr "AI Uitgelichte Afbeelding Generator:"
+
+msgid "AI Featured Image"
+msgstr "AI Uitgelichte Afbeelding"
+
+msgid "Auto-generate on publish"
+msgstr "Automatisch genereren bij publicatie"
+
+msgid "Status:"
+msgstr "Status:"
+
+msgid "Regenerate Image"
+msgstr "Afbeelding opnieuw genereren"
+
+msgid "Generate Image Now"
+msgstr "Afbeelding nu genereren"
+
+msgid "Powered by DALL-E 3. <a href=\"%s\" target=\"_blank\">Settings</a>"
+msgstr "Aangedreven door DALL-E 3. <a href=\"%s\" target=\"_blank\">Instellingen</a>"
+
+msgid "Post not found."
+msgstr "Bericht niet gevonden."
+
+msgid "OpenAI API key is not configured. Go to AI Image Gen → Billing."
+msgstr "OpenAI API-sleutel is niet geconfigureerd. Ga naar AI Afb. Gen. → Facturering."
+
+msgid "OpenAI API error (HTTP %1$d): %2$s"
+msgstr "OpenAI API-fout (HTTP %1$d): %2$s"
+
+msgid "OpenAI API returned HTTP %d."
+msgstr "OpenAI API heeft HTTP %d geretourneerd."
+
+msgid "OpenAI returned no image URL."
+msgstr "OpenAI heeft geen afbeeldings-URL geretourneerd."
+
+msgid "AI generated image for: %s"
+msgstr "AI-gegenereerde afbeelding voor: %s"
+
+msgid "AI generated image"
+msgstr "AI-gegenereerde afbeelding"
+
+msgid "Permission denied."
+msgstr "Toegang geweigerd."
+
+msgid "Invalid post ID."
+msgstr "Ongeldig bericht-ID."
+
+msgid "You do not have permission to edit this post."
+msgstr "U heeft geen toestemming om dit bericht te bewerken."
+
+msgid "Image generated successfully."
+msgstr "Afbeelding succesvol gegenereerd."
+
+msgid "Invalid plan selected."
+msgstr "Ongeldig abonnement geselecteerd."
+
+msgid "No Stripe customer found. Please subscribe first."
+msgstr "Geen Stripe-klant gevonden. Abonneer u eerst."
+
+msgid "API key cannot be empty."
+msgstr "API-sleutel mag niet leeg zijn."
+
+msgid "Saved. Switched to BYOK mode."
+msgstr "Opgeslagen. Overgeschakeld naar BYOK-modus."
+
+msgid "No subscription found to sync."
+msgstr "Geen abonnement gevonden om te synchroniseren."
+
+msgid "Subscription synced."
+msgstr "Abonnement gesynchroniseerd."
+
+msgid "Subscription activated! Welcome aboard."
+msgstr "Abonnement geactiveerd! Welkom aan boord."
+
+msgid "Checkout cancelled — no charge was made."
+msgstr "Betaling geannuleerd — er is niets in rekening gebracht."
+
+msgid "Free Trial"
+msgstr "Gratis proefperiode"
+
+msgid "BYOK — Your API Key"
+msgstr "BYOK — Uw API-sleutel"
+
+msgid "%s Plan"
+msgstr "%s-abonnement"
+
+msgid "Paid Plan"
+msgstr "Betaald abonnement"
+
+msgid "AI Featured Image Generator — Billing"
+msgstr "AI Uitgelichte Afbeelding Generator — Facturering"
+
+msgid "Current Plan"
+msgstr "Huidig abonnement"
+
+msgid "Mode"
+msgstr "Modus"
+
+msgid "Not configured"
+msgstr "Niet geconfigureerd"
+
+msgid "Trial Credits"
+msgstr "Proeftegoed"
+
+msgid "(used)"
+msgstr "(gebruikt)"
+
+msgid "Credits"
+msgstr "Tegoed"
+
+msgid "this month"
+msgstr "deze maand"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Renews"
+msgstr "Verlengt"
+
+msgid "Manage Subscription →"
+msgstr "Abonnement beheren →"
+
+msgid "Sync Status"
+msgstr "Status synchroniseren"
+
+msgid "Use Your Own API Key (Free)"
+msgstr "Gebruik uw eigen API-sleutel (gratis)"
+
+msgid "Enter your OpenAI API key. We never see it — it stays in your WordPress database. No monthly charge from us."
+msgstr "Voer uw OpenAI API-sleutel in. Wij zien hem nooit — hij blijft in uw WordPress-database. Geen maandelijkse kosten van ons."
+
+msgid "Save &amp; Switch to BYOK"
+msgstr "Opslaan &amp; overschakelen naar BYOK"
+
+msgid "Get a key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr "Haal een sleutel op bij <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+
+msgid "Active mode"
+msgstr "Actieve modus"
+
+msgid "Rate-limited to 10 images/min."
+msgstr "Beperkt tot 10 afbeeldingen/min."
+
+msgid "Subscribe to a Managed Plan"
+msgstr "Abonneren op een beheerd abonnement"
+
+msgid "We provide the OpenAI key — no setup needed. Credits reset on your monthly renewal date. No carry-over."
+msgstr "Wij leveren de OpenAI-sleutel — geen installatie nodig. Tegoed wordt gereset op uw maandelijkse verlengingsdatum. Geen overdracht."
+
+msgid "Current"
+msgstr "Huidig"
+
+msgid "%d image credits / month"
+msgstr "%d afbeeldingstegoed / maand"
+
+msgid "Your plan"
+msgstr "Uw abonnement"
+
+msgid "Switch Plan"
+msgstr "Abonnement wijzigen"
+
+msgid "Subscribe"
+msgstr "Abonneren"
+
+msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgstr "Facturering wordt veilig afgehandeld door Stripe. AI Uitgelichte Afbeelding Generator slaat uw betalingsgegevens niet op."
+
+msgid "No API key configured. <a href=\"%s\">Add your key or subscribe →</a>"
+msgstr "Geen API-sleutel geconfigureerd. <a href=\"%s\">Sleutel toevoegen of abonneren →</a>"
+
+msgid "Subscription inactive. <a href=\"%s\">Manage billing →</a>"
+msgstr "Abonnement inactief. <a href=\"%s\">Facturering beheren →</a>"
+
+msgid "Too many requests. Please wait a moment and try again."
+msgstr "Te veel verzoeken. Wacht even en probeer het opnieuw."
+
+msgid "Image service temporarily unavailable. Please try again shortly."
+msgstr "Afbeeldingsservice tijdelijk niet beschikbaar. Probeer het binnenkort opnieuw."
+
+msgid "Plugin not yet configured. <a href=\"%s\">Go to Billing →</a>"
+msgstr "Plugin nog niet geconfigureerd. <a href=\"%s\">Ga naar Facturering →</a>"
+
+msgid "Image generation is not available."
+msgstr "Afbeeldingen genereren is niet beschikbaar."
+
+msgid "Stripe price ID for plan \"%s\" not configured in wp-config.php."
+msgstr "Stripe prijs-ID voor abonnement \"%s\" niet geconfigureerd in wp-config.php."
+
+msgid "Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php."
+msgstr "Stripe geheime sleutel niet geconfigureerd. Voeg STRIPE_SECRET_KEY toe aan wp-config.php."
+
+msgid "Stripe API error (HTTP %d)."
+msgstr "Stripe API-fout (HTTP %d)."

@@ -1,0 +1,529 @@
+# Translation template for AI Featured Image Generator.
+# Copyright (C) 2026 Barack Sokullu
+# This file is distributed under the same license as the AI Featured Image Generator package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
+"POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"X-Domain: wp-ai-image\n"
+
+#. Plugin Name of the plugin
+msgid "AI Featured Image Generator"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI Image Gen"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Generate Images"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Settings"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Billing"
+msgstr ""
+
+#: wpaiimage.php
+msgid "API Configuration"
+msgstr ""
+
+#: wpaiimage.php
+msgid "OpenAI API Key"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Image Settings"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Image Size"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Image Quality"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Image Style"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Custom Prompt Template"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Automation"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Auto-generate on Publish"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Overwrite Existing Images"
+msgstr ""
+
+#. translators: %s: link to OpenAI API keys page
+#: wpaiimage.php
+msgid "Get your API key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr ""
+
+#: wpaiimage.php
+msgid "1792 \u00d7 1024 \u2014 Landscape (recommended for blog posts)"
+msgstr ""
+
+#: wpaiimage.php
+msgid "1024 \u00d7 1024 \u2014 Square"
+msgstr ""
+
+#: wpaiimage.php
+msgid "1024 \u00d7 1792 \u2014 Portrait"
+msgstr ""
+
+#: wpaiimage.php
+msgid "HD \u2014 higher detail, higher cost"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Standard"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Vivid \u2014 hyper-real and dramatic"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Natural \u2014 more realistic tones"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt."
+msgstr ""
+
+#. translators: %s: the default prompt text
+#: wpaiimage.php
+msgid "<strong>Default:</strong> <em>%s</em>"
+msgstr ""
+
+#: wpaiimage.php
+msgid "(post title)"
+msgstr ""
+
+#: wpaiimage.php
+msgid "(post content)"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Automatically generate a featured image when a post is published (if none exists)"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Overwrite existing featured images when regenerating via the admin page"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI Featured Image Generator \u2014 Settings"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Save Settings"
+msgstr ""
+
+#. translators: %s: billing page URL
+#: wpaiimage.php
+msgid "Image generation is not available. <a href=\"%s\">Configure billing \u2192</a>"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI Featured Image Generator \u2014 Generate"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Select All"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Deselect All"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Select Posts Without Image"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Generate for Selected"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Post Title"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Published"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Thumbnail"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI Status"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Action"
+msgstr ""
+
+#: wpaiimage.php
+msgid "No published posts found."
+msgstr ""
+
+#: wpaiimage.php
+msgid "Regenerate"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Generate"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Generated"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Pending&hellip;"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Generating&hellip;"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Failed"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Done"
+msgstr ""
+
+#: wpaiimage.php
+msgid "This post already has a featured image. Overwrite it?"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Please select at least one post."
+msgstr ""
+
+#. translators: 1: current count, 2: total count
+#: wpaiimage.php
+msgid "Processing %1$d of %2$d&hellip;"
+msgstr ""
+
+#. translators: %d: number of images generated
+#: wpaiimage.php
+msgid "Done! %d image(s) generated."
+msgstr ""
+
+#: wpaiimage.php
+msgid "Image generated \u2014 refresh to see the thumbnail."
+msgstr ""
+
+#. translators: %s: billing page URL
+#: wpaiimage.php
+msgid "BYOK mode is active but no API key is configured. <a href=\"%s\">Add your key \u2192</a>"
+msgstr ""
+
+#. translators: %s: billing page URL
+#: wpaiimage.php
+msgid "Your free trial image has been used. <a href=\"%s\">Subscribe or enter your own API key \u2192</a>"
+msgstr ""
+
+#. translators: %s: billing page URL
+#: wpaiimage.php
+msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan \u2192</a>"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI Featured Image Generator:"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI Featured Image"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Auto-generate on publish"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Status:"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Regenerate Image"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Generate Image Now"
+msgstr ""
+
+#. translators: %s: settings page URL
+#: wpaiimage.php
+msgid "Powered by DALL-E 3. <a href=\"%s\" target=\"_blank\">Settings</a>"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Post not found."
+msgstr ""
+
+#: wpaiimage.php
+msgid "OpenAI API key is not configured. Go to AI Image Gen \u2192 Billing."
+msgstr ""
+
+#. translators: 1: HTTP code, 2: API error message
+#: wpaiimage.php
+msgid "OpenAI API error (HTTP %1$d): %2$s"
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: wpaiimage.php
+msgid "OpenAI API returned HTTP %d."
+msgstr ""
+
+#: wpaiimage.php
+msgid "OpenAI returned no image URL."
+msgstr ""
+
+#. translators: %s: post title
+#: wpaiimage.php
+msgid "AI generated image for: %s"
+msgstr ""
+
+#: wpaiimage.php
+msgid "AI generated image"
+msgstr ""
+
+#: wpaiimage.php
+msgid "Permission denied."
+msgstr ""
+
+#: wpaiimage.php
+msgid "Invalid post ID."
+msgstr ""
+
+#: wpaiimage.php
+msgid "You do not have permission to edit this post."
+msgstr ""
+
+#: wpaiimage.php
+msgid "Image generated successfully."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Invalid plan selected."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "No Stripe customer found. Please subscribe first."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "API key cannot be empty."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Saved. Switched to BYOK mode."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "No subscription found to sync."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Subscription synced."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Subscription activated! Welcome aboard."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Checkout cancelled \u2014 no charge was made."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Free Trial"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "BYOK \u2014 Your API Key"
+msgstr ""
+
+#. translators: %s: plan name
+#: includes/class-billing.php
+msgid "%s Plan"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Paid Plan"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "AI Featured Image Generator \u2014 Billing"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Current Plan"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Mode"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Not configured"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Trial Credits"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "(used)"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Credits"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "this month"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Status"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Renews"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Manage Subscription \u2192"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Sync Status"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Use Your Own API Key (Free)"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Enter your OpenAI API key. We never see it \u2014 it stays in your WordPress database. No monthly charge from us."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Save &amp; Switch to BYOK"
+msgstr ""
+
+#. translators: %s: OpenAI keys page URL
+#: includes/class-billing.php
+msgid "Get a key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Active mode"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Rate-limited to 10 images/min."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Subscribe to a Managed Plan"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "We provide the OpenAI key \u2014 no setup needed. Credits reset on your monthly renewal date. No carry-over."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Current"
+msgstr ""
+
+#. translators: %d: number of credits
+#: includes/class-billing.php
+msgid "%d image credits / month"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Your plan"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Switch Plan"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Subscribe"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgstr ""
+
+#. translators: %s: billing page URL
+#: includes/class-billing.php
+msgid "No API key configured. <a href=\"%s\">Add your key or subscribe \u2192</a>"
+msgstr ""
+
+#. translators: %s: billing page URL
+#: includes/class-billing.php
+msgid "Subscription inactive. <a href=\"%s\">Manage billing \u2192</a>"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Too many requests. Please wait a moment and try again."
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Image service temporarily unavailable. Please try again shortly."
+msgstr ""
+
+#. translators: %s: billing page URL
+#: includes/class-billing.php
+msgid "Plugin not yet configured. <a href=\"%s\">Go to Billing \u2192</a>"
+msgstr ""
+
+#: includes/class-billing.php
+msgid "Image generation is not available."
+msgstr ""
+
+#. translators: %s: plan name
+#: includes/class-stripe.php
+msgid "Stripe price ID for plan \"%s\" not configured in wp-config.php."
+msgstr ""
+
+#: includes/class-stripe.php
+msgid "Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php."
+msgstr ""
+
+#. translators: %d: HTTP status code
+#: includes/class-stripe.php
+msgid "Stripe API error (HTTP %d)."
+msgstr ""
