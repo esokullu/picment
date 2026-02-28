@@ -87,10 +87,10 @@ class WP_AI_Image_Billing {
 		$base       = $this->get_server_base_url();
 		$install_id = $this->get_install_id();
 		if ( $base === '' ) {
-			return new WP_Error( 'no_server_url', __( 'Server base URL is not configured.', 'wp-ai-image-plugin' ) );
+			return new WP_Error( 'no_server_url', __( 'Server base URL is not configured.', 'zero-key-ai-images' ) );
 		}
 		if ( $install_id === '' ) {
-			return new WP_Error( 'no_install_id', __( 'Install ID is missing.', 'wp-ai-image-plugin' ) );
+			return new WP_Error( 'no_install_id', __( 'Install ID is missing.', 'zero-key-ai-images' ) );
 		}
 
 		$response = wp_remote_post(
@@ -112,13 +112,13 @@ class WP_AI_Image_Billing {
 
 		if ( $http_code < 200 || $http_code >= 300 ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'wp-ai-image-plugin' ), $http_code );
+			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'zero-key-ai-images' ), $http_code );
 			return new WP_Error( 'server_register_http_error', $message );
 		}
 
 		if ( empty( $data['success'] ) || empty( $data['data']['site_token'] ) ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : __( 'Could not register site with server.', 'wp-ai-image-plugin' );
+			$message = $api_msg ? $api_msg : __( 'Could not register site with server.', 'zero-key-ai-images' );
 			return new WP_Error( 'server_register_failed', $message );
 		}
 
@@ -143,10 +143,10 @@ class WP_AI_Image_Billing {
 			return $token;
 		}
 		if ( $base === '' ) {
-			return new WP_Error( 'no_server_url', __( 'Server base URL is not configured.', 'wp-ai-image-plugin' ) );
+			return new WP_Error( 'no_server_url', __( 'Server base URL is not configured.', 'zero-key-ai-images' ) );
 		}
 		if ( $install_id === '' ) {
-			return new WP_Error( 'no_install_id', __( 'Install ID is missing.', 'wp-ai-image-plugin' ) );
+			return new WP_Error( 'no_install_id', __( 'Install ID is missing.', 'zero-key-ai-images' ) );
 		}
 
 		$url = $base . $path;
@@ -177,12 +177,12 @@ class WP_AI_Image_Billing {
 		$raw_body  = wp_remote_retrieve_body( $response );
 		$data      = json_decode( $raw_body, true );
 		if ( ! is_array( $data ) ) {
-			return new WP_Error( 'server_invalid_json', __( 'Server returned invalid JSON.', 'wp-ai-image-plugin' ) );
+			return new WP_Error( 'server_invalid_json', __( 'Server returned invalid JSON.', 'zero-key-ai-images' ) );
 		}
 
 		if ( $http_code < 200 || $http_code >= 300 || empty( $data['success'] ) ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'wp-ai-image-plugin' ), $http_code );
+			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'zero-key-ai-images' ), $http_code );
 			return new WP_Error( 'server_error', $message );
 		}
 
@@ -333,35 +333,35 @@ class WP_AI_Image_Billing {
 		$messages    = array(
 			'no_byok_key'          => sprintf(
 				/* translators: %s: billing page URL */
-				__( 'No API key configured. <a href="%s">Add your key or subscribe →</a>', 'wp-ai-image-plugin' ),
+				__( 'No API key configured. <a href="%s">Add your key or subscribe →</a>', 'zero-key-ai-images' ),
 				$billing_url
 			),
 			'trial_exhausted'      => sprintf(
 				/* translators: %s: billing page URL */
-				__( 'Your free trial image has been used. <a href="%s">Subscribe or enter your own API key →</a>', 'wp-ai-image-plugin' ),
+				__( 'Your free trial image has been used. <a href="%s">Subscribe or enter your own API key →</a>', 'zero-key-ai-images' ),
 				$billing_url
 			),
 			'no_credits'           => sprintf(
 				/* translators: %s: billing page URL */
-				__( 'No image credits remaining this month. <a href="%s">Upgrade your plan →</a>', 'wp-ai-image-plugin' ),
+				__( 'No image credits remaining this month. <a href="%s">Upgrade your plan →</a>', 'zero-key-ai-images' ),
 				$billing_url
 			),
 			'subscription_inactive' => sprintf(
 				/* translators: %s: billing page URL */
-				__( 'Subscription inactive. <a href="%s">Manage billing →</a>', 'wp-ai-image-plugin' ),
+				__( 'Subscription inactive. <a href="%s">Manage billing →</a>', 'zero-key-ai-images' ),
 				$billing_url
 			),
-			'rate_limited'         => __( 'Too many requests. Please wait a moment and try again.', 'wp-ai-image-plugin' ),
-			'service_unavailable'  => __( 'Image service temporarily unavailable. Please try again shortly.', 'wp-ai-image-plugin' ),
+			'rate_limited'         => __( 'Too many requests. Please wait a moment and try again.', 'zero-key-ai-images' ),
+			'service_unavailable'  => __( 'Image service temporarily unavailable. Please try again shortly.', 'zero-key-ai-images' ),
 			'not_configured'       => sprintf(
 				/* translators: %s: billing page URL */
-				__( 'Plugin not yet configured. <a href="%s">Go to Billing →</a>', 'wp-ai-image-plugin' ),
+				__( 'Plugin not yet configured. <a href="%s">Go to Billing →</a>', 'zero-key-ai-images' ),
 				$billing_url
 			),
 		);
 		return isset( $messages[ $reason ] )
 			? $messages[ $reason ]
-			: __( 'Image generation is not available.', 'wp-ai-image-plugin' );
+			: __( 'Image generation is not available.', 'zero-key-ai-images' );
 	}
 
 	// =========================================================================
@@ -484,12 +484,12 @@ class WP_AI_Image_Billing {
 	public function ajax_checkout() {
 		check_ajax_referer( 'wpaiimage_billing', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'zero-key-ai-images' ) ) );
 		}
 
 		$plan = isset( $_POST['plan'] ) ? sanitize_key( $_POST['plan'] ) : '';
 		if ( ! array_key_exists( $plan, self::PLANS ) ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid plan selected.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Invalid plan selected.', 'zero-key-ai-images' ) ) );
 		}
 
 		$data = $this->server_request( 'POST', '/v1/billing/checkout-session', array( 'plan' => $plan ) );
@@ -498,7 +498,7 @@ class WP_AI_Image_Billing {
 		}
 		$url = isset( $data['url'] ) ? (string) $data['url'] : '';
 		if ( $url === '' ) {
-			wp_send_json_error( array( 'message' => __( 'Server returned no checkout URL.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Server returned no checkout URL.', 'zero-key-ai-images' ) ) );
 		}
 		wp_send_json_success( array( 'url' => $url ) );
 	}
@@ -510,7 +510,7 @@ class WP_AI_Image_Billing {
 	public function ajax_portal() {
 		check_ajax_referer( 'wpaiimage_billing', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'zero-key-ai-images' ) ) );
 		}
 
 		$data = $this->server_request( 'POST', '/v1/billing/portal-session', array() );
@@ -519,7 +519,7 @@ class WP_AI_Image_Billing {
 		}
 		$url = isset( $data['url'] ) ? (string) $data['url'] : '';
 		if ( $url === '' ) {
-			wp_send_json_error( array( 'message' => __( 'Server returned no portal URL.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Server returned no portal URL.', 'zero-key-ai-images' ) ) );
 		}
 		wp_send_json_success( array( 'url' => $url ) );
 	}
@@ -531,35 +531,35 @@ class WP_AI_Image_Billing {
 	public function ajax_save_byok() {
 		check_ajax_referer( 'wpaiimage_billing', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'zero-key-ai-images' ) ) );
 		}
 
 		$api_key = isset( $_POST['api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['api_key'] ) ) : '';
 		if ( empty( $api_key ) ) {
-			wp_send_json_error( array( 'message' => __( 'API key cannot be empty.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'API key cannot be empty.', 'zero-key-ai-images' ) ) );
 		}
 
 		$api_key = trim( $api_key );
 		if ( strlen( $api_key ) > 200 ) {
-			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key.', 'zero-key-ai-images' ) ) );
 		}
 		if ( strpos( $api_key, 'sk-' ) !== 0 ) {
-			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key. It should start with “sk-”.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key. It should start with “sk-”.', 'zero-key-ai-images' ) ) );
 		}
 		if ( preg_match( '/\s/', $api_key ) ) {
-			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key (contains spaces/newlines).', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key (contains spaces/newlines).', 'zero-key-ai-images' ) ) );
 		}
 
 		update_option( WP_AI_Image::OPTION_API_KEY, $api_key );
 		update_option( self::OPT_MODE, 'byok' );
 
-		wp_send_json_success( array( 'message' => __( 'Saved. Switched to BYOK mode.', 'wp-ai-image-plugin' ) ) );
+		wp_send_json_success( array( 'message' => __( 'Saved. Switched to BYOK mode.', 'zero-key-ai-images' ) ) );
 	}
 
 	public function ajax_switch_trial() {
 		check_ajax_referer( 'wpaiimage_billing', 'nonce' );
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-ai-image-plugin' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'zero-key-ai-images' ) ) );
 		}
 
 		$data = $this->sync_from_server();
@@ -568,12 +568,12 @@ class WP_AI_Image_Billing {
 			$ends   = isset( $data['current_period_end'] ) ? (int) $data['current_period_end'] : 0;
 			if ( $this->is_subscription_active_status( $status, $ends ) ) {
 				update_option( self::OPT_MODE, 'paid' );
-				wp_send_json_error( array( 'message' => __( 'Subscription is active. You cannot switch to Free Trial.', 'wp-ai-image-plugin' ) ) );
+				wp_send_json_error( array( 'message' => __( 'Subscription is active. You cannot switch to Free Trial.', 'zero-key-ai-images' ) ) );
 			}
 		}
 
 		update_option( self::OPT_MODE, 'trial' );
-		wp_send_json_success( array( 'message' => __( 'Switched to Free Trial mode.', 'wp-ai-image-plugin' ) ) );
+		wp_send_json_success( array( 'message' => __( 'Switched to Free Trial mode.', 'zero-key-ai-images' ) ) );
 	}
 
 	// =========================================================================
@@ -612,7 +612,7 @@ class WP_AI_Image_Billing {
 
 		set_transient( 'wpaiimage_billing_last_sync', time(), 600 );
 
-		wp_send_json_success( array( 'message' => __( 'Status synced.', 'wp-ai-image-plugin' ) ) );
+		wp_send_json_success( array( 'message' => __( 'Status synced.', 'zero-key-ai-images' ) ) );
 	}
 
 	// =========================================================================
@@ -645,17 +645,17 @@ class WP_AI_Image_Billing {
 		$plan_info = isset( self::PLANS[ $plan_key ] ) ? self::PLANS[ $plan_key ] : null;
 
 		$mode_label = array(
-			'trial' => __( 'Free Trial', 'wp-ai-image-plugin' ),
-			'byok'  => __( 'BYOK — Your API Key', 'wp-ai-image-plugin' ),
+			'trial' => __( 'Free Trial', 'zero-key-ai-images' ),
+			'byok'  => __( 'BYOK — Your API Key', 'zero-key-ai-images' ),
 			'paid'  => $plan_info
-				? sprintf( /* translators: %s: plan name */ __( '%s Plan', 'wp-ai-image-plugin' ), $plan_info['name'] )
-				: __( 'Paid Plan', 'wp-ai-image-plugin' ),
+				? sprintf( /* translators: %s: plan name */ __( '%s Plan', 'zero-key-ai-images' ), $plan_info['name'] )
+				: __( 'Paid Plan', 'zero-key-ai-images' ),
 		);
 
 		$byok_key = get_option( WP_AI_Image::OPTION_API_KEY, '' );
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Zero-Key AI Images — Billing', 'wp-ai-image-plugin' ); ?></h1>
+			<h1><?php esc_html_e( 'Zero-Key AI Images — Billing', 'zero-key-ai-images' ); ?></h1>
 
 			<?php echo $notice; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
@@ -664,45 +664,45 @@ class WP_AI_Image_Billing {
 				<!-- ── Current plan card ─────────────────────────────────────── -->
 				<div style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;padding:20px;">
 					<h2 style="margin-top:0;border-bottom:1px solid #eee;padding-bottom:10px;">
-						<?php esc_html_e( 'Current Plan', 'wp-ai-image-plugin' ); ?>
+						<?php esc_html_e( 'Current Plan', 'zero-key-ai-images' ); ?>
 					</h2>
 
 					<table class="form-table" style="margin:0;">
 						<tr>
-							<th style="width:130px;"><?php esc_html_e( 'Mode', 'wp-ai-image-plugin' ); ?></th>
+							<th style="width:130px;"><?php esc_html_e( 'Mode', 'zero-key-ai-images' ); ?></th>
 							<td>
-								<strong><?php echo esc_html( isset( $mode_label[ $mode ] ) ? $mode_label[ $mode ] : __( 'Not configured', 'wp-ai-image-plugin' ) ); ?></strong>
+								<strong><?php echo esc_html( isset( $mode_label[ $mode ] ) ? $mode_label[ $mode ] : __( 'Not configured', 'zero-key-ai-images' ) ); ?></strong>
 							</td>
 						</tr>
 						<?php if ( 'trial' === $mode ) : ?>
 						<tr>
-							<th><?php esc_html_e( 'Trial Credits', 'wp-ai-image-plugin' ); ?></th>
+							<th><?php esc_html_e( 'Trial Credits', 'zero-key-ai-images' ); ?></th>
 							<td>
 								<strong><?php echo esc_html( $credits ); ?></strong> / 1
 								<?php if ( $credits <= 0 ) : ?>
-									&nbsp;<span style="color:#dc3232;"><?php esc_html_e( '(used)', 'wp-ai-image-plugin' ); ?></span>
+									&nbsp;<span style="color:#dc3232;"><?php esc_html_e( '(used)', 'zero-key-ai-images' ); ?></span>
 								<?php endif; ?>
 							</td>
 						</tr>
 						<?php endif; ?>
 						<?php if ( 'paid' === $mode ) : ?>
 						<tr>
-							<th><?php esc_html_e( 'Credits', 'wp-ai-image-plugin' ); ?></th>
+							<th><?php esc_html_e( 'Credits', 'zero-key-ai-images' ); ?></th>
 							<td>
 								<strong><?php echo esc_html( $credits ); ?></strong>
 								<?php if ( $plan_info ) : ?>
 									/ <?php echo esc_html( $plan_info['credits'] ); ?>
-									<?php esc_html_e( 'this month', 'wp-ai-image-plugin' ); ?>
+									<?php esc_html_e( 'this month', 'zero-key-ai-images' ); ?>
 								<?php endif; ?>
 							</td>
 						</tr>
 						<tr>
-							<th><?php esc_html_e( 'Status', 'wp-ai-image-plugin' ); ?></th>
+							<th><?php esc_html_e( 'Status', 'zero-key-ai-images' ); ?></th>
 							<td><?php echo esc_html( ucfirst( $status ) ); ?></td>
 						</tr>
 						<?php if ( $period_end ) : ?>
 						<tr>
-							<th><?php esc_html_e( 'Renews', 'wp-ai-image-plugin' ); ?></th>
+							<th><?php esc_html_e( 'Renews', 'zero-key-ai-images' ); ?></th>
 							<td><?php echo esc_html( date_i18n( get_option( 'date_format' ), $period_end ) ); ?></td>
 						</tr>
 						<?php endif; ?>
@@ -712,10 +712,10 @@ class WP_AI_Image_Billing {
 					<?php if ( $has_sub ) : ?>
 					<p style="margin-top:16px;margin-bottom:0;">
 						<button type="button" class="button" id="wpaiimage-portal-btn">
-							<?php esc_html_e( 'Manage Subscription →', 'wp-ai-image-plugin' ); ?>
+							<?php esc_html_e( 'Manage Subscription →', 'zero-key-ai-images' ); ?>
 						</button>
 						<button type="button" class="button" id="wpaiimage-sync-btn" style="margin-left:6px;">
-							<?php esc_html_e( 'Sync Status', 'wp-ai-image-plugin' ); ?>
+							<?php esc_html_e( 'Sync Status', 'zero-key-ai-images' ); ?>
 						</button>
 					</p>
 					<?php endif; ?>
@@ -724,10 +724,10 @@ class WP_AI_Image_Billing {
 				<!-- ── BYOK card ─────────────────────────────────────────────── -->
 				<div style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;padding:20px;">
 					<h2 style="margin-top:0;border-bottom:1px solid #eee;padding-bottom:10px;">
-						<?php esc_html_e( 'Use Your Own API Key (Free)', 'wp-ai-image-plugin' ); ?>
+						<?php esc_html_e( 'Use Your Own API Key (Free)', 'zero-key-ai-images' ); ?>
 					</h2>
 					<p class="description">
-						<?php esc_html_e( 'Enter your OpenAI API key. We never see it — it stays in your WordPress database. No monthly charge from us.', 'wp-ai-image-plugin' ); ?>
+						<?php esc_html_e( 'Enter your OpenAI API key. We never see it — it stays in your WordPress database. No monthly charge from us.', 'zero-key-ai-images' ); ?>
 					</p>
 					<input type="password"
 					       id="wpaiimage-byok-key"
@@ -737,11 +737,11 @@ class WP_AI_Image_Billing {
 					       placeholder="sk-proj-..." />
 					<p style="margin-top:8px;">
 						<button type="button" class="button button-secondary" id="wpaiimage-byok-save">
-							<?php esc_html_e( 'Save &amp; Switch to BYOK', 'wp-ai-image-plugin' ); ?>
+							<?php esc_html_e( 'Save &amp; Switch to BYOK', 'zero-key-ai-images' ); ?>
 						</button>
 						<?php if ( 'byok' === $mode && ! $has_sub ) : ?>
 						<button type="button" class="button" id="wpaiimage-switch-trial" style="margin-left:6px;">
-							<?php esc_html_e( 'Switch back to Free Trial', 'wp-ai-image-plugin' ); ?>
+							<?php esc_html_e( 'Switch back to Free Trial', 'zero-key-ai-images' ); ?>
 						</button>
 						<?php endif; ?>
 						<span id="wpaiimage-byok-msg" style="margin-left:8px;font-size:13px;"></span>
@@ -751,7 +751,7 @@ class WP_AI_Image_Billing {
 						echo wp_kses(
 							sprintf(
 								/* translators: %s: OpenAI keys page URL */
-								__( 'Get a key at <a href="%s" target="_blank" rel="noopener noreferrer">platform.openai.com/api-keys</a>.', 'wp-ai-image-plugin' ),
+								__( 'Get a key at <a href="%s" target="_blank" rel="noopener noreferrer">platform.openai.com/api-keys</a>.', 'zero-key-ai-images' ),
 								'https://platform.openai.com/api-keys'
 							),
 							array( 'a' => array( 'href' => array(), 'target' => array(), 'rel' => array() ) )
@@ -760,9 +760,9 @@ class WP_AI_Image_Billing {
 					</p>
 					<?php if ( 'byok' === $mode ) : ?>
 					<p style="margin-top:8px;">
-						<span style="color:#46b450;">&#10003; <?php esc_html_e( 'Active mode', 'wp-ai-image-plugin' ); ?></span>
+						<span style="color:#46b450;">&#10003; <?php esc_html_e( 'Active mode', 'zero-key-ai-images' ); ?></span>
 						&nbsp;—&nbsp;
-						<small><?php esc_html_e( 'Rate-limited to 10 images/min.', 'wp-ai-image-plugin' ); ?></small>
+						<small><?php esc_html_e( 'Rate-limited to 10 images/min.', 'zero-key-ai-images' ); ?></small>
 					</p>
 					<?php endif; ?>
 				</div>
@@ -772,10 +772,10 @@ class WP_AI_Image_Billing {
 			<!-- ── Subscribe / upgrade ───────────────────────────────────────── -->
 			<div style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;padding:20px;max-width:960px;margin-top:20px;">
 				<h2 style="margin-top:0;border-bottom:1px solid #eee;padding-bottom:10px;">
-					<?php esc_html_e( 'Subscribe to a Managed Plan', 'wp-ai-image-plugin' ); ?>
+					<?php esc_html_e( 'Subscribe to a Managed Plan', 'zero-key-ai-images' ); ?>
 				</h2>
 				<p class="description">
-					<?php esc_html_e( 'We provide the OpenAI key — no setup needed. Credits reset on your monthly renewal date. No carry-over.', 'wp-ai-image-plugin' ); ?>
+					<?php esc_html_e( 'We provide the OpenAI key — no setup needed. Credits reset on your monthly renewal date. No carry-over.', 'zero-key-ai-images' ); ?>
 				</p>
 
 				<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;">
@@ -785,7 +785,7 @@ class WP_AI_Image_Billing {
 					<div style="flex:1;min-width:200px;border:2px solid <?php echo $is_current ? '#0073aa' : '#ddd'; ?>;border-radius:6px;padding:20px;text-align:center;position:relative;">
 						<?php if ( $is_current ) : ?>
 						<span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#0073aa;color:#fff;font-size:11px;padding:2px 8px;border-radius:10px;">
-							<?php esc_html_e( 'Current', 'wp-ai-image-plugin' ); ?>
+							<?php esc_html_e( 'Current', 'zero-key-ai-images' ); ?>
 						</span>
 						<?php endif; ?>
 						<h3 style="margin:0 0 8px;"><?php echo esc_html( $plan['name'] ); ?></h3>
@@ -796,20 +796,20 @@ class WP_AI_Image_Billing {
 							<?php
 echo esc_html( sprintf(
 							/* translators: %d: number of credits */
-							__( '%d image credits / month', 'wp-ai-image-plugin' ),
+							__( '%d image credits / month', 'zero-key-ai-images' ),
 							$plan['credits']
 						) );
 							?>
 						</div>
 						<?php if ( $is_current ) : ?>
 						<span class="button button-primary disabled" aria-disabled="true">
-							<?php esc_html_e( 'Your plan', 'wp-ai-image-plugin' ); ?>
+							<?php esc_html_e( 'Your plan', 'zero-key-ai-images' ); ?>
 						</span>
 						<?php else : ?>
 						<button type="button"
 						        class="button button-primary wpaiimage-subscribe-btn"
 						        data-plan="<?php echo esc_attr( $key ); ?>">
-							<?php echo $has_sub ? esc_html__( 'Switch Plan', 'wp-ai-image-plugin' ) : esc_html__( 'Subscribe', 'wp-ai-image-plugin' ); ?>
+							<?php echo $has_sub ? esc_html__( 'Switch Plan', 'zero-key-ai-images' ) : esc_html__( 'Subscribe', 'zero-key-ai-images' ); ?>
 						</button>
 						<?php endif; ?>
 					</div>
@@ -819,7 +819,7 @@ echo esc_html( sprintf(
 
 			<p style="max-width:960px;margin-top:12px;color:#777;font-size:12px;">
 				<?php
-				esc_html_e( 'Billing is handled securely by Stripe. Zero-Key AI Images does not store your payment details.', 'wp-ai-image-plugin' );
+				esc_html_e( 'Billing is handled securely by Stripe. Zero-Key AI Images does not store your payment details.', 'zero-key-ai-images' );
 				?>
 			</p>
 		</div><!-- /wrap -->

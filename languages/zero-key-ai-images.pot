@@ -14,7 +14,7 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
-"X-Domain: wp-ai-image\n"
+"X-Domain: zero-key-ai-images\n"
 
 #. Plugin Name of the plugin
 msgid "Zero-Key AI Images"
