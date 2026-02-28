@@ -1,10 +1,10 @@
-# Translation template for AI Featured Image Generator.
+# Translation template for Zero-Key AI Images.
 # Copyright (C) 2026 Barack Sokullu
-# This file is distributed under the same license as the AI Featured Image Generator package.
+# This file is distributed under the same license as the Zero-Key AI Images package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Project-Id-Version: Zero-Key AI Images 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
 "POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Domain: wp-ai-image\n"
 
 #. Plugin Name of the plugin
-msgid "AI Featured Image Generator"
+msgid "Zero-Key AI Images"
 msgstr ""
 
 #: wpaiimage.php
@@ -135,7 +135,7 @@ msgid "Overwrite existing featured images when regenerating via the admin page"
 msgstr ""
 
 #: wpaiimage.php
-msgid "AI Featured Image Generator \u2014 Settings"
+msgid "Zero-Key AI Images \u2014 Settings"
 msgstr ""
 
 #: wpaiimage.php
@@ -148,7 +148,7 @@ msgid "Image generation is not available. <a href=\"%s\">Configure billing \u219
 msgstr ""
 
 #: wpaiimage.php
-msgid "AI Featured Image Generator \u2014 Generate"
+msgid "Zero-Key AI Images \u2014 Generate"
 msgstr ""
 
 #: wpaiimage.php
@@ -257,7 +257,7 @@ msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan \
 msgstr ""
 
 #: wpaiimage.php
-msgid "AI Featured Image Generator:"
+msgid "Zero-Key AI Images:"
 msgstr ""
 
 #: wpaiimage.php
@@ -382,7 +382,7 @@ msgid "Paid Plan"
 msgstr ""
 
 #: includes/class-billing.php
-msgid "AI Featured Image Generator \u2014 Billing"
+msgid "Zero-Key AI Images \u2014 Billing"
 msgstr ""
 
 #: includes/class-billing.php
@@ -484,7 +484,7 @@ msgid "Subscribe"
 msgstr ""
 
 #: includes/class-billing.php
-msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgid "Billing is handled securely by Stripe. Zero-Key AI Images does not store your payment details."
 msgstr ""
 
 #. translators: %s: billing page URL

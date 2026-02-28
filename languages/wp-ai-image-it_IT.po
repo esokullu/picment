@@ -1,10 +1,10 @@
-# Italian translation for AI Featured Image Generator.
+# Italian translation for Zero-Key AI Images.
 # Copyright (C) 2026 Barack Sokullu
-# This file is distributed under the same license as the AI Featured Image Generator package.
+# This file is distributed under the same license as the Zero-Key AI Images package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Project-Id-Version: Zero-Key AI Images 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
 "POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
 "PO-Revision-Date: 2026-02-23T00:00:00+00:00\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: wp-ai-image\n"
 
-msgid "AI Featured Image Generator"
+msgid "Zero-Key AI Images"
 msgstr "Generatore di immagini in evidenza con IA"
 
 msgid "AI Image Gen"
@@ -103,7 +103,7 @@ msgstr "Genera automaticamente un'immagine in evidenza quando un post viene pubb
 msgid "Overwrite existing featured images when regenerating via the admin page"
 msgstr "Sovrascrivi le immagini in evidenza esistenti durante la rigenerazione dalla pagina di amministrazione"
 
-msgid "AI Featured Image Generator — Settings"
+msgid "Zero-Key AI Images — Settings"
 msgstr "Generatore di immagini in evidenza con IA — Impostazioni"
 
 msgid "Save Settings"
@@ -112,7 +112,7 @@ msgstr "Salva impostazioni"
 msgid "Image generation is not available. <a href=\"%s\">Configure billing →</a>"
 msgstr "La generazione di immagini non è disponibile. <a href=\"%s\">Configura fatturazione →</a>"
 
-msgid "AI Featured Image Generator — Generate"
+msgid "Zero-Key AI Images — Generate"
 msgstr "Generatore di immagini in evidenza con IA — Genera"
 
 msgid "Select All"
@@ -190,7 +190,7 @@ msgstr "La tua immagine di prova gratuita è stata utilizzata. <a href=\"%s\">Ab
 msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan →</a>"
 msgstr "Nessun credito immagine rimanente questo mese. <a href=\"%s\">Aggiorna il tuo piano →</a>"
 
-msgid "AI Featured Image Generator:"
+msgid "Zero-Key AI Images:"
 msgstr "Generatore di immagini in evidenza con IA:"
 
 msgid "AI Featured Image"
@@ -280,7 +280,7 @@ msgstr "Piano %s"
 msgid "Paid Plan"
 msgstr "Piano a pagamento"
 
-msgid "AI Featured Image Generator — Billing"
+msgid "Zero-Key AI Images — Billing"
 msgstr "Generatore di immagini in evidenza con IA — Fatturazione"
 
 msgid "Current Plan"
@@ -355,7 +355,7 @@ msgstr "Cambia piano"
 msgid "Subscribe"
 msgstr "Abbonati"
 
-msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgid "Billing is handled securely by Stripe. Zero-Key AI Images does not store your payment details."
 msgstr "La fatturazione è gestita in modo sicuro da Stripe. Il Generatore di immagini in evidenza con IA non memorizza i dati di pagamento."
 
 msgid "No API key configured. <a href=\"%s\">Add your key or subscribe →</a>"

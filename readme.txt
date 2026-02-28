@@ -1,4 +1,4 @@
-=== AI Featured Image Generator ===
+=== Zero-Key AI Images ===
 Contributors:      baracksok
 Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
@@ -14,7 +14,7 @@ The only AI image plugin that works instantly—no API key required. Get 1 free 
 
 **The only AI featured image plugin that works out of the box — no API key needed.**
 
-Every other AI image plugin on the WordPress marketplace requires you to create an OpenAI account, generate an API key, and enter billing details before you can generate a single image. **AI Featured Image Generator is different.** Install it, activate it, and your first image is free — no sign-up, no API key, no configuration.
+Every other AI image plugin on the WordPress marketplace requires you to create an OpenAI account, generate an API key, and enter billing details before you can generate a single image. **Zero-Key AI Images is different.** Install it, activate it, and your first image is free — no sign-up, no API key, no configuration.
 
 When you need more, simply subscribe to an affordable monthly plan directly from your WordPress dashboard. We handle the AI infrastructure so you can focus on your content.
 

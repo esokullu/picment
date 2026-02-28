@@ -655,7 +655,7 @@ class WP_AI_Image_Billing {
 		$byok_key = get_option( WP_AI_Image::OPTION_API_KEY, '' );
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'AI Featured Image Generator — Billing', 'wp-ai-image-plugin' ); ?></h1>
+			<h1><?php esc_html_e( 'Zero-Key AI Images — Billing', 'wp-ai-image-plugin' ); ?></h1>
 
 			<?php echo $notice; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
@@ -819,7 +819,7 @@ echo esc_html( sprintf(
 
 			<p style="max-width:960px;margin-top:12px;color:#777;font-size:12px;">
 				<?php
-				esc_html_e( 'Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details.', 'wp-ai-image-plugin' );
+				esc_html_e( 'Billing is handled securely by Stripe. Zero-Key AI Images does not store your payment details.', 'wp-ai-image-plugin' );
 				?>
 			</p>
 		</div><!-- /wrap -->

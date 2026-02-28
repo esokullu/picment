@@ -1,4 +1,4 @@
-AI Featured Image Generator — Subscription & Billing System
+Zero-Key AI Images — Subscription & Billing System
 =============================================================
 
 Overview

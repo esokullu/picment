@@ -1,10 +1,10 @@
-# Chinese Simplified translation for AI Featured Image Generator.
+# Chinese Simplified translation for Zero-Key AI Images.
 # Copyright (C) 2026 Barack Sokullu
-# This file is distributed under the same license as the AI Featured Image Generator package.
+# This file is distributed under the same license as the Zero-Key AI Images package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Project-Id-Version: Zero-Key AI Images 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
 "POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
 "PO-Revision-Date: 2026-02-23T00:00:00+00:00\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: wp-ai-image\n"
 
-msgid "AI Featured Image Generator"
+msgid "Zero-Key AI Images"
 msgstr "AI 特色图片生成器"
 
 msgid "AI Image Gen"
@@ -103,7 +103,7 @@ msgstr "发布文章时自动生成特色图片（如果尚无特色图片）"
 msgid "Overwrite existing featured images when regenerating via the admin page"
 msgstr "通过管理页面重新生成时覆盖现有特色图片"
 
-msgid "AI Featured Image Generator — Settings"
+msgid "Zero-Key AI Images — Settings"
 msgstr "AI 特色图片生成器 — 设置"
 
 msgid "Save Settings"
@@ -112,7 +112,7 @@ msgstr "保存设置"
 msgid "Image generation is not available. <a href=\"%s\">Configure billing →</a>"
 msgstr "图片生成不可用。<a href=\"%s\">配置账单 →</a>"
 
-msgid "AI Featured Image Generator — Generate"
+msgid "Zero-Key AI Images — Generate"
 msgstr "AI 特色图片生成器 — 生成"
 
 msgid "Select All"
@@ -190,7 +190,7 @@ msgstr "您的免费试用图片已使用。<a href=\"%s\">订阅或输入您自
 msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan →</a>"
 msgstr "本月图片额度已用尽。<a href=\"%s\">升级您的套餐 →</a>"
 
-msgid "AI Featured Image Generator:"
+msgid "Zero-Key AI Images:"
 msgstr "AI 特色图片生成器："
 
 msgid "AI Featured Image"
@@ -280,7 +280,7 @@ msgstr "%s 套餐"
 msgid "Paid Plan"
 msgstr "付费套餐"
 
-msgid "AI Featured Image Generator — Billing"
+msgid "Zero-Key AI Images — Billing"
 msgstr "AI 特色图片生成器 — 账单"
 
 msgid "Current Plan"
@@ -355,7 +355,7 @@ msgstr "更换套餐"
 msgid "Subscribe"
 msgstr "订阅"
 
-msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgid "Billing is handled securely by Stripe. Zero-Key AI Images does not store your payment details."
 msgstr "账单由 Stripe 安全处理。AI 特色图片生成器不存储您的支付信息。"
 
 msgid "No API key configured. <a href=\"%s\">Add your key or subscribe →</a>"

@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name:       AI Featured Image Generator
- * Plugin URI:        https://wordpress.org/plugins/ai-featured-image-generator/
+ * Plugin Name:       Zero-Key AI Images
+ * Plugin URI:        https://wordpress.org/plugins/zero-key-ai-images/
  * Description:       Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
  * Version:           1.0.1
  * Requires at least: 6.0
@@ -135,7 +135,7 @@ class WP_AI_Image {
 
 	public function add_admin_menu() {
 		add_menu_page(
-			__( 'AI Featured Image Generator', 'wp-ai-image-plugin' ),
+			__( 'Zero-Key AI Images', 'wp-ai-image-plugin' ),
 			__( 'AI Image Gen', 'wp-ai-image-plugin' ),
 			'manage_options',
 			'wpaiimage',
@@ -328,7 +328,7 @@ echo wp_kses(
 		}
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'AI Featured Image Generator — Settings', 'wp-ai-image-plugin' );?></h1>
+			<h1><?php esc_html_e( 'Zero-Key AI Images — Settings', 'wp-ai-image-plugin' );?></h1>
 			<form method="post" action="options.php">
 				<?php
 				settings_fields( 'wpaiimage_settings' );
@@ -351,7 +351,7 @@ echo wp_kses(
 
 		$billing = WP_AI_Image_Billing::get_instance();
 		if ( ! $billing->is_configured() ) {
-			echo '<div class="wrap"><h1>' . esc_html__( 'AI Featured Image Generator', 'wp-ai-image-plugin' ) . '</h1>';
+			echo '<div class="wrap"><h1>' . esc_html__( 'Zero-Key AI Images', 'wp-ai-image-plugin' ) . '</h1>';
 			echo '<div class="notice notice-warning"><p>';
 			echo wp_kses(
 				sprintf(
@@ -374,7 +374,7 @@ echo wp_kses(
 		) );
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'AI Featured Image Generator — Generate', 'wp-ai-image-plugin' ); ?></h1>
+			<h1><?php esc_html_e( 'Zero-Key AI Images — Generate', 'wp-ai-image-plugin' ); ?></h1>
 
 			<div class="wpaiimage-toolbar" style="margin:1em 0;display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
 				<button type="button" id="wpaiimage-select-all" class="button">
@@ -575,7 +575,7 @@ echo wp_kses(
 		if ( $msg ) {
 			printf(
 				'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
-				esc_html__( 'AI Featured Image Generator:', 'wp-ai-image-plugin' ),
+				esc_html__( 'Zero-Key AI Images:', 'wp-ai-image-plugin' ),
 				wp_kses( $msg, array( 'a' => array( 'href' => array() ) ) )
 			);
 		}

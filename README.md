@@ -1,6 +1,6 @@
-# AI Featured Image Generator
+# Zero-Key AI Images
 
-**AI Featured Image Generator** is a powerful WordPress plugin that leverages OpenAI's DALL-E 3 model to automatically create stunning, relevant featured images for your blog posts. Save time and ensure your content is always visually engaging with high-quality AI-generated art.
+**Zero-Key AI Images** is a powerful WordPress plugin that leverages OpenAI's DALL-E 3 model to automatically create stunning, relevant featured images for your blog posts. Save time and ensure your content is always visually engaging with high-quality AI-generated art.
 
 ## 🚀 Key Features
 
@@ -50,9 +50,9 @@ This project is licensed under the GPLv2 or later. See the [LICENSE](https://www
 
 ## 📊 Competitive Landscape
 
-There are several AI image generation plugins available for WordPress, but **AI Featured Image Generator** offers a unique combination of features that sets it apart.
+There are several AI image generation plugins available for WordPress, but **Zero-Key AI Images** offers a unique combination of features that sets it apart.
 
-| Feature | AI Featured Image Generator | AI Featured Image (WPRaptor) | Artist Image Generator | Featured Image Creator AI |
+| Feature | Zero-Key AI Images | AI Featured Image (WPRaptor) | Artist Image Generator | Featured Image Creator AI |
 |:---|:---:|:---:|:---:|:---:|
 | **Subscription Plans** | ✅ | ❌ | Partial (Credits) | ❌ |
 | **Free Trial Credit** | ✅ | ❌ | ❌ | ❌ |
