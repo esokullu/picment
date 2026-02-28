@@ -8,15 +8,21 @@ Stable tag:        1.0.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
+The only AI image plugin that works instantly—no API key required. Get 1 free image, then subscribe for more. Auto-generate DALL-E 3 featured images, bulk generate, and more.
 
 == Description ==
 
-**AI Featured Image Generator** uses OpenAI's DALL-E 3 model to automatically create beautiful, relevant featured images for your blog posts — saving you time and keeping your content visually consistent.
+**The only AI featured image plugin that works out of the box — no API key needed.**
+
+Every other AI image plugin on the WordPress marketplace requires you to create an OpenAI account, generate an API key, and enter billing details before you can generate a single image. **AI Featured Image Generator is different.** Install it, activate it, and your first image is free — no sign-up, no API key, no configuration.
+
+When you need more, simply subscribe to an affordable monthly plan directly from your WordPress dashboard. We handle the AI infrastructure so you can focus on your content.
+
+Of course, if you prefer full control, you can also bring your own OpenAI API key (BYOK mode) at no charge from us.
 
 = How It Works =
 
-Every time you publish a post, the plugin automatically generates a high-quality featured image based on your post's title and content. You can also run bulk generation across all your existing posts from a single admin page.
+Every time you publish a post, the plugin automatically generates a high-quality DALL-E 3 featured image based on your post's title and content. You can also run bulk generation across all your existing posts from a single admin page.
 
 = Key Features =
 
