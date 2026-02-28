@@ -281,7 +281,7 @@ echo wp_kses(
 		<textarea name="<?php echo esc_attr( self::OPTION_PROMPT_TEMPLATE ); ?>"
 		          rows="4" class="large-text"><?php echo esc_textarea( $val ); ?></textarea>
 		<p class="description">
-			<?php esc_htmlecho wp_kses( __( 'Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt.', 'wp-ai-image-plugin' ), array( 'code' => array() ) ); ?>
+			<?php echo wp_kses( __( 'Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt.', 'wp-ai-image-plugin' ), array( 'code' => array() ) ); ?>
 		</p>
 		<p class="description">
 			<?php
@@ -706,10 +706,7 @@ echo wp_kses(
 
 	/** Called by WP-Cron. */
 	public function cron_generate( $post_id ) {
-		ignore_user_abort( true );if ( function_exists( 'set_time_limit' ) ) {
-				// set_time_limit( 300 ); // Discouraged function
-			} // Discouraged function
-		}
+		ignore_user_abort( true );
 		$this->run_generation( $post_id );
 	}
 
