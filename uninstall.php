@@ -10,7 +10,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Remove plugin options
-$options = array(
+$wpaiimage_options = array(
 	// Core settings
 	'wpaiimage_api_key',
 	'wpaiimage_image_size',
@@ -33,12 +33,12 @@ $options = array(
 	'wpaiimage_credits_remaining',
 	'wpaiimage_credits_reset_at',
 );
-foreach ( $options as $option ) {
-	delete_option( $option );
+foreach ( $wpaiimage_options as $wpaiimage_option ) {
+	delete_option( $wpaiimage_option );
 }
 
 // Remove all post meta added by this plugin
-$meta_keys = array(
+$wpaiimage_meta_keys = array(
 	'_wpaiimage_status',
 	'_wpaiimage_generated_at',
 	'_wpaiimage_error',
@@ -49,8 +49,8 @@ $meta_keys = array(
 );
 
 global $wpdb;
-foreach ( $meta_keys as $key ) {
-	$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => $key ), array( '%s' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+foreach ( $wpaiimage_meta_keys as $wpaiimage_key ) {
+	$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => $wpaiimage_key ), array( '%s' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 }
 
 // Clear any pending WP-Cron events

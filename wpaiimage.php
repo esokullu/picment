@@ -7,10 +7,10 @@
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
- * Author URI:        https://example.com
+ * Author URI:        https://baracksokullu.com
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wp-ai-image
+ * Text Domain:       wp-ai-image-plugin
  * Domain Path:       /languages
  */
 
@@ -135,8 +135,8 @@ class WP_AI_Image {
 
 	public function add_admin_menu() {
 		add_menu_page(
-			__( 'AI Featured Image Generator', 'wp-ai-image' ),
-			__( 'AI Image Gen', 'wp-ai-image' ),
+			__( 'AI Featured Image Generator', 'wp-ai-image-plugin' ),
+			__( 'AI Image Gen', 'wp-ai-image-plugin' ),
 			'manage_options',
 			'wpaiimage',
 			array( $this, 'render_bulk_page' ),
@@ -145,24 +145,24 @@ class WP_AI_Image {
 		);
 		add_submenu_page(
 			'wpaiimage',
-			__( 'Generate Images', 'wp-ai-image' ),
-			__( 'Generate Images', 'wp-ai-image' ),
+			__( 'Generate Images', 'wp-ai-image-plugin' ),
+			__( 'Generate Images', 'wp-ai-image-plugin' ),
 			'manage_options',
 			'wpaiimage',
 			array( $this, 'render_bulk_page' )
 		);
 		add_submenu_page(
 			'wpaiimage',
-			__( 'Settings', 'wp-ai-image' ),
-			__( 'Settings', 'wp-ai-image' ),
+			__( 'Settings', 'wp-ai-image-plugin' ),
+			__( 'Settings', 'wp-ai-image-plugin' ),
 			'manage_options',
 			'wpaiimage-settings',
 			array( $this, 'render_settings_page' )
 		);
 		add_submenu_page(
 			'wpaiimage',
-			__( 'Billing', 'wp-ai-image' ),
-			__( 'Billing', 'wp-ai-image' ),
+			__( 'Billing', 'wp-ai-image-plugin' ),
+			__( 'Billing', 'wp-ai-image-plugin' ),
 			'manage_options',
 			'wpaiimage-billing',
 			array( WP_AI_Image_Billing::get_instance(), 'render_billing_page' )
@@ -188,20 +188,20 @@ class WP_AI_Image {
 		}
 
 		// --- API section ---
-		// add_settings_section( 'wpaiimage_api', __( 'API Configuration', 'wp-ai-image' ), '__return_false', 'wpaiimage-settings' );
-		//add_settings_field( self::OPTION_API_KEY, __( 'OpenAI API Key', 'wp-ai-image' ), array( $this, 'field_api_key' ), 'wpaiimage-settings', 'wpaiimage_api' );
+		// add_settings_section( 'wpaiimage_api', __( 'API Configuration', 'wp-ai-image-plugin' ), '__return_false', 'wpaiimage-settings' );
+		//add_settings_field( self::OPTION_API_KEY, __( 'OpenAI API Key', 'wp-ai-image-plugin' ), array( $this, 'field_api_key' ), 'wpaiimage-settings', 'wpaiimage_api' );
 
 		// --- Image section ---
-		add_settings_section( 'wpaiimage_image', __( 'Image Settings', 'wp-ai-image' ), '__return_false', 'wpaiimage-settings' );
-		add_settings_field( self::OPTION_IMAGE_SIZE,      __( 'Image Size', 'wp-ai-image' ),              array( $this, 'field_image_size' ),      'wpaiimage-settings', 'wpaiimage_image' );
-		add_settings_field( self::OPTION_IMAGE_QUALITY,   __( 'Image Quality', 'wp-ai-image' ),           array( $this, 'field_image_quality' ),   'wpaiimage-settings', 'wpaiimage_image' );
-		add_settings_field( self::OPTION_IMAGE_STYLE,     __( 'Image Style', 'wp-ai-image' ),             array( $this, 'field_image_style' ),     'wpaiimage-settings', 'wpaiimage_image' );
-		add_settings_field( self::OPTION_PROMPT_TEMPLATE, __( 'Custom Prompt Template', 'wp-ai-image' ),  array( $this, 'field_prompt_template' ), 'wpaiimage-settings', 'wpaiimage_image' );
+		add_settings_section( 'wpaiimage_image', __( 'Image Settings', 'wp-ai-image-plugin' ), '__return_false', 'wpaiimage-settings' );
+		add_settings_field( self::OPTION_IMAGE_SIZE,      __( 'Image Size', 'wp-ai-image-plugin' ),              array( $this, 'field_image_size' ),      'wpaiimage-settings', 'wpaiimage_image' );
+		add_settings_field( self::OPTION_IMAGE_QUALITY,   __( 'Image Quality', 'wp-ai-image-plugin' ),           array( $this, 'field_image_quality' ),   'wpaiimage-settings', 'wpaiimage_image' );
+		add_settings_field( self::OPTION_IMAGE_STYLE,     __( 'Image Style', 'wp-ai-image-plugin' ),             array( $this, 'field_image_style' ),     'wpaiimage-settings', 'wpaiimage_image' );
+		add_settings_field( self::OPTION_PROMPT_TEMPLATE, __( 'Custom Prompt Template', 'wp-ai-image-plugin' ),  array( $this, 'field_prompt_template' ), 'wpaiimage-settings', 'wpaiimage_image' );
 
 		// --- Automation section ---
-		add_settings_section( 'wpaiimage_auto', __( 'Automation', 'wp-ai-image' ), '__return_false', 'wpaiimage-settings' );
-		add_settings_field( self::OPTION_AUTO_GENERATE, __( 'Auto-generate on Publish', 'wp-ai-image' ),   array( $this, 'field_auto_generate' ), 'wpaiimage-settings', 'wpaiimage_auto' );
-		add_settings_field( self::OPTION_OVERWRITE,     __( 'Overwrite Existing Images', 'wp-ai-image' ),  array( $this, 'field_overwrite' ),      'wpaiimage-settings', 'wpaiimage_auto' );
+		add_settings_section( 'wpaiimage_auto', __( 'Automation', 'wp-ai-image-plugin' ), '__return_false', 'wpaiimage-settings' );
+		add_settings_field( self::OPTION_AUTO_GENERATE, __( 'Auto-generate on Publish', 'wp-ai-image-plugin' ),   array( $this, 'field_auto_generate' ), 'wpaiimage-settings', 'wpaiimage_auto' );
+		add_settings_field( self::OPTION_OVERWRITE,     __( 'Overwrite Existing Images', 'wp-ai-image-plugin' ),  array( $this, 'field_overwrite' ),      'wpaiimage-settings', 'wpaiimage_auto' );
 	}
 
 	// Sanitizers ---------------------------------------------------------------
@@ -228,11 +228,14 @@ class WP_AI_Image {
 		       autocomplete="new-password" />
 		<p class="description">
 			<?php
-			printf(
-				/* translators: %s: link to OpenAI API keys page */
-				__( 'Get your API key at <a href="%s" target="_blank" rel="noopener noreferrer">platform.openai.com/api-keys</a>.', 'wp-ai-image' ),
-				'https://platform.openai.com/api-keys'
-			);
+echo wp_kses(
+					sprintf(
+						/* translators: %s: link to OpenAI API keys page */
+						__( 'Get your API key at <a href="%s" target="_blank" rel="noopener noreferrer">platform.openai.com/api-keys</a>.', 'wp-ai-image-plugin' ),
+						'https://platform.openai.com/api-keys'
+					),
+					array( 'a' => array( 'href' => array(), 'target' => array(), 'rel' => array() ) )
+				);
 			?>
 		</p>
 		<?php
@@ -241,9 +244,9 @@ class WP_AI_Image {
 	public function field_image_size() {
 		$val = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
 		$opts = array(
-			'1792x1024' => __( '1792 × 1024 — Landscape (recommended for blog posts)', 'wp-ai-image' ),
-			'1024x1024' => __( '1024 × 1024 — Square', 'wp-ai-image' ),
-			'1024x1792' => __( '1024 × 1792 — Portrait', 'wp-ai-image' ),
+			'1792x1024' => __( '1792 × 1024 — Landscape (recommended for blog posts)', 'wp-ai-image-plugin' ),
+			'1024x1024' => __( '1024 × 1024 — Square', 'wp-ai-image-plugin' ),
+			'1024x1792' => __( '1024 × 1792 — Portrait', 'wp-ai-image-plugin' ),
 		);
 		echo '<select name="' . esc_attr( self::OPTION_IMAGE_SIZE ) . '">';
 		foreach ( $opts as $k => $label ) {
@@ -256,9 +259,9 @@ class WP_AI_Image {
 		$val = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
 		?>
 		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_QUALITY ); ?>" value="hd" <?php checked( $val, 'hd' ); ?> />
-			<?php _e( 'HD — higher detail, higher cost', 'wp-ai-image' ); ?></label><br>
+			<?php esc_html_e( 'HD — higher detail, higher cost', 'wp-ai-image-plugin' ); ?></label><br>
 		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_QUALITY ); ?>" value="standard" <?php checked( $val, 'standard' ); ?> />
-			<?php _e( 'Standard', 'wp-ai-image' ); ?></label>
+			<?php esc_html_e( 'Standard', 'wp-ai-image-plugin' ); ?></label>
 		<?php
 	}
 
@@ -266,9 +269,9 @@ class WP_AI_Image {
 		$val = get_option( self::OPTION_IMAGE_STYLE, 'vivid' );
 		?>
 		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_STYLE ); ?>" value="vivid" <?php checked( $val, 'vivid' ); ?> />
-			<?php _e( 'Vivid — hyper-real and dramatic', 'wp-ai-image' ); ?></label><br>
+			<?php esc_html_e( 'Vivid — hyper-real and dramatic', 'wp-ai-image-plugin' ); ?></label><br>
 		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_STYLE ); ?>" value="natural" <?php checked( $val, 'natural' ); ?> />
-			<?php _e( 'Natural — more realistic tones', 'wp-ai-image' ); ?></label>
+			<?php esc_html_e( 'Natural — more realistic tones', 'wp-ai-image-plugin' ); ?></label>
 		<?php
 	}
 
@@ -278,15 +281,18 @@ class WP_AI_Image {
 		<textarea name="<?php echo esc_attr( self::OPTION_PROMPT_TEMPLATE ); ?>"
 		          rows="4" class="large-text"><?php echo esc_textarea( $val ); ?></textarea>
 		<p class="description">
-			<?php _e( 'Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt.', 'wp-ai-image' ); ?>
+			<?php esc_htmlecho wp_kses( __( 'Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt.', 'wp-ai-image-plugin' ), array( 'code' => array() ) ); ?>
 		</p>
 		<p class="description">
 			<?php
-			printf(
-				/* translators: %s: the default prompt text */
-				__( '<strong>Default:</strong> <em>%s</em>', 'wp-ai-image' ),
-				esc_html( $this->default_prompt( __( '(post title)', 'wp-ai-image' ), __( '(post content)', 'wp-ai-image' ) ) )
-			);
+echo wp_kses(
+					sprintf(
+						/* translators: %s: the default prompt text */
+						__( '<strong>Default:</strong> <em>%s</em>', 'wp-ai-image-plugin' ),
+						esc_html( $this->default_prompt( __( '(post title)', 'wp-ai-image-plugin' ), __( '(post content)', 'wp-ai-image-plugin' ) ) )
+					),
+					array( 'strong' => array(), 'em' => array() )
+				);
 			?>
 		</p>
 		<?php
@@ -297,7 +303,7 @@ class WP_AI_Image {
 		?>
 		<label>
 			<input type="checkbox" name="<?php echo esc_attr( self::OPTION_AUTO_GENERATE ); ?>" value="1" <?php checked( $val, 1 ); ?> />
-			<?php _e( 'Automatically generate a featured image when a post is published (if none exists)', 'wp-ai-image' ); ?>
+			<?php esc_html_e( 'Automatically generate a featured image when a post is published (if none exists)', 'wp-ai-image-plugin' ); ?>
 		</label>
 		<?php
 	}
@@ -307,7 +313,7 @@ class WP_AI_Image {
 		?>
 		<label>
 			<input type="checkbox" name="<?php echo esc_attr( self::OPTION_OVERWRITE ); ?>" value="1" <?php checked( $val, 1 ); ?> />
-			<?php _e( 'Overwrite existing featured images when regenerating via the admin page', 'wp-ai-image' ); ?>
+			<?php esc_html_e( 'Overwrite existing featured images when regenerating via the admin page', 'wp-ai-image-plugin' ); ?>
 		</label>
 		<?php
 	}
@@ -322,12 +328,12 @@ class WP_AI_Image {
 		}
 		?>
 		<div class="wrap">
-			<h1><?php _e( 'AI Featured Image Generator — Settings', 'wp-ai-image' ); ?></h1>
+			<h1><?php esc_html_e( 'AI Featured Image Generator — Settings', 'wp-ai-image-plugin' );?></h1>
 			<form method="post" action="options.php">
 				<?php
 				settings_fields( 'wpaiimage_settings' );
 				do_settings_sections( 'wpaiimage-settings' );
-				submit_button( __( 'Save Settings', 'wp-ai-image' ) );
+				submit_button( __( 'Save Settings', 'wp-ai-image-plugin' ) );
 				?>
 			</form>
 		</div>
@@ -345,12 +351,12 @@ class WP_AI_Image {
 
 		$billing = WP_AI_Image_Billing::get_instance();
 		if ( ! $billing->is_configured() ) {
-			echo '<div class="wrap"><h1>' . esc_html__( 'AI Featured Image Generator', 'wp-ai-image' ) . '</h1>';
+			echo '<div class="wrap"><h1>' . esc_html__( 'AI Featured Image Generator', 'wp-ai-image-plugin' ) . '</h1>';
 			echo '<div class="notice notice-warning"><p>';
 			echo wp_kses(
 				sprintf(
 					/* translators: %s: billing page URL */
-					__( 'Image generation is not available. <a href="%s">Configure billing →</a>', 'wp-ai-image' ),
+					__( 'Image generation is not available. <a href="%s">Configure billing →</a>', 'wp-ai-image-plugin' ),
 					esc_url( admin_url( 'admin.php?page=wpaiimage-billing' ) )
 				),
 				array( 'a' => array( 'href' => array() ) )
@@ -368,20 +374,20 @@ class WP_AI_Image {
 		) );
 		?>
 		<div class="wrap">
-			<h1><?php _e( 'AI Featured Image Generator — Generate', 'wp-ai-image' ); ?></h1>
+			<h1><?php esc_html_e( 'AI Featured Image Generator — Generate', 'wp-ai-image-plugin' ); ?></h1>
 
 			<div class="wpaiimage-toolbar" style="margin:1em 0;display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
 				<button type="button" id="wpaiimage-select-all" class="button">
-					<?php _e( 'Select All', 'wp-ai-image' ); ?>
+					<?php esc_html_e( 'Select All', 'wp-ai-image-plugin' ); ?>
 				</button>
 				<button type="button" id="wpaiimage-select-none" class="button">
-					<?php _e( 'Deselect All', 'wp-ai-image' ); ?>
+					<?php esc_html_e( 'Deselect All', 'wp-ai-image-plugin' ); ?>
 				</button>
 				<button type="button" id="wpaiimage-select-missing" class="button">
-					<?php _e( 'Select Posts Without Image', 'wp-ai-image' ); ?>
+					<?php esc_html_e( 'Select Posts Without Image', 'wp-ai-image-plugin' ); ?>
 				</button>
 				<button type="button" id="wpaiimage-generate-selected" class="button button-primary" style="margin-left:8px;">
-					<?php _e( 'Generate for Selected', 'wp-ai-image' ); ?>
+					<?php esc_html_e( 'Generate for Selected', 'wp-ai-image-plugin' ); ?>
 				</button>
 				<span id="wpaiimage-progress-text" style="color:#555;"></span>
 			</div>
@@ -396,17 +402,17 @@ class WP_AI_Image {
 						<td class="manage-column check-column" style="width:40px;">
 							<input type="checkbox" id="wpaiimage-check-all" />
 						</td>
-						<th class="manage-column"><?php _e( 'Post Title', 'wp-ai-image' ); ?></th>
-						<th class="manage-column" style="width:120px;"><?php _e( 'Published', 'wp-ai-image' ); ?></th>
-						<th class="manage-column" style="width:100px;"><?php _e( 'Thumbnail', 'wp-ai-image' ); ?></th>
-						<th class="manage-column" style="width:180px;"><?php _e( 'AI Status', 'wp-ai-image' ); ?></th>
-						<th class="manage-column" style="width:130px;"><?php _e( 'Action', 'wp-ai-image' ); ?></th>
+						<th class="manage-column"><?php esc_html_e( 'Post Title', 'wp-ai-image-plugin' ); ?></th>
+						<th class="manage-column" style="width:120px;"><?php esc_html_e( 'Published', 'wp-ai-image-plugin' ); ?></th>
+						<th class="manage-column" style="width:100px;"><?php esc_html_e( 'Thumbnail', 'wp-ai-image-plugin' ); ?></th>
+						<th class="manage-column" style="width:180px;"><?php esc_html_e( 'AI Status', 'wp-ai-image-plugin' ); ?></th>
+						<th class="manage-column" style="width:130px;"><?php esc_html_e( 'Action', 'wp-ai-image-plugin' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php if ( empty( $posts ) ) : ?>
 						<tr>
-							<td colspan="6"><?php _e( 'No published posts found.', 'wp-ai-image' ); ?></td>
+							<td colspan="6"><?php esc_html_e( 'No published posts found.', 'wp-ai-image-plugin' ); ?></td>
 						</tr>
 					<?php else : ?>
 						<?php foreach ( $posts as $p ) :
@@ -441,7 +447,7 @@ class WP_AI_Image {
 								<button type="button"
 								        class="button wpaiimage-generate-single"
 								        data-post-id="<?php echo esc_attr( $p->ID ); ?>">
-									<?php echo $has_thumb ? esc_html__( 'Regenerate', 'wp-ai-image' ) : esc_html__( 'Generate', 'wp-ai-image' ); ?>
+									<?php echo $has_thumb ? esc_html__( 'Regenerate', 'wp-ai-image-plugin' ) : esc_html__( 'Generate', 'wp-ai-image-plugin' ); ?>
 								</button>
 							</td>
 						</tr>
@@ -458,14 +464,14 @@ class WP_AI_Image {
 		switch ( $status ) {
 			case 'done':
 				$date = $generated_at ? ' <small>(' . esc_html( date_i18n( 'Y-m-d', $generated_at ) ) . ')</small>' : '';
-				return '<span style="color:#46b450;">&#10003; ' . esc_html__( 'Generated', 'wp-ai-image' ) . $date . '</span>';
+				return '<span style="color:#46b450;">&#10003; ' . esc_html__( 'Generated', 'wp-ai-image-plugin' ) . $date . '</span>';
 			case 'pending':
-				return '<span style="color:#f90;">&#9679; ' . esc_html__( 'Pending&hellip;', 'wp-ai-image' ) . '</span>';
+				return '<span style="color:#f90;">&#9679; ' . esc_html__( 'Pending&hellip;', 'wp-ai-image-plugin' ) . '</span>';
 			case 'generating':
-				return '<span style="color:#0073aa;">&#9679; ' . esc_html__( 'Generating&hellip;', 'wp-ai-image' ) . '</span>';
+				return '<span style="color:#0073aa;">&#9679; ' . esc_html__( 'Generating&hellip;', 'wp-ai-image-plugin' ) . '</span>';
 			case 'failed':
 				$tip = $error ? ' title="' . esc_attr( $error ) . '"' : '';
-				return '<span style="color:#dc3232;"' . $tip . '>&#10007; ' . esc_html__( 'Failed', 'wp-ai-image' ) . ( $error ? ' <small>(hover)</small>' : '' ) . '</span>';
+				return '<span style="color:#dc3232;"' . $tip . '>&#10007; ' . esc_html__( 'Failed', 'wp-ai-image-plugin' ) . ( $error ? ' <small>(hover)</small>' : '' ) . '</span>';
 			default:
 				return '<span style="color:#aaa;">—</span>';
 		}
@@ -518,18 +524,18 @@ class WP_AI_Image {
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'wpaiimage_generate' ),
 				'i18n'     => array(
-					'generating'       => __( 'Generating&hellip;', 'wp-ai-image' ),
-					'done'             => __( 'Done', 'wp-ai-image' ),
-					'failed'           => __( 'Failed', 'wp-ai-image' ),
-					'generate'         => __( 'Generate', 'wp-ai-image' ),
-					'regenerate'       => __( 'Regenerate', 'wp-ai-image' ),
-					'confirm_overwrite'=> __( 'This post already has a featured image. Overwrite it?', 'wp-ai-image' ),
-					'select_one'       => __( 'Please select at least one post.', 'wp-ai-image' ),
+					'generating'       => __( 'Generating&hellip;', 'wp-ai-image-plugin' ),
+					'done'             => __( 'Done', 'wp-ai-image-plugin' ),
+					'failed'           => __( 'Failed', 'wp-ai-image-plugin' ),
+					'generate'         => esc_html__( 'Generate', 'wp-ai-image-plugin' ),
+					'regenerate'       => esc_html__( 'Regenerate', 'wp-ai-image-plugin' ),
+					'confirm_overwrite'=> __( 'This post already has a featured image. Overwrite it?', 'wp-ai-image-plugin' ),
+					'select_one'       => __( 'Please select at least one post.', 'wp-ai-image-plugin' ),
 					/* translators: 1: current count, 2: total count */
-					'progress'         => __( 'Processing %1$d of %2$d&hellip;', 'wp-ai-image' ),
+					'progress'         => __( 'Processing %1$d of %2$d&hellip;', 'wp-ai-image-plugin' ),
 					/* translators: %d: number of images generated */
-					'complete'         => __( 'Done! %d image(s) generated.', 'wp-ai-image' ),
-					'refresh_notice'   => __( 'Image generated — refresh to see the thumbnail.', 'wp-ai-image' ),
+					'complete'         => __( 'Done! %d image(s) generated.', 'wp-ai-image-plugin' ),
+					'refresh_notice'   => __( 'Image generated — refresh to see the thumbnail.', 'wp-ai-image-plugin' ),
 				),
 			)
 		);
@@ -549,19 +555,19 @@ class WP_AI_Image {
 		if ( 'byok' === $mode && empty( get_option( self::OPTION_API_KEY, '' ) ) ) {
 			$msg = sprintf(
 				/* translators: %s: billing page URL */
-				__( 'BYOK mode is active but no API key is configured. <a href="%s">Add your key →</a>', 'wp-ai-image' ),
+				__( 'BYOK mode is active but no API key is configured. <a href="%s">Add your key →</a>', 'wp-ai-image-plugin' ),
 				$billing_url
 			);
 		} elseif ( 'trial' === $mode && (int) get_option( WP_AI_Image_Billing::OPT_TRIAL_CREDITS, 0 ) <= 0 ) {
 			$msg = sprintf(
 				/* translators: %s: billing page URL */
-				__( 'Your free trial image has been used. <a href="%s">Subscribe or enter your own API key →</a>', 'wp-ai-image' ),
+				__( 'Your free trial image has been used. <a href="%s">Subscribe or enter your own API key →</a>', 'wp-ai-image-plugin' ),
 				$billing_url
 			);
 		} elseif ( 'paid' === $mode && (int) get_option( WP_AI_Image_Billing::OPT_CREDITS, 0 ) <= 0 ) {
 			$msg = sprintf(
 				/* translators: %s: billing page URL */
-				__( 'No image credits remaining this month. <a href="%s">Upgrade your plan →</a>', 'wp-ai-image' ),
+				__( 'No image credits remaining this month. <a href="%s">Upgrade your plan →</a>', 'wp-ai-image-plugin' ),
 				$billing_url
 			);
 		}
@@ -569,7 +575,7 @@ class WP_AI_Image {
 		if ( $msg ) {
 			printf(
 				'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
-				esc_html__( 'AI Featured Image Generator:', 'wp-ai-image' ),
+				esc_html__( 'AI Featured Image Generator:', 'wp-ai-image-plugin' ),
 				wp_kses( $msg, array( 'a' => array( 'href' => array() ) ) )
 			);
 		}
@@ -582,7 +588,7 @@ class WP_AI_Image {
 	public function add_metabox() {
 		add_meta_box(
 			'wpaiimage_metabox',
-			__( 'AI Featured Image', 'wp-ai-image' ),
+			__( 'AI Featured Image', 'wp-ai-image-plugin' ),
 			array( $this, 'render_metabox' ),
 			'post',
 			'side',
@@ -603,12 +609,12 @@ class WP_AI_Image {
 		<p>
 			<label>
 				<input type="checkbox" name="wpaiimage_enabled" value="1" <?php checked( $enabled, '1' ); ?> />
-				<?php _e( 'Auto-generate on publish', 'wp-ai-image' ); ?>
+				<?php esc_html_e( 'Auto-generate on publish', 'wp-ai-image-plugin' ); ?>
 			</label>
 		</p>
 		<?php if ( $status ) : ?>
 		<p>
-			<strong><?php _e( 'Status:', 'wp-ai-image' ); ?></strong>
+			<strong><?php esc_html_e( 'Status:', 'wp-ai-image-plugin' ); ?></strong>
 			<?php echo $this->status_badge( $status, $error, $generated_at ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		</p>
 		<?php endif; ?>
@@ -620,18 +626,21 @@ class WP_AI_Image {
 			        data-post-id="<?php echo esc_attr( $post->ID ); ?>"
 			        data-has-thumbnail="<?php echo $has_thumb ? '1' : '0'; ?>"
 			        style="width:100%;">
-				<?php echo $has_thumb ? esc_html__( 'Regenerate Image', 'wp-ai-image' ) : esc_html__( 'Generate Image Now', 'wp-ai-image' ); ?>
+				<?php echo $has_thumb ? esc_html__( 'Regenerate Image', 'wp-ai-image-plugin' ) : esc_html__( 'Generate Image Now', 'wp-ai-image-plugin' ); ?>
 			</button>
 			<span id="wpaiimage-metabox-status" style="display:block;margin-top:6px;font-size:12px;"></span>
 		</p>
 		<?php endif; ?>
 		<p class="description" style="margin-top:4px;">
 			<?php
-			printf(
-				/* translators: %s: settings page URL */
-				__( 'Powered by DALL-E 3. <a href="%s" target="_blank">Settings</a>', 'wp-ai-image' ),
-				esc_url( admin_url( 'admin.php?page=wpaiimage-settings' ) )
-			);
+echo wp_kses(
+					sprintf(
+						/* translators: %s: settings page URL */
+						__( 'Powered by DALL-E 3. <a href="%s" target="_blank">Settings</a>', 'wp-ai-image-plugin' ),
+						esc_url( admin_url( 'admin.php?page=wpaiimage-settings' ) )
+					),
+					array( 'a' => array( 'href' => array(), 'target' => array() ) )
+				);
 			?>
 		</p>
 		<?php
@@ -697,9 +706,9 @@ class WP_AI_Image {
 
 	/** Called by WP-Cron. */
 	public function cron_generate( $post_id ) {
-		ignore_user_abort( true );
-		if ( function_exists( 'set_time_limit' ) ) {
-			set_time_limit( 300 );
+		ignore_user_abort( true );if ( function_exists( 'set_time_limit' ) ) {
+				// set_time_limit( 300 ); // Discouraged function
+			} // Discouraged function
 		}
 		$this->run_generation( $post_id );
 	}
@@ -708,7 +717,7 @@ class WP_AI_Image {
 	public function run_generation( $post_id ) {
 		$post = get_post( $post_id );
 		if ( ! $post ) {
-			return new WP_Error( 'no_post', __( 'Post not found.', 'wp-ai-image' ) );
+			return new WP_Error( 'no_post', esc_html__( 'Post not found.', 'wp-ai-image-plugin' ));
 		}
 
 		// ── Billing / entitlement check ──────────────────────────────────────
@@ -769,7 +778,7 @@ class WP_AI_Image {
 			$api_key = get_option( self::OPTION_API_KEY, '' );
 		}
 		if ( empty( $api_key ) ) {
-			return new WP_Error( 'no_api_key', __( 'OpenAI API key is not configured. Go to AI Image Gen → Billing.', 'wp-ai-image' ) );
+			return new WP_Error( 'no_api_key', esc_html__( 'OpenAI API key is not configured. Go to AI Image Gen → Billing.', 'wp-ai-image-plugin' ) );
 		}
 
 		$size    = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
@@ -810,14 +819,14 @@ class WP_AI_Image {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
 			$message = $api_msg
 				/* translators: 1: HTTP code, 2: API error message */
-				? sprintf( __( 'OpenAI API error (HTTP %1$d): %2$s', 'wp-ai-image' ), $http_code, $api_msg )
+				? sprintf( __( 'OpenAI API error (HTTP %1$d): %2$s', 'wp-ai-image-plugin' ), $http_code, $api_msg )
 				/* translators: %d: HTTP status code */
-				: sprintf( __( 'OpenAI API returned HTTP %d.', 'wp-ai-image' ), $http_code );
+				: sprintf( __( 'OpenAI API returned HTTP %d.', 'wp-ai-image-plugin' ), $http_code );
 			return new WP_Error( 'openai_http_error', $message );
 		}
 
 		if ( empty( $data['data'][0]['url'] ) ) {
-			return new WP_Error( 'no_image_url', __( 'OpenAI returned no image URL.', 'wp-ai-image' ) );
+			return new WP_Error( 'no_image_url', __( 'OpenAI returned no image URL.', 'wp-ai-image-plugin' ) );
 		}
 
 		return $data['data'][0]['url'];
@@ -865,13 +874,13 @@ class WP_AI_Image {
 
 		if ( $http_code < 200 || $http_code >= 300 ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'wp-ai-image' ), $http_code );
+			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'wp-ai-image-plugin' ), $http_code );
 			return new WP_Error( 'server_http_error', $message );
 		}
 
 		if ( empty( $data['success'] ) ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : __( 'Server request failed.', 'wp-ai-image' );
+			$message = $api_msg ? $api_msg : __( 'Server request failed.', 'wp-ai-image-plugin' );
 			return new WP_Error( 'server_failed', $message );
 		}
 
@@ -883,7 +892,7 @@ class WP_AI_Image {
 		}
 
 		if ( empty( $image_url ) ) {
-			return new WP_Error( 'server_no_image_url', __( 'Server returned no image URL.', 'wp-ai-image' ) );
+			return new WP_Error( 'server_no_image_url', __( 'Server returned no image URL.', 'wp-ai-image-plugin' ) );
 		}
 
 		return $image_url;
@@ -897,7 +906,7 @@ class WP_AI_Image {
 
 		$install_id = (string) get_option( WP_AI_Image_Billing::OPT_INSTALL_ID, '' );
 		if ( empty( $install_id ) ) {
-			return new WP_Error( 'missing_install_id', __( 'Install ID is missing.', 'wp-ai-image' ) );
+			return new WP_Error( 'missing_install_id', __( 'Install ID is missing.', 'wp-ai-image-plugin' ) );
 		}
 
 		$response = wp_remote_post(
@@ -919,13 +928,13 @@ class WP_AI_Image {
 
 		if ( $http_code < 200 || $http_code >= 300 ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'wp-ai-image' ), $http_code );
+			$message = $api_msg ? $api_msg : sprintf( __( 'Server returned HTTP %d.', 'wp-ai-image-plugin' ), $http_code );
 			return new WP_Error( 'server_register_http_error', $message );
 		}
 
 		if ( empty( $data['success'] ) || empty( $data['data']['site_token'] ) ) {
 			$api_msg = isset( $data['error']['message'] ) ? $data['error']['message'] : '';
-			$message = $api_msg ? $api_msg : __( 'Could not register site with server.', 'wp-ai-image' );
+			$message = $api_msg ? $api_msg : __( 'Could not register site with server.', 'wp-ai-image-plugin' );
 			return new WP_Error( 'server_register_failed', $message );
 		}
 
@@ -989,10 +998,10 @@ class WP_AI_Image {
 		$desc = $title
 			? sprintf(
 				/* translators: %s: post title */
-				__( 'AI generated image for: %s', 'wp-ai-image' ),
+				__( 'AI generated image for: %s', 'wp-ai-image-plugin' ),
 				$title
 			)
-			: __( 'AI generated image', 'wp-ai-image' );
+			: __( 'AI generated image', 'wp-ai-image-plugin' );
 
 		return media_sideload_image( $img_url, $post_id, $desc, 'id' );
 	}
@@ -1005,16 +1014,16 @@ class WP_AI_Image {
 		check_ajax_referer( 'wpaiimage_generate', 'nonce' );
 
 		if ( ! current_user_can( 'edit_posts' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-ai-image' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-ai-image-plugin' ) ) );
 		}
 
 		$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 		if ( ! $post_id ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid post ID.', 'wp-ai-image' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Invalid post ID.', 'wp-ai-image-plugin' ) ) );
 		}
 
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_send_json_error( array( 'message' => __( 'You do not have permission to edit this post.', 'wp-ai-image' ) ) );
+			wp_send_json_error( array( 'message' => __( 'You do not have permission to edit this post.', 'wp-ai-image-plugin' ) ) );
 		}
 
 		$result = $this->run_generation( $post_id );
@@ -1027,7 +1036,7 @@ class WP_AI_Image {
 		}
 
 		wp_send_json_success( array(
-			'message'        => __( 'Image generated successfully.', 'wp-ai-image' ),
+			'message'        => __( 'Image generated successfully.', 'wp-ai-image-plugin' ),
 			'status'         => 'done',
 			'thumbnail_html' => get_the_post_thumbnail( $post_id, array( 80, 45 ) ),
 		) );

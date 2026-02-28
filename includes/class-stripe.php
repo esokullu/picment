@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WP_AI_Image_Stripe {
+class WPAIImage_Stripe {
 
 	const STRIPE_API_BASE = 'https://api.stripe.com/v1/';
 	const STRIPE_VERSION  = '2024-06-20'; // pinned stable version
@@ -202,7 +202,7 @@ class WP_AI_Image_Stripe {
 			return new WP_Error(
 				'no_price_id',
 				/* translators: %s: plan name */
-				sprintf( __( 'Stripe price ID for plan "%s" not configured in wp-config.php.', 'wp-ai-image' ), $plan_key )
+				sprintf( __( 'Stripe price ID for plan "%s" not configured in wp-config.php.', 'wp-ai-image-plugin' ), $plan_key )
 			);
 		}
 
@@ -271,7 +271,7 @@ class WP_AI_Image_Stripe {
 		if ( empty( $secret_key ) ) {
 			return new WP_Error(
 				'no_stripe_key',
-				__( 'Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php.', 'wp-ai-image' )
+				__( 'Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php.', 'wp-ai-image-plugin' )
 			);
 		}
 
@@ -306,7 +306,7 @@ class WP_AI_Image_Stripe {
 		if ( $http_code >= 400 ) {
 			$msg = isset( $decoded['error']['message'] )
 				? $decoded['error']['message']
-				: sprintf( __( 'Stripe API error (HTTP %d).', 'wp-ai-image' ), $http_code );
+				: sprintf( __( 'Stripe API error (HTTP %d).', 'wp-ai-image-plugin' ), $http_code );
 			return new WP_Error( 'stripe_error', $msg );
 		}
 

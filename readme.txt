@@ -1,8 +1,8 @@
 === AI Featured Image Generator ===
 Contributors:      baracksok
-Tags:              ai, featured image, image generator, openai, dall-e, dall-e-3, artificial intelligence, image generation, post thumbnail, automation
+Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
-Tested up to:      6.7
+Tested up to:      6.9
 Requires PHP:      7.4
 Stable tag:        1.0.1
 License:           GPLv2 or later
@@ -121,10 +121,20 @@ Click **Manage Subscription** on the **AI Image Gen → Billing** page. This ope
 
 == Changelog ==
 
+= 1.0.1 =
+* Fixed escaping and sanitization issues for WordPress.org compliance
+* Replaced mt_rand() with wp_rand() for improved security
+* Updated text domain to match plugin slug
+* Updated "Tested up to" to WordPress 6.9
+* Reduced tags to comply with the 5-tag limit
+
 = 1.0.0 =
 * Initial release with DALL-E 3 image generation, bulk generate, per-post control, BYOK mode, trial credit, and Starter/Pro/Agency subscription plans
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Security and compliance fixes for WordPress.org submission.
 
 = 1.0.0 =
 Initial release.
