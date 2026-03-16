@@ -1,0 +1,386 @@
+# Russian translation for AI Featured Image Generator.
+# Copyright (C) 2026 Barack Sokullu
+# This file is distributed under the same license as the AI Featured Image Generator package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Featured Image Generator 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-featured-image-generator/\n"
+"POT-Creation-Date: 2026-02-23T00:00:00+00:00\n"
+"PO-Revision-Date: 2026-02-23T00:00:00+00:00\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: wp-ai-image\n"
+
+msgid "AI Featured Image Generator"
+msgstr "Генератор изображений ИИ"
+
+msgid "AI Image Gen"
+msgstr "Ген. изобр. ИИ"
+
+msgid "Generate Images"
+msgstr "Генерировать изображения"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Billing"
+msgstr "Биллинг"
+
+msgid "API Configuration"
+msgstr "Конфигурация API"
+
+msgid "OpenAI API Key"
+msgstr "API-ключ OpenAI"
+
+msgid "Image Settings"
+msgstr "Настройки изображения"
+
+msgid "Image Size"
+msgstr "Размер изображения"
+
+msgid "Image Quality"
+msgstr "Качество изображения"
+
+msgid "Image Style"
+msgstr "Стиль изображения"
+
+msgid "Custom Prompt Template"
+msgstr "Пользовательский шаблон запроса"
+
+msgid "Automation"
+msgstr "Автоматизация"
+
+msgid "Auto-generate on Publish"
+msgstr "Автогенерация при публикации"
+
+msgid "Overwrite Existing Images"
+msgstr "Перезаписывать существующие изображения"
+
+msgid "Get your API key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr "Получите API-ключ на <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+
+msgid "1792 × 1024 — Landscape (recommended for blog posts)"
+msgstr "1792 × 1024 — Альбомная (рекомендуется для записей блога)"
+
+msgid "1024 × 1024 — Square"
+msgstr "1024 × 1024 — Квадратная"
+
+msgid "1024 × 1792 — Portrait"
+msgstr "1024 × 1792 — Портретная"
+
+msgid "HD — higher detail, higher cost"
+msgstr "HD — больше деталей, выше стоимость"
+
+msgid "Standard"
+msgstr "Стандартный"
+
+msgid "Vivid — hyper-real and dramatic"
+msgstr "Яркий — гиперреалистичный и драматичный"
+
+msgid "Natural — more realistic tones"
+msgstr "Натуральный — более реалистичные тона"
+
+msgid "Use <code>{title}</code> and <code>{content}</code> as placeholders. Leave blank to use the built-in prompt."
+msgstr "Используйте <code>{title}</code> и <code>{content}</code> как заполнители. Оставьте пустым для использования встроенного запроса."
+
+msgid "<strong>Default:</strong> <em>%s</em>"
+msgstr "<strong>По умолчанию:</strong> <em>%s</em>"
+
+msgid "(post title)"
+msgstr "(заголовок записи)"
+
+msgid "(post content)"
+msgstr "(содержимое записи)"
+
+msgid "Automatically generate a featured image when a post is published (if none exists)"
+msgstr "Автоматически генерировать миниатюру при публикации записи (если её нет)"
+
+msgid "Overwrite existing featured images when regenerating via the admin page"
+msgstr "Перезаписывать существующие миниатюры при регенерации через страницу администратора"
+
+msgid "AI Featured Image Generator — Settings"
+msgstr "Генератор изображений ИИ — Настройки"
+
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+msgid "Image generation is not available. <a href=\"%s\">Configure billing →</a>"
+msgstr "Генерация изображений недоступна. <a href=\"%s\">Настроить биллинг →</a>"
+
+msgid "AI Featured Image Generator — Generate"
+msgstr "Генератор изображений ИИ — Генерировать"
+
+msgid "Select All"
+msgstr "Выбрать все"
+
+msgid "Deselect All"
+msgstr "Снять выделение"
+
+msgid "Select Posts Without Image"
+msgstr "Выбрать записи без изображения"
+
+msgid "Generate for Selected"
+msgstr "Генерировать для выбранных"
+
+msgid "Post Title"
+msgstr "Заголовок записи"
+
+msgid "Published"
+msgstr "Опубликовано"
+
+msgid "Thumbnail"
+msgstr "Миниатюра"
+
+msgid "AI Status"
+msgstr "Статус ИИ"
+
+msgid "Action"
+msgstr "Действие"
+
+msgid "No published posts found."
+msgstr "Опубликованные записи не найдены."
+
+msgid "Regenerate"
+msgstr "Регенерировать"
+
+msgid "Generate"
+msgstr "Генерировать"
+
+msgid "Generated"
+msgstr "Сгенерировано"
+
+msgid "Pending&hellip;"
+msgstr "Ожидание&hellip;"
+
+msgid "Generating&hellip;"
+msgstr "Генерация&hellip;"
+
+msgid "Failed"
+msgstr "Ошибка"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "This post already has a featured image. Overwrite it?"
+msgstr "У этой записи уже есть миниатюра. Перезаписать её?"
+
+msgid "Please select at least one post."
+msgstr "Выберите хотя бы одну запись."
+
+msgid "Processing %1$d of %2$d&hellip;"
+msgstr "Обработка %1$d из %2$d&hellip;"
+
+msgid "Done! %d image(s) generated."
+msgstr "Готово! Сгенерировано %d изображений."
+
+msgid "Image generated — refresh to see the thumbnail."
+msgstr "Изображение сгенерировано — обновите страницу для просмотра миниатюры."
+
+msgid "BYOK mode is active but no API key is configured. <a href=\"%s\">Add your key →</a>"
+msgstr "Режим BYOK активен, но API-ключ не настроен. <a href=\"%s\">Добавить ключ →</a>"
+
+msgid "Your free trial image has been used. <a href=\"%s\">Subscribe or enter your own API key →</a>"
+msgstr "Пробное изображение использовано. <a href=\"%s\">Подпишитесь или введите собственный API-ключ →</a>"
+
+msgid "No image credits remaining this month. <a href=\"%s\">Upgrade your plan →</a>"
+msgstr "В этом месяце кредиты на изображения закончились. <a href=\"%s\">Улучшить план →</a>"
+
+msgid "AI Featured Image Generator:"
+msgstr "Генератор изображений ИИ:"
+
+msgid "AI Featured Image"
+msgstr "Миниатюра ИИ"
+
+msgid "Auto-generate on publish"
+msgstr "Автогенерация при публикации"
+
+msgid "Status:"
+msgstr "Статус:"
+
+msgid "Regenerate Image"
+msgstr "Регенерировать изображение"
+
+msgid "Generate Image Now"
+msgstr "Сгенерировать изображение сейчас"
+
+msgid "Powered by DALL-E 3. <a href=\"%s\" target=\"_blank\">Settings</a>"
+msgstr "На базе DALL-E 3. <a href=\"%s\" target=\"_blank\">Настройки</a>"
+
+msgid "Post not found."
+msgstr "Запись не найдена."
+
+msgid "OpenAI API key is not configured. Go to AI Image Gen → Billing."
+msgstr "API-ключ OpenAI не настроен. Перейдите в Ген. изобр. ИИ → Биллинг."
+
+msgid "OpenAI API error (HTTP %1$d): %2$s"
+msgstr "Ошибка API OpenAI (HTTP %1$d): %2$s"
+
+msgid "OpenAI API returned HTTP %d."
+msgstr "API OpenAI вернул HTTP %d."
+
+msgid "OpenAI returned no image URL."
+msgstr "OpenAI не вернул URL изображения."
+
+msgid "AI generated image for: %s"
+msgstr "Изображение, созданное ИИ для: %s"
+
+msgid "AI generated image"
+msgstr "Изображение, созданное ИИ"
+
+msgid "Permission denied."
+msgstr "Доступ запрещён."
+
+msgid "Invalid post ID."
+msgstr "Неверный ID записи."
+
+msgid "You do not have permission to edit this post."
+msgstr "У вас нет прав на редактирование этой записи."
+
+msgid "Image generated successfully."
+msgstr "Изображение успешно сгенерировано."
+
+msgid "Invalid plan selected."
+msgstr "Выбран неверный план."
+
+msgid "No Stripe customer found. Please subscribe first."
+msgstr "Клиент Stripe не найден. Сначала оформите подписку."
+
+msgid "API key cannot be empty."
+msgstr "API-ключ не может быть пустым."
+
+msgid "Saved. Switched to BYOK mode."
+msgstr "Сохранено. Переключено в режим BYOK."
+
+msgid "No subscription found to sync."
+msgstr "Подписка для синхронизации не найдена."
+
+msgid "Subscription synced."
+msgstr "Подписка синхронизирована."
+
+msgid "Subscription activated! Welcome aboard."
+msgstr "Подписка активирована! Добро пожаловать."
+
+msgid "Checkout cancelled — no charge was made."
+msgstr "Оплата отменена — средства не списаны."
+
+msgid "Free Trial"
+msgstr "Бесплатный пробный период"
+
+msgid "BYOK — Your API Key"
+msgstr "BYOK — Ваш API-ключ"
+
+msgid "%s Plan"
+msgstr "План %s"
+
+msgid "Paid Plan"
+msgstr "Платный план"
+
+msgid "AI Featured Image Generator — Billing"
+msgstr "Генератор изображений ИИ — Биллинг"
+
+msgid "Current Plan"
+msgstr "Текущий план"
+
+msgid "Mode"
+msgstr "Режим"
+
+msgid "Not configured"
+msgstr "Не настроено"
+
+msgid "Trial Credits"
+msgstr "Пробные кредиты"
+
+msgid "(used)"
+msgstr "(использовано)"
+
+msgid "Credits"
+msgstr "Кредиты"
+
+msgid "this month"
+msgstr "в этом месяце"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Renews"
+msgstr "Обновляется"
+
+msgid "Manage Subscription →"
+msgstr "Управление подпиской →"
+
+msgid "Sync Status"
+msgstr "Синхронизировать статус"
+
+msgid "Use Your Own API Key (Free)"
+msgstr "Использовать собственный API-ключ (бесплатно)"
+
+msgid "Enter your OpenAI API key. We never see it — it stays in your WordPress database. No monthly charge from us."
+msgstr "Введите API-ключ OpenAI. Мы его никогда не видим — он хранится в вашей базе данных WordPress. Ежемесячных платежей от нас нет."
+
+msgid "Save &amp; Switch to BYOK"
+msgstr "Сохранить и переключиться в BYOK"
+
+msgid "Get a key at <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+msgstr "Получите ключ на <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">platform.openai.com/api-keys</a>."
+
+msgid "Active mode"
+msgstr "Активный режим"
+
+msgid "Rate-limited to 10 images/min."
+msgstr "Ограничение: 10 изображений/мин."
+
+msgid "Subscribe to a Managed Plan"
+msgstr "Подписаться на управляемый план"
+
+msgid "We provide the OpenAI key — no setup needed. Credits reset on your monthly renewal date. No carry-over."
+msgstr "Мы предоставляем ключ OpenAI — настройка не требуется. Кредиты сбрасываются в дату ежемесячного продления. Перенос не предусмотрен."
+
+msgid "Current"
+msgstr "Текущий"
+
+msgid "%d image credits / month"
+msgstr "%d кредитов на изображения / месяц"
+
+msgid "Your plan"
+msgstr "Ваш план"
+
+msgid "Switch Plan"
+msgstr "Сменить план"
+
+msgid "Subscribe"
+msgstr "Подписаться"
+
+msgid "Billing is handled securely by Stripe. AI Featured Image Generator does not store your payment details."
+msgstr "Биллинг обрабатывается безопасно через Stripe. Генератор изображений ИИ не хранит данные платёжных карт."
+
+msgid "No API key configured. <a href=\"%s\">Add your key or subscribe →</a>"
+msgstr "API-ключ не настроен. <a href=\"%s\">Добавить ключ или подписаться →</a>"
+
+msgid "Subscription inactive. <a href=\"%s\">Manage billing →</a>"
+msgstr "Подписка неактивна. <a href=\"%s\">Управление биллингом →</a>"
+
+msgid "Too many requests. Please wait a moment and try again."
+msgstr "Слишком много запросов. Подождите немного и попробуйте снова."
+
+msgid "Image service temporarily unavailable. Please try again shortly."
+msgstr "Сервис изображений временно недоступен. Повторите попытку позже."
+
+msgid "Plugin not yet configured. <a href=\"%s\">Go to Billing →</a>"
+msgstr "Плагин ещё не настроен. <a href=\"%s\">Перейти в Биллинг →</a>"
+
+msgid "Image generation is not available."
+msgstr "Генерация изображений недоступна."
+
+msgid "Stripe price ID for plan \"%s\" not configured in wp-config.php."
+msgstr "ID цены Stripe для плана \"%s\" не настроен в wp-config.php."
+
+msgid "Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php."
+msgstr "Секретный ключ Stripe не настроен. Добавьте STRIPE_SECRET_KEY в wp-config.php."
+
+msgid "Stripe API error (HTTP %d)."
+msgstr "Ошибка API Stripe (HTTP %d)."

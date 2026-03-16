@@ -10,48 +10,48 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Remove plugin options
-$wpaiimage_options = array(
+$options = array(
 	// Core settings
-	'wpaiimage_api_key',
-	'wpaiimage_image_size',
-	'wpaiimage_image_quality',
-	'wpaiimage_image_style',
-	'wpaiimage_auto_generate',
-	'wpaiimage_overwrite_existing',
-	'wpaiimage_prompt_template',
-	'wpaiimage_server_base_url',
-	'wpaiimage_site_token',
+	'picment_ai_image_api_key',
+	'picment_ai_image_image_size',
+	'picment_ai_image_image_quality',
+	'picment_ai_image_image_style',
+	'picment_ai_image_auto_generate',
+	'picment_ai_image_overwrite_existing',
+	'picment_ai_image_prompt_template',
+	'picment_ai_image_server_base_url',
+	'picment_ai_image_site_token',
 	// Billing
-	'wpaiimage_billing_mode',
-	'wpaiimage_trial_credits',
-	'wpaiimage_install_id',
-	'wpaiimage_stripe_customer_id',
-	'wpaiimage_stripe_subscription_id',
-	'wpaiimage_stripe_plan',
-	'wpaiimage_stripe_status',
-	'wpaiimage_stripe_current_period_end',
-	'wpaiimage_credits_remaining',
-	'wpaiimage_credits_reset_at',
+	'picment_ai_image_billing_mode',
+	'picment_ai_image_trial_credits',
+	'picment_ai_image_install_id',
+	'picment_ai_image_stripe_customer_id',
+	'picment_ai_image_stripe_subscription_id',
+	'picment_ai_image_stripe_plan',
+	'picment_ai_image_stripe_status',
+	'picment_ai_image_stripe_current_period_end',
+	'picment_ai_image_credits_remaining',
+	'picment_ai_image_credits_reset_at',
 );
-foreach ( $wpaiimage_options as $wpaiimage_option ) {
-	delete_option( $wpaiimage_option );
+foreach ( $options as $option ) {
+	delete_option( $option );
 }
 
 // Remove all post meta added by this plugin
-$wpaiimage_meta_keys = array(
-	'_wpaiimage_status',
-	'_wpaiimage_generated_at',
-	'_wpaiimage_error',
-	'_wpaiimage_enabled',
+$meta_keys = array(
+	'_picment_ai_image_status',
+	'_picment_ai_image_generated_at',
+	'_picment_ai_image_error',
+	'_picment_ai_image_enabled',
 	// Legacy keys from earlier versions
-	'_wpaiimage_url',
-	'_wpaiimage_auto_generate',
+	'_picment_ai_image_url',
+	'_picment_ai_image_auto_generate',
 );
 
 global $wpdb;
-foreach ( $wpaiimage_meta_keys as $wpaiimage_key ) {
-	$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => $wpaiimage_key ), array( '%s' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+foreach ( $meta_keys as $key ) {
+	$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => $key ), array( '%s' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 }
 
 // Clear any pending WP-Cron events
-wp_clear_scheduled_hook( 'wpaiimage_generate_event' );
+wp_clear_scheduled_hook( 'picment_ai_image_generate_event' );

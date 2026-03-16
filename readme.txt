@@ -1,28 +1,22 @@
-=== Zero-Key AI Images ===
-Contributors:      baracksok
+=== Picment AI Featured Image Generator ===
+Contributors:      baracksokullu
 Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        1.0.2
+Stable tag:        1.0.4
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-The only AI image plugin that works instantly—no API key required. Get 1 free image, then subscribe for more. Auto-generate DALL-E 3 featured images, bulk generate, and more.
+Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
 
 == Description ==
 
-**The only AI featured image plugin that works out of the box — no API key needed.**
-
-Every other AI image plugin on the WordPress marketplace requires you to create an OpenAI account, generate an API key, and enter billing details before you can generate a single image. **Zero-Key AI Images is different.** Install it, activate it, and your first image is free — no sign-up, no API key, no configuration.
-
-When you need more, simply subscribe to an affordable monthly plan directly from your WordPress dashboard. We handle the AI infrastructure so you can focus on your content.
-
-Of course, if you prefer full control, you can also bring your own OpenAI API key (BYOK mode) at no charge from us.
+**Picment AI Featured Image Generator** uses OpenAI's DALL-E 3 model to automatically create beautiful, relevant featured images for your blog posts — saving you time and keeping your content visually consistent.
 
 = How It Works =
 
-Every time you publish a post, the plugin automatically generates a high-quality DALL-E 3 featured image based on your post's title and content. You can also run bulk generation across all your existing posts from a single admin page.
+Every time you publish a post, the plugin automatically generates a high-quality featured image based on your post's title and content. You can also run bulk generation across all your existing posts from a single admin page.
 
 = Key Features =
 
@@ -60,25 +54,25 @@ Every time you publish a post, the plugin automatically generates a high-quality
 **Option A — Use a subscription plan:**
 
 1. Install and activate the plugin
-2. Go to **AI Image Gen → Billing** and subscribe to a plan
+2. Go to **Picment → Billing** and subscribe to a plan
 3. Publish a post — a featured image will be generated automatically
 
 **Option B — Bring your own OpenAI key:**
 
 1. Install and activate the plugin
-2. Go to **AI Image Gen → Billing** and enter your OpenAI API key under "Bring Your Own Key"
+2. Go to **Picment → Billing** and enter your OpenAI API key under "Bring Your Own Key"
 3. Publish a post — a featured image will be generated automatically
 
 **Option C — Try it free:**
 
 1. Install and activate the plugin — you receive 1 free trial credit automatically
-2. Go to **AI Image Gen → Generate** and generate your first image
+2. Go to **Picment → Generate** and generate your first image
 
 == Installation ==
 
 1. Upload the `wp-ai-image` folder to `/wp-content/plugins/`
 2. Activate the plugin through the **Plugins** menu in WordPress
-3. Go to **AI Image Gen → Billing** to choose your billing mode
+3. Go to **Picment → Billing** to choose your billing mode
 
 == Frequently Asked Questions ==
 
@@ -100,7 +94,7 @@ Generation is paused until your credits reset at the start of your next billing 
 
 = Can I use a custom prompt? =
 
-Yes — go to **AI Image Gen → Settings** and enter your own prompt template. Use `{title}` and `{content}` as placeholders for the post title and content.
+Yes — go to **Picment → Settings** and enter your own prompt template. Use `{title}` and `{content}` as placeholders for the post title and content.
 
 = Where are images stored? =
 
@@ -108,7 +102,7 @@ Images are downloaded from OpenAI and saved to your WordPress Media Library. The
 
 = Will it overwrite my existing featured images? =
 
-By default, auto-generation is skipped if a post already has a featured image. You can enable overwriting in **AI Image Gen → Settings**.
+By default, auto-generation is skipped if a post already has a featured image. You can enable overwriting in **Picment → Settings**.
 
 = What happens if generation fails? =
 
@@ -116,7 +110,7 @@ The failure is recorded in the post's AI Status. You can retry generation at any
 
 = How do I cancel my subscription? =
 
-Click **Manage Subscription** on the **AI Image Gen → Billing** page. This opens the Stripe Customer Portal where you can cancel or modify your plan at any time.
+Click **Manage Subscription** on the **Picment → Billing** page. This opens the Stripe Customer Portal where you can cancel or modify your plan at any time.
 
 == Screenshots ==
 
@@ -125,22 +119,56 @@ Click **Manage Subscription** on the **AI Image Gen → Billing** page. This ope
 3. Settings page
 4. Post editor sidebar metabox
 
+== External Services ==
+
+This plugin connects to the following external services:
+
+= OpenAI (DALL-E 3) =
+
+Used to generate featured images from your post title and content when BYOK (Bring Your Own Key) mode is active.
+
+* **Data sent:** post title and a content excerpt derived from the post body
+* **When:** each time an image is generated in BYOK mode
+* **Terms of use:** https://openai.com/policies/terms-of-use
+* **Privacy policy:** https://openai.com/policies/privacy-policy
+
+= Picment Image Service =
+
+Used to generate images via managed subscription plans (Starter, Pro, Agency), and for site registration, billing synchronisation, checkout session creation, and credit tracking. This service is operated by the plugin author.
+
+* **Data sent:** your site URL and a unique anonymous install ID (on activation); a prompt derived from your post title and content excerpt (on image generation in trial or paid mode); plan selection (on subscription)
+* **When:** on plugin activation, when subscribing to a plan, when syncing billing status, and when generating images in trial or paid mode
+* **Terms of use and privacy policy:** https://picment.xyz
+
+= Stripe =
+
+Used to process subscription payments securely. Payment details are handled entirely on Stripe-hosted pages and are never stored by this plugin.
+
+* **Data sent:** your site's anonymous install ID is associated with your subscription for credit tracking; payment details are entered directly on Stripe-hosted pages
+* **When:** when subscribing to or managing a paid plan
+* **Terms of service:** https://stripe.com/legal/ssa
+* **Privacy policy:** https://stripe.com/privacy
+
 == Changelog ==
 
+= 1.0.4 =
+* Updated API URLs to use picment.xyz instead of aaronswtech.com
+
+= 1.0.3 =
+* Fixed plugin version constant
+* Improved output escaping throughout admin UI
+* Updated plugin branding to Picment
+
 = 1.0.2 =
-* Fixed escaping and sanitization issues for WordPress.org compliance
-* Replaced mt_rand() with wp_rand() for improved security
-* Updated text domain to match plugin slug
-* Updated "Tested up to" to WordPress 6.9
-* Reduced tags to comply with the 5-tag limit
+* Minor stability improvements
+
+= 1.0.1 =
+* Billing system improvements
 
 = 1.0.0 =
 * Initial release with DALL-E 3 image generation, bulk generate, per-post control, BYOK mode, trial credit, and Starter/Pro/Agency subscription plans
 
 == Upgrade Notice ==
 
-= 1.0.2 =
-Security and compliance fixes for WordPress.org submission.
-
-= 1.0.0 =
-Initial release.
+= 1.0.3 =
+Recommended update with security and stability improvements.

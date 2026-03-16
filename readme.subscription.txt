@@ -1,4 +1,4 @@
-Zero-Key AI Images — Subscription & Billing System
+AI Featured Image Generator — Subscription & Billing System
 =============================================================
 
 Overview
@@ -33,39 +33,39 @@ These constants must be defined in wp-config.php on the plugin operator's
 WordPress server (not on subscriber sites):
 
   // Shared OpenAI key used for trial + paid plan generations
-  define( 'WPAIIMAGE_OUR_API_KEY', 'sk-...' );
+  define( 'PICMENT_AI_IMAGE_OUR_API_KEY', 'sk-...' );
 
   // Stripe keys (live or test)
-  define( 'STRIPE_SECRET_KEY',      'sk_live_...' );
-  define( 'STRIPE_PUBLISHABLE_KEY', 'pk_live_...' );
-  define( 'STRIPE_WEBHOOK_SECRET',  'whsec_...' );
+  define( 'PICMENT_AI_IMAGE_STRIPE_SECRET_KEY',      'sk_live_...' );
+  define( 'PICMENT_AI_IMAGE_STRIPE_PUBLISHABLE_KEY', 'pk_live_...' );
+  define( 'PICMENT_AI_IMAGE_STRIPE_WEBHOOK_SECRET',  'whsec_...' );
 
   // Stripe price IDs for each plan
-  define( 'PRICE_STARTER', 'price_...' );
-  define( 'PRICE_PRO',     'price_...' );
-  define( 'PRICE_AGENCY',  'price_...' );
+  define( 'PICMENT_AI_IMAGE_PRICE_STARTER', 'price_...' );
+  define( 'PICMENT_AI_IMAGE_PRICE_PRO',     'price_...' );
+  define( 'PICMENT_AI_IMAGE_PRICE_AGENCY',  'price_...' );
 
 Note: BYOK keys are stored per-site in the WordPress options table
-(wpaiimage_api_key) and are never sent to the plugin operator.
+(picment_ai_image_api_key) and are never sent to the plugin operator.
 
 
 Database Options
 ----------------
 All options are stored in wp_options with these keys:
 
-  wpaiimage_billing_mode           Current mode: 'trial', 'byok', or 'paid'
-  wpaiimage_trial_credits          Remaining trial credits (integer)
-  wpaiimage_install_id             UUID generated at activation (ties the
+  picment_ai_image_billing_mode           Current mode: 'trial', 'byok', or 'paid'
+  picment_ai_image_trial_credits          Remaining trial credits (integer)
+  picment_ai_image_install_id             UUID generated at activation (ties the
                                    site to its Stripe customer record)
-  wpaiimage_api_key                BYOK OpenAI API key (encrypted at rest
+  picment_ai_image_api_key                BYOK OpenAI API key (encrypted at rest
                                    via WordPress options; not transmitted)
-  wpaiimage_stripe_customer_id     Stripe customer ID (cus_...)
-  wpaiimage_stripe_subscription_id Stripe subscription ID (sub_...)
-  wpaiimage_stripe_plan            Active plan key: starter | pro | agency
-  wpaiimage_stripe_status          Stripe subscription status
-  wpaiimage_stripe_current_period_end  Unix timestamp of current period end
-  wpaiimage_credits_remaining      Credits left in current billing period
-  wpaiimage_credits_reset_at       Unix timestamp of last credit reset
+  picment_ai_image_stripe_customer_id     Stripe customer ID (cus_...)
+  picment_ai_image_stripe_subscription_id Stripe subscription ID (sub_...)
+  picment_ai_image_stripe_plan            Active plan key: starter | pro | agency
+  picment_ai_image_stripe_status          Stripe subscription status
+  picment_ai_image_stripe_current_period_end  Unix timestamp of current period end
+  picment_ai_image_credits_remaining      Credits left in current billing period
+  picment_ai_image_credits_reset_at       Unix timestamp of last credit reset
 
 
 Stripe Webhook
@@ -73,7 +73,7 @@ Stripe Webhook
 Register this endpoint in your Stripe Dashboard under
 Developers → Webhooks → Add endpoint:
 
-  https://YOUR-SITE.com/wp-json/wpaiimage/v1/stripe-webhook
+  https://YOUR-SITE.com/wp-json/picment-ai-image/v1/stripe-webhook
 
 Recommended events to send:
 
@@ -84,7 +84,7 @@ Recommended events to send:
 
 The webhook verifies the Stripe-Signature header using HMAC-SHA256 and
 rejects events older than 5 minutes (replay-attack protection). The
-STRIPE_WEBHOOK_SECRET constant must match the signing secret shown in
+PICMENT_AI_IMAGE_STRIPE_WEBHOOK_SECRET constant must match the signing secret shown in
 the Stripe Dashboard for this endpoint.
 
 
@@ -99,13 +99,13 @@ Subscription Lifecycle
 5. Stripe fires `customer.subscription.created` — webhook receives it
    and calls apply_subscription() to confirm state.
 6. Stripe fires `invoice.paid` at the start of each billing period —
-   webhook resets wpaiimage_credits_remaining to the plan's credit
+   webhook resets picment_ai_image_credits_remaining to the plan's credit
    allowance and updates the period end timestamp.
 7. If the subscription is canceled but still within the current period,
    the billing mode remains 'paid' (grace period). When the period ends,
    the mode reverts to 'trial'.
 
-Credit consumption happens server-side in WP_AI_Image_Billing::consume_credit()
+Credit consumption happens server-side in Picment_AI_Image_Billing::consume_credit()
 and is called only after a successful image generation. Failed generations
 do not consume credits.
 
@@ -114,7 +114,7 @@ Lazy Credit Reset
 -----------------
 In addition to webhook-triggered resets, the plugin performs a lazy reset
 check on every entitlement check (check_entitlement()). If the current
-time has passed wpaiimage_stripe_current_period_end and the credits have
+time has passed picment_ai_image_stripe_current_period_end and the credits have
 not yet been reset for this period, they are reset automatically. This
 ensures credits are refreshed even if a webhook was missed.
 
@@ -124,23 +124,23 @@ AJAX Actions
 These WordPress AJAX actions are registered by the billing class and
 require the user to be logged in as an admin (manage_options capability):
 
-  wpaiimage_checkout      Create a Stripe Checkout Session for a plan.
+  picment_ai_image_checkout      Create a Stripe Checkout Session for a plan.
                           POST data: { plan: 'starter'|'pro'|'agency' }
                           Returns:   { checkout_url: '...' }
 
-  wpaiimage_portal        Create a Stripe Billing Portal session for the
+  picment_ai_image_portal        Create a Stripe Billing Portal session for the
                           current customer.
                           Returns:   { portal_url: '...' }
 
-  wpaiimage_billing_sync  Re-fetch the current subscription from Stripe
+  picment_ai_image_billing_sync  Re-fetch the current subscription from Stripe
                           and update local state.
                           Returns:   {} (page reloads on success)
 
-  wpaiimage_save_byok     Save a BYOK OpenAI API key to wp_options.
+  picment_ai_image_save_byok     Save a BYOK OpenAI API key to wp_options.
                           POST data: { api_key: 'sk-...' }
                           Returns:   { message: '...' }
 
-All AJAX actions are protected by a WordPress nonce (wpaiimage_billing_nonce)
+All AJAX actions are protected by a WordPress nonce (picment_ai_image_billing_nonce)
 which is localized into the page via wp_localize_script.
 
 
@@ -161,7 +161,7 @@ is NOT consumed.
 
 Entitlement Check Flow
 ----------------------
-WP_AI_Image_Billing::check_entitlement() is called before every generation.
+Picment_AI_Image_Billing::check_entitlement() is called before every generation.
 It returns either:
 
   [ 'ok' => true,  'mode' => '...', 'api_key' => '...', 'credits' => N ]
@@ -189,7 +189,7 @@ want to be billed.
 
 Security Notes
 --------------
-- The shared OpenAI key (WPAIIMAGE_OUR_API_KEY) is defined as a PHP
+- The shared OpenAI key (PICMENT_AI_IMAGE_OUR_API_KEY) is defined as a PHP
   constant and never exposed to the browser or to subscriber sites.
 - BYOK keys are stored in wp_options on the subscriber's own server.
   They are never transmitted to the plugin operator.

@@ -4,14 +4,14 @@
  *
  * Uses wp_remote_post / wp_remote_get directly (no Stripe SDK dependency).
  *
- * Webhook endpoint: POST /wp-json/wpaiimage/v1/stripe-webhook
+ * Webhook endpoint: POST /wp-json/picment-ai-image/v1/stripe-webhook
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WPAIImage_Stripe {
+class Picment_AI_Image_Stripe {
 
 	const STRIPE_API_BASE = 'https://api.stripe.com/v1/';
 	const STRIPE_VERSION  = '2024-06-20'; // pinned stable version
@@ -36,7 +36,7 @@ class WPAIImage_Stripe {
 
 	public function register_webhook_route() {
 		register_rest_route(
-			'wpaiimage/v1',
+			'picment-ai-image/v1',
 			'/stripe-webhook',
 			array(
 				'methods'             => 'POST',
@@ -121,33 +121,33 @@ class WPAIImage_Stripe {
 		}
 
 		if ( $customer_id ) {
-			update_option( WP_AI_Image_Billing::OPT_STRIPE_CUS, $customer_id );
+			update_option( Picment_AI_Image_Billing::OPT_STRIPE_CUS, $customer_id );
 		}
 		if ( $sub_id ) {
-			update_option( WP_AI_Image_Billing::OPT_STRIPE_SUB, $sub_id );
+			update_option( Picment_AI_Image_Billing::OPT_STRIPE_SUB, $sub_id );
 		}
 
-		update_option( WP_AI_Image_Billing::OPT_STRIPE_STATUS, $status );
-		update_option( WP_AI_Image_Billing::OPT_STRIPE_ENDS, $period_end );
+		update_option( Picment_AI_Image_Billing::OPT_STRIPE_STATUS, $status );
+		update_option( Picment_AI_Image_Billing::OPT_STRIPE_ENDS, $period_end );
 
 		if ( $plan ) {
-			$old_plan = get_option( WP_AI_Image_Billing::OPT_STRIPE_PLAN, '' );
-			update_option( WP_AI_Image_Billing::OPT_STRIPE_PLAN, $plan );
+			$old_plan = get_option( Picment_AI_Image_Billing::OPT_STRIPE_PLAN, '' );
+			update_option( Picment_AI_Image_Billing::OPT_STRIPE_PLAN, $plan );
 
 			// If plan changed mid-period, adjust credit allowance immediately
 			if ( $old_plan !== $plan ) {
-				$plans   = WP_AI_Image_Billing::PLANS;
+				$plans   = Picment_AI_Image_Billing::PLANS;
 				$credits = isset( $plans[ $plan ] ) ? $plans[ $plan ]['credits'] : 0;
-				update_option( WP_AI_Image_Billing::OPT_CREDITS, $credits );
+				update_option( Picment_AI_Image_Billing::OPT_CREDITS, $credits );
 			}
 		}
 
 		// Update billing mode
 		if ( in_array( $status, array( 'active', 'trialing' ), true ) ) {
-			update_option( WP_AI_Image_Billing::OPT_MODE, 'paid' );
+			update_option( Picment_AI_Image_Billing::OPT_MODE, 'paid' );
 		} elseif ( 'canceled' === $status && $period_end <= time() ) {
 			// Grace period has ended — revert to trial (user can re-subscribe)
-			update_option( WP_AI_Image_Billing::OPT_MODE, 'trial' );
+			update_option( Picment_AI_Image_Billing::OPT_MODE, 'trial' );
 		}
 		// 'canceled' with period_end still in the future: keep mode='paid' until grace ends
 	}
@@ -173,15 +173,15 @@ class WPAIImage_Stripe {
 				$this->apply_subscription( $sub );
 				// Override period_end with the invoice line item value if available
 				if ( $new_period_end > 0 ) {
-					update_option( WP_AI_Image_Billing::OPT_STRIPE_ENDS, $new_period_end );
+					update_option( Picment_AI_Image_Billing::OPT_STRIPE_ENDS, $new_period_end );
 				}
 			}
 		}
 
 		// Hard-reset credits now that a new period has been paid for
-		$plan = get_option( WP_AI_Image_Billing::OPT_STRIPE_PLAN, '' );
+		$plan = get_option( Picment_AI_Image_Billing::OPT_STRIPE_PLAN, '' );
 		if ( $plan && $new_period_end > 0 ) {
-			WP_AI_Image_Billing::get_instance()->reset_credits_for_plan( $plan, $new_period_end );
+			Picment_AI_Image_Billing::get_instance()->reset_credits_for_plan( $plan, $new_period_end );
 		}
 	}
 
@@ -202,12 +202,12 @@ class WPAIImage_Stripe {
 			return new WP_Error(
 				'no_price_id',
 				/* translators: %s: plan name */
-				sprintf( __( 'Stripe price ID for plan "%s" not configured in wp-config.php.', 'zero-key-ai-images' ), $plan_key )
+				sprintf( __( 'Stripe price ID for plan "%s" not configured in wp-config.php.', 'picment-ai-featured-image-generator' ), $plan_key )
 			);
 		}
 
-		$billing_url = admin_url( 'admin.php?page=wpaiimage-billing' );
-		$install_id  = get_option( WP_AI_Image_Billing::OPT_INSTALL_ID, '' );
+		$billing_url = admin_url( 'admin.php?page=picment-ai-image-billing' );
+		$install_id  = get_option( Picment_AI_Image_Billing::OPT_INSTALL_ID, '' );
 
 		$data = array(
 			'mode'                                     => 'subscription',
@@ -267,11 +267,11 @@ class WPAIImage_Stripe {
 	 * @return array|WP_Error   Decoded response body or error.
 	 */
 	private function stripe_request( $method, $endpoint, $data = array() ) {
-		$secret_key = defined( 'STRIPE_SECRET_KEY' ) ? STRIPE_SECRET_KEY : '';
+		$secret_key = defined( 'PICMENT_AI_IMAGE_STRIPE_SECRET_KEY' ) ? PICMENT_AI_IMAGE_STRIPE_SECRET_KEY : '';
 		if ( empty( $secret_key ) ) {
 			return new WP_Error(
 				'no_stripe_key',
-				__( 'Stripe secret key not configured. Add STRIPE_SECRET_KEY to wp-config.php.', 'zero-key-ai-images' )
+				__( 'Stripe secret key not configured. Add PICMENT_AI_IMAGE_STRIPE_SECRET_KEY to wp-config.php.', 'picment-ai-featured-image-generator' )
 			);
 		}
 
@@ -306,7 +306,7 @@ class WPAIImage_Stripe {
 		if ( $http_code >= 400 ) {
 			$msg = isset( $decoded['error']['message'] )
 				? $decoded['error']['message']
-				: sprintf( __( 'Stripe API error (HTTP %d).', 'zero-key-ai-images' ), $http_code );
+				: sprintf( __( 'Stripe API error (HTTP %d).', 'picment-ai-featured-image-generator' ), $http_code );
 			return new WP_Error( 'stripe_error', $msg );
 		}
 
@@ -318,14 +318,14 @@ class WPAIImage_Stripe {
 	// =========================================================================
 
 	/**
-	 * Verify the Stripe-Signature header against STRIPE_WEBHOOK_SECRET.
+	 * Verify the Stripe-Signature header against PICMENT_AI_IMAGE_STRIPE_WEBHOOK_SECRET.
 	 *
 	 * @param  string $payload    Raw request body.
 	 * @param  string $sig_header Value of the Stripe-Signature header.
 	 * @return bool
 	 */
 	private function verify_signature( $payload, $sig_header ) {
-		$secret = defined( 'STRIPE_WEBHOOK_SECRET' ) ? STRIPE_WEBHOOK_SECRET : '';
+		$secret = defined( 'PICMENT_AI_IMAGE_STRIPE_WEBHOOK_SECRET' ) ? PICMENT_AI_IMAGE_STRIPE_WEBHOOK_SECRET : '';
 		if ( empty( $secret ) || empty( $sig_header ) ) {
 			return false;
 		}
@@ -363,9 +363,9 @@ class WPAIImage_Stripe {
 
 	private function plan_to_price_id( $plan_key ) {
 		$map = array(
-			'starter' => 'PRICE_STARTER',
-			'pro'     => 'PRICE_PRO',
-			'agency'  => 'PRICE_AGENCY',
+			'starter' => 'PICMENT_AI_IMAGE_PRICE_STARTER',
+			'pro'     => 'PICMENT_AI_IMAGE_PRICE_PRO',
+			'agency'  => 'PICMENT_AI_IMAGE_PRICE_AGENCY',
 		);
 		if ( ! isset( $map[ $plan_key ] ) ) {
 			return '';
@@ -375,7 +375,7 @@ class WPAIImage_Stripe {
 	}
 
 	private function price_id_to_plan( $price_id ) {
-		$consts = array( 'PRICE_STARTER' => 'starter', 'PRICE_PRO' => 'pro', 'PRICE_AGENCY' => 'agency' );
+		$consts = array( 'PICMENT_AI_IMAGE_PRICE_STARTER' => 'starter', 'PICMENT_AI_IMAGE_PRICE_PRO' => 'pro', 'PICMENT_AI_IMAGE_PRICE_AGENCY' => 'agency' );
 		foreach ( $consts as $const => $plan ) {
 			if ( defined( $const ) && constant( $const ) === $price_id ) {
 				return $plan;

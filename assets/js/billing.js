@@ -1,4 +1,4 @@
-/* global wpaiimageBilling, jQuery */
+/* global picmentAiImageBilling, jQuery */
 ( function ( $ ) {
 	'use strict';
 
@@ -23,10 +23,10 @@
 	function billingAjax( action, data, onSuccess, onError ) {
 		startLoadingCursor();
 		$.ajax( {
-			url:     wpaiimageBilling.ajax_url,
+			url:     picmentAiImageBilling.ajax_url,
 			type:    'POST',
 			timeout: 30000,
-			data:    $.extend( { action: action, nonce: wpaiimageBilling.nonce }, data ),
+			data:    $.extend( { action: action, nonce: picmentAiImageBilling.nonce }, data ),
 			success: function ( resp ) {
 				if ( resp && resp.success ) {
 					onSuccess( resp.data || {} );
@@ -48,14 +48,14 @@
 	// Subscribe / switch plan buttons
 	// -------------------------------------------------------------------------
 
-	$( document ).on( 'click', '.wpaiimage-subscribe-btn', function () {
+	$( document ).on( 'click', '.picment-ai-image-subscribe-btn', function () {
 		var plan = $( this ).data( 'plan' );
 		var $btn = $( this );
 
 		$btn.prop( 'disabled', true ).text( 'Redirecting to Stripe\u2026' );
 
 		billingAjax(
-			'wpaiimage_checkout',
+			'picment_ai_image_checkout',
 			{ plan: plan },
 			function ( data ) {
 				window.location.href = data.url;
@@ -72,12 +72,12 @@
 	// Manage subscription (Stripe Customer Portal)
 	// -------------------------------------------------------------------------
 
-	$( '#wpaiimage-portal-btn' ).on( 'click', function () {
+	$( '#picment-ai-image-portal-btn' ).on( 'click', function () {
 		var $btn = $( this );
 		$btn.prop( 'disabled', true ).text( 'Loading\u2026' );
 
 		billingAjax(
-			'wpaiimage_portal',
+			'picment_ai_image_portal',
 			{},
 			function ( data ) {
 				window.location.href = data.url;
@@ -94,12 +94,12 @@
 	// Sync subscription status
 	// -------------------------------------------------------------------------
 
-	$( '#wpaiimage-sync-btn' ).on( 'click', function () {
+	$( '#picment-ai-image-sync-btn' ).on( 'click', function () {
 		var $btn = $( this );
 		$btn.prop( 'disabled', true ).text( 'Syncing\u2026' );
 
 		billingAjax(
-			'wpaiimage_billing_sync',
+			'picment_ai_image_billing_sync',
 			{},
 			function () {
 				window.location.reload();
@@ -116,9 +116,9 @@
 	// Save BYOK API key
 	// -------------------------------------------------------------------------
 
-	$( '#wpaiimage-byok-save' ).on( 'click', function () {
-		var key  = $.trim( $( '#wpaiimage-byok-key' ).val() );
-		var $msg = $( '#wpaiimage-byok-msg' );
+	$( '#picment-ai-image-byok-save' ).on( 'click', function () {
+		var key  = $.trim( $( '#picment-ai-image-byok-key' ).val() );
+		var $msg = $( '#picment-ai-image-byok-msg' );
 		var $btn = $( this );
 
 		if ( ! key ) {
@@ -130,7 +130,7 @@
 		$msg.html( '<span style="color:#555;">Saving\u2026</span>' );
 
 		billingAjax(
-			'wpaiimage_save_byok',
+			'picment_ai_image_save_byok',
 			{ api_key: key },
 			function ( data ) {
 				$msg.html( '<span style="color:#46b450;">\u2713 ' + escHtml( data.message ) + '</span>' );
@@ -145,14 +145,14 @@
 		);
 	} );
 
-	$( '#wpaiimage-switch-trial' ).on( 'click', function () {
+	$( '#picment-ai-image-switch-trial' ).on( 'click', function () {
 		var $btn = $( this );
-		var $msg = $( '#wpaiimage-byok-msg' );
+		var $msg = $( '#picment-ai-image-byok-msg' );
 		$btn.prop( 'disabled', true );
 		$msg.html( '<span style="color:#555;">Switching\u2026</span>' );
 
 		billingAjax(
-			'wpaiimage_switch_trial',
+			'picment_ai_image_switch_trial',
 			{},
 			function ( data ) {
 				$msg.html( '<span style="color:#46b450;">\u2713 ' + escHtml( data.message ) + '</span>' );
