@@ -3,7 +3,7 @@
  * Plugin Name:       Picment AI Featured Image Generator
  * Plugin URI:        https://picment.xyz
  * Description:       Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           1.0.4
+ * Version:           1.0.5
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PICMENT_AI_IMAGE_VERSION', '1.0.4' );
+define( 'PICMENT_AI_IMAGE_VERSION', '1.0.5' );
 define( 'PICMENT_AI_IMAGE_PLUGIN_FILE', __FILE__ );
 define( 'PICMENT_AI_IMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PICMENT_AI_IMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
