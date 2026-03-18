@@ -70,7 +70,7 @@ Every time you publish a post, the plugin automatically generates a high-quality
 
 == Installation ==
 
-1. Upload the `wp-ai-image` folder to `/wp-content/plugins/`
+1. Upload the `picment-ai-featured-image-generator` folder to `/wp-content/plugins/`
 2. Activate the plugin through the **Plugins** menu in WordPress
 3. Go to **Picment → Billing** to choose your billing mode
 
@@ -151,6 +151,9 @@ Used to process subscription payments securely. Payment details are handled enti
 
 == Changelog ==
 
+= 1.0.5 =
+* Minor improvements and compatibility updates
+
 = 1.0.4 =
 * Updated API URLs to use picment.xyz instead of aaronswtech.com
 
@@ -170,5 +173,5 @@ Used to process subscription payments securely. Payment details are handled enti
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-Recommended update with security and stability improvements.
+= 1.0.5 =
+Minor improvements and compatibility updates.
