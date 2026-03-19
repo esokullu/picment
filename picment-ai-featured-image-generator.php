@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Picment AI Featured Image Generator
  * Plugin URI:        https://picment.xyz
- * Description:       Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           1.1.1
+ * Description:       Auto-generate stunning AI featured images using DALL-E 3 or fal.ai Flux Pro. Bulk generation, per-post control, BYOK mode, and subscription plans.
+ * Version:           2.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PICMENT_AI_IMAGE_VERSION', '1.1.1' );
+define( 'PICMENT_AI_IMAGE_VERSION', '2.0.0' );
 define( 'PICMENT_AI_IMAGE_PLUGIN_FILE', __FILE__ );
 define( 'PICMENT_AI_IMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PICMENT_AI_IMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -54,6 +54,9 @@ class Picment_AI_Image {
 	const OPTION_AUTO_GENERATE   = 'picment_ai_image_auto_generate';
 	const OPTION_OVERWRITE       = 'picment_ai_image_overwrite_existing';
 	const OPTION_PROMPT_TEMPLATE = 'picment_ai_image_prompt_template';
+	const OPTION_PROVIDER        = 'picment_ai_image_provider';
+	const OPTION_FAL_MODEL       = 'picment_ai_image_fal_model';
+	const OPTION_FAL_API_KEY     = 'picment_ai_image_fal_api_key';
 
 	const META_STATUS       = '_picment_ai_image_status';
 	const META_GENERATED_AT = '_picment_ai_image_generated_at';
@@ -131,6 +134,15 @@ class Picment_AI_Image {
 		if ( false === get_option( self::OPTION_OVERWRITE ) ) {
 			add_option( self::OPTION_OVERWRITE, 0 );
 		}
+		if ( false === get_option( self::OPTION_PROVIDER ) ) {
+			add_option( self::OPTION_PROVIDER, 'openai' );
+		}
+		if ( false === get_option( self::OPTION_FAL_MODEL ) ) {
+			add_option( self::OPTION_FAL_MODEL, 'fal-ai/flux-pro/v1.1' );
+		}
+		if ( false === get_option( self::OPTION_FAL_API_KEY ) ) {
+			add_option( self::OPTION_FAL_API_KEY, '' );
+		}
 	}
 
 	public static function deactivate() {
@@ -197,6 +209,9 @@ class Picment_AI_Image {
 			self::OPTION_AUTO_GENERATE   => 'absint',
 			self::OPTION_OVERWRITE       => 'absint',
 			self::OPTION_PROMPT_TEMPLATE => 'sanitize_textarea_field',
+			self::OPTION_PROVIDER        => array( $this, 'sanitize_provider' ),
+			self::OPTION_FAL_MODEL       => array( $this, 'sanitize_fal_model' ),
+			self::OPTION_FAL_API_KEY     => 'sanitize_text_field',
 		);
 		foreach ( $settings as $key => $callback ) {
 			register_setting( 'picment_ai_image_settings', $key, array( 'sanitize_callback' => $callback ) );
@@ -236,6 +251,13 @@ class Picment_AI_Image {
 	public function sanitize_image_look( $v ) {
 		$allowed = array_keys( $this->get_image_look_options() );
 		return in_array( $v, $allowed, true ) ? $v : 'illustration';
+	}
+	public function sanitize_provider( $v ) {
+		return in_array( $v, array( 'openai', 'fal' ), true ) ? $v : 'openai';
+	}
+	public function sanitize_fal_model( $v ) {
+		$allowed = array( 'fal-ai/flux-pro/v1.1-ultra', 'fal-ai/flux-pro/v1.1', 'fal-ai/flux/dev' );
+		return in_array( $v, $allowed, true ) ? $v : 'fal-ai/flux-pro/v1.1';
 	}
 
 	// Field renderers ----------------------------------------------------------
@@ -334,11 +356,17 @@ class Picment_AI_Image {
 
 	public function field_allow_text_logos() {
 		$val = get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
+		$provider = get_option( self::OPTION_PROVIDER, 'openai' );
 		?>
 		<label>
 			<input type="checkbox" name="<?php echo esc_attr( self::OPTION_ALLOW_TEXT_LOGOS ); ?>" value="1" <?php checked( $val, 1 ); ?> />
 			<?php esc_html_e( 'Allow images to contain text and logo-like marks', 'picment-ai-featured-image-generator' ); ?>
 		</label>
+		<?php if ( 'openai' === $provider ) : ?>
+		<p class="description" style="color:#b32d2e;">
+			<?php esc_html_e( 'Note: Disabled for OpenAI DALL-E 3 due to poor text rendering results. DALL-E frequently produces misspelled or garbled text. If you need text in images, consider switching to fal.ai Flux Pro.', 'picment-ai-featured-image-generator' ); ?>
+		</p>
+		<?php endif; ?>
 		<?php
 	}
 
@@ -379,6 +407,59 @@ class Picment_AI_Image {
 			<input type="checkbox" name="<?php echo esc_attr( self::OPTION_OVERWRITE ); ?>" value="1" <?php checked( $val, 1 ); ?> />
 			<?php esc_html_e( 'Overwrite existing featured images when regenerating via the admin page', 'picment-ai-featured-image-generator' ); ?>
 		</label>
+		<?php
+	}
+
+	public function field_provider() {
+		$val = get_option( self::OPTION_PROVIDER, 'openai' );
+		?>
+		<label>
+			<input type="radio" name="<?php echo esc_attr( self::OPTION_PROVIDER ); ?>" value="openai" <?php checked( $val, 'openai' ); ?> />
+			<?php esc_html_e( 'OpenAI DALL-E 3 (recommended)', 'picment-ai-featured-image-generator' ); ?>
+		</label><br>
+		<label>
+			<input type="radio" name="<?php echo esc_attr( self::OPTION_PROVIDER ); ?>" value="fal" <?php checked( $val, 'fal' ); ?> />
+			<?php esc_html_e( 'fal.ai Flux Pro', 'picment-ai-featured-image-generator' ); ?>
+		</label>
+		<?php
+	}
+
+	public function field_fal_model() {
+		$val = get_option( self::OPTION_FAL_MODEL, 'fal-ai/flux-pro/v1.1' );
+		$opts = array(
+			'fal-ai/flux-pro/v1.1-ultra' => __( 'Flux Pro v1.1 Ultra (best quality, 2K)', 'picment-ai-featured-image-generator' ),
+			'fal-ai/flux-pro/v1.1' => __( 'Flux Pro v1.1 (fast, 1MP)', 'picment-ai-featured-image-generator' ),
+			'fal-ai/flux/dev' => __( 'Flux Dev (budget)', 'picment-ai-featured-image-generator' ),
+		);
+		echo '<select name="' . esc_attr( self::OPTION_FAL_MODEL ) . '">';
+		foreach ( $opts as $k => $label ) {
+			printf( '<option value="%s" %s>%s</option>', esc_attr( $k ), selected( $val, $k, false ), esc_html( $label ) );
+		}
+		echo '</select>';
+		?>
+		<p class="description">
+			<?php esc_html_e( 'Only used when provider is set to fal.ai.', 'picment-ai-featured-image-generator' ); ?>
+		</p>
+		<?php
+	}
+
+	public function field_fal_api_key() {
+		$val = get_option( self::OPTION_FAL_API_KEY, '' );
+		?>
+		<input type="password"
+		       name="<?php echo esc_attr( self::OPTION_FAL_API_KEY ); ?>"
+		       value="<?php echo esc_attr( $val ); ?>"
+		       class="regular-text"
+		       autocomplete="new-password" />
+		<p class="description">
+			<?php
+			printf(
+				/* translators: %s: link to fal.ai API keys page */
+				wp_kses_post( __( 'Get your API key at <a href="%s" target="_blank" rel="noopener noreferrer">fal.ai dashboard</a>. Required when using fal.ai with BYOK mode.', 'picment-ai-featured-image-generator' ) ),
+				esc_url( 'https://dashboard.fal.ai/keys' )
+			);
+			?>
+		</p>
 		<?php
 	}
 
@@ -699,7 +780,7 @@ class Picment_AI_Image {
 			<?php
 			printf(
 				/* translators: %s: settings page URL */
-				wp_kses_post( __( 'Powered by DALL-E 3. <a href="%s" target="_blank">Settings</a>', 'picment-ai-featured-image-generator' ) ),
+				wp_kses_post( __( 'Powered by DALL-E 3 & Flux Pro. <a href="%s" target="_blank">Settings</a>', 'picment-ai-featured-image-generator' ) ),
 				esc_url( admin_url( 'admin.php?page=picment-ai-image-settings' ) )
 			);
 			?>
@@ -795,7 +876,12 @@ class Picment_AI_Image {
 		delete_post_meta( $post_id, self::META_ERROR );
 
 		if ( 'byok' === $ent['mode'] ) {
-			$img_url = $this->call_openai( $post->post_title, $post->post_content );
+			$provider = get_option( self::OPTION_PROVIDER, 'openai' );
+			if ( 'fal' === $provider ) {
+				$img_url = $this->call_fal( $post->post_title, $post->post_content );
+			} else {
+				$img_url = $this->call_openai( $post->post_title, $post->post_content );
+			}
 		} else {
 			$img_url = $this->call_server_generate( $post->post_title, $post->post_content );
 		}
@@ -893,6 +979,74 @@ class Picment_AI_Image {
 		return $data['data'][0]['url'];
 	}
 
+	private function call_fal( $post_title, $post_content, $api_key = null ) {
+		if ( null === $api_key ) {
+			$api_key = get_option( self::OPTION_FAL_API_KEY, '' );
+		}
+		if ( empty( $api_key ) ) {
+			return new WP_Error( 'no_fal_api_key', __( 'fal.ai API key is not configured. Go to AI Image Gen → Settings.', 'picment-ai-featured-image-generator' ) );
+		}
+
+		$size    = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
+		$model   = get_option( self::OPTION_FAL_MODEL, 'fal-ai/flux-pro/v1.1' );
+		$prompt  = $this->build_prompt( $post_title, $post_content );
+
+		// Map size to fal.ai image_size format
+		$size_map = array(
+			'1792x1024' => 'landscape_16_9',
+			'1024x1024' => 'square_hd',
+			'1024x1792' => 'portrait_4_3',
+		);
+		$fal_size = isset( $size_map[ $size ] ) ? $size_map[ $size ] : 'landscape_16_9';
+
+		$payload = wp_json_encode( array(
+			'prompt'           => $prompt,
+			'image_size'       => $fal_size,
+			'num_images'       => 1,
+			'output_format'    => 'jpeg',
+			'safety_tolerance' => 5,
+		) );
+
+		$response = wp_remote_post(
+			'https://fal.run/' . $model,
+			array(
+				'headers' => array(
+					'Content-Type'  => 'application/json',
+					'Authorization' => 'Key ' . $api_key,
+				),
+				'body'    => $payload,
+				'timeout' => 120,
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$http_code = wp_remote_retrieve_response_code( $response );
+		$body      = wp_remote_retrieve_body( $response );
+		$data      = json_decode( $body, true );
+
+		if ( 200 !== $http_code ) {
+			$api_msg = isset( $data['error'] ) ? $data['error'] : '';
+			if ( is_array( $api_msg ) && isset( $api_msg['message'] ) ) {
+				$api_msg = $api_msg['message'];
+			}
+			$message = $api_msg
+				/* translators: 1: HTTP code, 2: API error message */
+				? sprintf( __( 'fal.ai API error (HTTP %1$d): %2$s', 'picment-ai-featured-image-generator' ), $http_code, $api_msg )
+				/* translators: %d: HTTP status code */
+				: sprintf( __( 'fal.ai API returned HTTP %d.', 'picment-ai-featured-image-generator' ), $http_code );
+			return new WP_Error( 'fal_http_error', $message );
+		}
+
+		if ( empty( $data['images'][0]['url'] ) ) {
+			return new WP_Error( 'fal_no_image_url', __( 'fal.ai returned no image URL.', 'picment-ai-featured-image-generator' ) );
+		}
+
+		return $data['images'][0]['url'];
+	}
+
 	private function call_server_generate( $post_title, $post_content ) {
 		$base_url = untrailingslashit( (string) get_option( self::OPTION_SERVER_BASE_URL, 'https://picment.xyz/api' ) );
 		$token    = $this->ensure_site_token( $base_url );
@@ -906,6 +1060,8 @@ class Picment_AI_Image {
 		$look    = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
 		$custom_look_prompt = get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' );
 		$allow   = (int) get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
+		$provider = get_option( self::OPTION_PROVIDER, 'openai' );
+		$fal_model = get_option( self::OPTION_FAL_MODEL, 'fal-ai/flux-pro/v1.1' );
 		$prompt  = $this->build_prompt( $post_title, $post_content );
 
 		$payload = array(
@@ -917,6 +1073,8 @@ class Picment_AI_Image {
 			'look'       => $look,
 			'custom_look_prompt' => $custom_look_prompt,
 			'allow_text_logos' => $allow,
+			'provider'   => $provider,
+			'fal_model'  => $fal_model,
 		);
 
 		$response = wp_remote_post(
@@ -1054,19 +1212,19 @@ class Picment_AI_Image {
 
 		switch ( $look ) {
 			case 'photorealistic':
-				$addon .= ' Use a photorealistic editorial photography style with realistic lighting and a clean minimal background.';
+				$addon .= ' Use a photorealistic editorial photography style: shallow depth of field, golden-hour or studio lighting, 85mm lens perspective, crisp details on the subject with a softly blurred background.';
 				break;
 			case 'anime':
-				$addon .= ' Use a polished anime and manga-inspired style, expressive linework, vibrant color grading, and dynamic composition.';
+				$addon .= ' Use a premium anime and manga art style: detailed character/scene rendering, vibrant saturated colors, expressive dynamic composition, clean linework with cel-shading, and dramatic atmospheric lighting.';
 				break;
 			case 'cinematic':
-				$addon .= ' Use a cinematic visual style with dramatic lighting, rich depth, and a film-like color palette.';
+				$addon .= ' Use a cinematic visual style: anamorphic lens feel, dramatic volumetric lighting, rich color grading reminiscent of a Christopher Nolan or Denis Villeneuve film, with strong depth and atmospheric haze.';
 				break;
 			case 'watercolor':
-				$addon .= ' Use a hand-painted watercolor style with organic textures, soft brush blending, and subtle paper grain.';
+				$addon .= ' Use an authentic hand-painted watercolor style: visible wet-on-wet bleeding, granulating pigments, preserved white paper highlights, organic brush edges, and a palette of 4-5 harmonious colors.';
 				break;
 			case 'three_d':
-				$addon .= ' Use a high-quality 3D render style with realistic materials, global illumination, and depth.';
+				$addon .= ' Use a high-end 3D render style: subsurface scattering on organic materials, physically-based rendering, global illumination with HDRI lighting, subtle depth of field, and photorealistic material textures.';
 				break;
 			case 'custom':
 				if ( '' !== $custom_look_prompt ) {
@@ -1075,14 +1233,14 @@ class Picment_AI_Image {
 				break;
 			case 'illustration':
 			default:
-				$addon .= ' Use a clean, modern digital illustration style with soft lighting and a minimal background.';
+				$addon .= ' Use a refined, modern editorial illustration style with clean vector-like shapes, a limited but vibrant color palette, subtle gradients, and professional negative space. Think high-end magazine cover art.';
 				break;
 		}
 
 		if ( $allow ) {
 			$addon .= ' Text and logos are allowed.';
 		} else {
-			$addon .= ' No text, watermarks, or logos.';
+			$addon .= ' CRITICAL: The image must contain absolutely NO text, NO letters, NO words, NO numbers, NO watermarks, NO logos, NO labels, NO captions, NO signatures, and NO written characters of any kind. The image should be purely visual with zero textual elements.';
 		}
 
 		return rtrim( (string) $prompt ) . $addon;
@@ -1091,10 +1249,14 @@ class Picment_AI_Image {
 	private function default_prompt( $title, $content ) {
 		$combined = trim( $title . "\n\n" . $content );
 		return sprintf(
-			'Create a visually compelling featured image for a blog post. '
-			. 'Focus on a clear central subject that represents the post content. '
-			. 'Post content: %s',
-			$combined
+			'Create a visually striking, professional-grade featured image for a blog post. '
+			. 'The image should have a single clear focal point that immediately communicates the post\'s topic. '
+			. 'Use sophisticated composition with intentional negative space suitable for text overlay. '
+			. 'The color palette should be harmonious and contemporary. '
+			. 'Avoid clichés, stock photo aesthetics, and overly literal interpretations — aim for editorial quality. '
+			. 'Post title: "%s" — Post content: %s',
+			$title,
+			wp_trim_words( $content, 200, '' )
 		);
 	}
 

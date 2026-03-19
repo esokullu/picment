@@ -4,16 +4,12 @@
  *
  * Modes
  * -----
- *  trial  – one free image credit on new activation; uses our API key.
- *  byok   – user supplies their own OpenAI key; unlimited (rate-limited only).
- *  paid   – active Stripe subscription; uses our API key; monthly credit quota.
+ *  trial  – one free image credit on new activation; server handles generation.
+ *  byok   – user supplies their own OpenAI or fal.ai key; unlimited (rate-limited only).
+ *  paid   – active Stripe subscription via server; monthly credit quota.
  *
- * wp-config.php constants required for paid/trial image generation:
- *   PICMENT_AI_IMAGE_OUR_API_KEY           – your OpenAI key
- *   PICMENT_AI_IMAGE_STRIPE_SECRET_KEY
- *   PICMENT_AI_IMAGE_STRIPE_PUBLISHABLE_KEY
- *   PICMENT_AI_IMAGE_STRIPE_WEBHOOK_SECRET
- *   PICMENT_AI_IMAGE_PRICE_STARTER / PICMENT_AI_IMAGE_PRICE_PRO / PICMENT_AI_IMAGE_PRICE_AGENCY  – Stripe price IDs
+ * All API keys and Stripe credentials live on the server (.env).
+ * The plugin never needs wp-config.php constants for billing or generation.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -244,7 +240,12 @@ class Picment_AI_Image_Billing {
 	}
 
 	private function check_byok() {
-		$api_key = get_option( Picment_AI_Image::OPTION_API_KEY, '' );
+		$provider = get_option( Picment_AI_Image::OPTION_PROVIDER, 'openai' );
+		if ( 'fal' === $provider ) {
+			$api_key = get_option( Picment_AI_Image::OPTION_FAL_API_KEY, '' );
+		} else {
+			$api_key = get_option( Picment_AI_Image::OPTION_API_KEY, '' );
+		}
 		if ( empty( $api_key ) ) {
 			return $this->deny( 'no_byok_key' );
 		}
@@ -298,10 +299,6 @@ class Picment_AI_Image_Billing {
 		return array( 'ok' => false, 'reason' => $reason );
 	}
 
-	private function our_api_key() {
-		return defined( 'PICMENT_AI_IMAGE_OUR_API_KEY' ) ? PICMENT_AI_IMAGE_OUR_API_KEY : '';
-	}
-
 	/**
 	 * Quick non-rate-limited check for UI rendering.
 	 * Returns true if the current mode is potentially capable of generating.
@@ -310,6 +307,10 @@ class Picment_AI_Image_Billing {
 		$mode = $this->get_mode();
 		switch ( $mode ) {
 			case 'byok':
+				$provider = get_option( Picment_AI_Image::OPTION_PROVIDER, 'openai' );
+				if ( 'fal' === $provider ) {
+					return ! empty( get_option( Picment_AI_Image::OPTION_FAL_API_KEY, '' ) );
+				}
 				return ! empty( get_option( Picment_AI_Image::OPTION_API_KEY, '' ) );
 			case 'trial':
 				return (int) get_option( self::OPT_TRIAL_CREDITS, 0 ) > 0;
@@ -534,23 +535,45 @@ class Picment_AI_Image_Billing {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'picment-ai-featured-image-generator' ) ) );
 		}
 
-		$api_key = isset( $_POST['api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['api_key'] ) ) : '';
-		if ( empty( $api_key ) ) {
-			wp_send_json_error( array( 'message' => __( 'API key cannot be empty.', 'picment-ai-featured-image-generator' ) ) );
+		$provider  = isset( $_POST['provider'] ) ? sanitize_key( $_POST['provider'] ) : 'openai';
+		if ( ! in_array( $provider, array( 'openai', 'fal' ), true ) ) {
+			$provider = 'openai';
 		}
 
-		$api_key = trim( $api_key );
-		if ( strlen( $api_key ) > 200 ) {
-			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key.', 'picment-ai-featured-image-generator' ) ) );
-		}
-		if ( strpos( $api_key, 'sk-' ) !== 0 ) {
-			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key. It should start with “sk-”.', 'picment-ai-featured-image-generator' ) ) );
-		}
-		if ( preg_match( '/\s/', $api_key ) ) {
-			wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key (contains spaces/newlines).', 'picment-ai-featured-image-generator' ) ) );
+		if ( 'openai' === $provider ) {
+			$api_key = isset( $_POST['api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['api_key'] ) ) : '';
+			if ( empty( $api_key ) ) {
+				wp_send_json_error( array( 'message' => __( 'API key cannot be empty.', 'picment-ai-featured-image-generator' ) ) );
+			}
+			$api_key = trim( $api_key );
+			if ( strlen( $api_key ) > 200 ) {
+				wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key.', 'picment-ai-featured-image-generator' ) ) );
+			}
+			if ( strpos( $api_key, 'sk-' ) !== 0 ) {
+				wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key. It should start with “sk-”.', 'picment-ai-featured-image-generator' ) ) );
+			}
+			if ( preg_match( '/\s/', $api_key ) ) {
+				wp_send_json_error( array( 'message' => __( 'That does not look like a valid OpenAI API key (contains spaces/newlines).', 'picment-ai-featured-image-generator' ) ) );
+			}
+			update_option( Picment_AI_Image::OPTION_API_KEY, $api_key );
+		} else {
+			// fal.ai provider
+			$fal_key = isset( $_POST['fal_api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['fal_api_key'] ) ) : '';
+			if ( empty( $fal_key ) ) {
+				wp_send_json_error( array( 'message' => __( 'fal.ai API key cannot be empty.', 'picment-ai-featured-image-generator' ) ) );
+			}
+			$fal_key = trim( $fal_key );
+			update_option( Picment_AI_Image::OPTION_FAL_API_KEY, $fal_key );
+
+			$fal_model = isset( $_POST['fal_model'] ) ? sanitize_text_field( wp_unslash( $_POST['fal_model'] ) ) : 'fal-ai/flux-pro/v1.1';
+			$allowed_models = array( 'fal-ai/flux-pro/v1.1-ultra', 'fal-ai/flux-pro/v1.1', 'fal-ai/flux/dev' );
+			if ( ! in_array( $fal_model, $allowed_models, true ) ) {
+				$fal_model = 'fal-ai/flux-pro/v1.1';
+			}
+			update_option( Picment_AI_Image::OPTION_FAL_MODEL, $fal_model );
 		}
 
-		update_option( Picment_AI_Image::OPTION_API_KEY, $api_key );
+		update_option( Picment_AI_Image::OPTION_PROVIDER, $provider );
 		update_option( self::OPT_MODE, 'byok' );
 
 		wp_send_json_success( array( 'message' => __( 'Saved. Switched to BYOK mode.', 'picment-ai-featured-image-generator' ) ) );
@@ -727,15 +750,54 @@ class Picment_AI_Image_Billing {
 						<?php esc_html_e( 'Use Your Own API Key (Free)', 'picment-ai-featured-image-generator' ); ?>
 					</h2>
 					<p class="description">
-						<?php esc_html_e( 'Enter your OpenAI API key. We never see it — it stays in your WordPress database. No monthly charge from us.', 'picment-ai-featured-image-generator' ); ?>
+						<?php esc_html_e( 'Bring your own key — it stays in your WordPress database. No monthly charge from us.', 'picment-ai-featured-image-generator' ); ?>
 					</p>
-					<input type="password"
-					       id="picment-ai-image-byok-key"
-					       value="<?php echo esc_attr( $byok_key ); ?>"
-					       class="regular-text"
-					       autocomplete="new-password"
-					       placeholder="sk-proj-..." />
-					<p style="margin-top:8px;">
+
+					<?php
+					$current_provider = get_option( Picment_AI_Image::OPTION_PROVIDER, 'openai' );
+					$current_fal_model = get_option( Picment_AI_Image::OPTION_FAL_MODEL, 'fal-ai/flux-pro/v1.1' );
+					$fal_key = get_option( Picment_AI_Image::OPTION_FAL_API_KEY, '' );
+					?>
+
+					<table class="form-table" style="margin:0;">
+						<tr>
+							<th style="width:130px;padding:8px 0;"><?php esc_html_e( 'AI Provider', 'picment-ai-featured-image-generator' ); ?></th>
+							<td style="padding:8px 0;">
+								<label><input type="radio" name="picment_provider" class="picment-ai-image-provider-radio" value="openai" <?php checked( $current_provider, 'openai' ); ?> /> <?php esc_html_e( 'OpenAI DALL-E 3', 'picment-ai-featured-image-generator' ); ?></label><br>
+								<label><input type="radio" name="picment_provider" class="picment-ai-image-provider-radio" value="fal" <?php checked( $current_provider, 'fal' ); ?> /> <?php esc_html_e( 'fal.ai Flux Pro', 'picment-ai-featured-image-generator' ); ?></label>
+							</td>
+						</tr>
+						<tr id="picment-ai-image-openai-row">
+							<th style="padding:8px 0;"><?php esc_html_e( 'OpenAI Key', 'picment-ai-featured-image-generator' ); ?></th>
+							<td style="padding:8px 0;">
+								<input type="password" id="picment-ai-image-byok-key" value="<?php echo esc_attr( $byok_key ); ?>" class="regular-text" autocomplete="new-password" placeholder="sk-proj-..." />
+								<p class="description" style="margin-top:4px;">
+									<?php printf( wp_kses_post( __( 'Get a key at <a href="%s" target="_blank" rel="noopener noreferrer">platform.openai.com/api-keys</a>.', 'picment-ai-featured-image-generator' ) ), esc_url( 'https://platform.openai.com/api-keys' ) ); ?>
+								</p>
+							</td>
+						</tr>
+						<tr id="picment-ai-image-fal-model-row">
+							<th style="padding:8px 0;"><?php esc_html_e( 'fal.ai Model', 'picment-ai-featured-image-generator' ); ?></th>
+							<td style="padding:8px 0;">
+								<select id="picment-ai-image-fal-model">
+									<option value="fal-ai/flux-pro/v1.1-ultra" <?php selected( $current_fal_model, 'fal-ai/flux-pro/v1.1-ultra' ); ?>><?php esc_html_e( 'Flux Pro v1.1 Ultra (best quality, 2K)', 'picment-ai-featured-image-generator' ); ?></option>
+									<option value="fal-ai/flux-pro/v1.1" <?php selected( $current_fal_model, 'fal-ai/flux-pro/v1.1' ); ?>><?php esc_html_e( 'Flux Pro v1.1 (fast, 1MP)', 'picment-ai-featured-image-generator' ); ?></option>
+									<option value="fal-ai/flux/dev" <?php selected( $current_fal_model, 'fal-ai/flux/dev' ); ?>><?php esc_html_e( 'Flux Dev (budget)', 'picment-ai-featured-image-generator' ); ?></option>
+								</select>
+							</td>
+						</tr>
+						<tr id="picment-ai-image-fal-key-row">
+							<th style="padding:8px 0;"><?php esc_html_e( 'fal.ai Key', 'picment-ai-featured-image-generator' ); ?></th>
+							<td style="padding:8px 0;">
+								<input type="password" id="picment-ai-image-fal-key" value="<?php echo esc_attr( $fal_key ); ?>" class="regular-text" autocomplete="new-password" placeholder="xxxxxxxx-xxxx-xxxx-xxxx:xxxx..." />
+								<p class="description" style="margin-top:4px;">
+									<?php printf( wp_kses_post( __( 'Get a key at <a href="%s" target="_blank" rel="noopener noreferrer">fal.ai dashboard</a>.', 'picment-ai-featured-image-generator' ) ), esc_url( 'https://dashboard.fal.ai/keys' ) ); ?>
+								</p>
+							</td>
+						</tr>
+					</table>
+
+					<p style="margin-top:12px;">
 						<button type="button" class="button button-secondary" id="picment-ai-image-byok-save">
 							<?php esc_html_e( 'Save & Switch to BYOK', 'picment-ai-featured-image-generator' ); ?>
 						</button>
@@ -745,15 +807,6 @@ class Picment_AI_Image_Billing {
 						</button>
 						<?php endif; ?>
 						<span id="picment-ai-image-byok-msg" style="margin-left:8px;font-size:13px;"></span>
-					</p>
-					<p class="description">
-						<?php
-						printf(
-							/* translators: %s: OpenAI keys page URL */
-							wp_kses_post( __( 'Get a key at <a href="%s" target="_blank" rel="noopener noreferrer">platform.openai.com/api-keys</a>.', 'picment-ai-featured-image-generator' ) ),
-							esc_url( 'https://platform.openai.com/api-keys' )
-						);
-						?>
 					</p>
 					<?php if ( 'byok' === $mode ) : ?>
 					<p style="margin-top:8px;">

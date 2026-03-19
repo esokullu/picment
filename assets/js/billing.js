@@ -116,14 +116,41 @@
 	// Save BYOK API key
 	// -------------------------------------------------------------------------
 
+	// Toggle provider-specific fields visibility
+	function toggleProviderFields() {
+		var provider = $( 'input.picment-ai-image-provider-radio:checked' ).val() || 'openai';
+		if ( provider === 'fal' ) {
+			$( '#picment-ai-image-openai-row' ).hide();
+			$( '#picment-ai-image-fal-model-row, #picment-ai-image-fal-key-row' ).show();
+		} else {
+			$( '#picment-ai-image-openai-row' ).show();
+			$( '#picment-ai-image-fal-model-row, #picment-ai-image-fal-key-row' ).hide();
+		}
+	}
+	$( document ).on( 'change', '.picment-ai-image-provider-radio', toggleProviderFields );
+	toggleProviderFields();
+
 	$( '#picment-ai-image-byok-save' ).on( 'click', function () {
-		var key  = $.trim( $( '#picment-ai-image-byok-key' ).val() );
+		var provider = $( 'input.picment-ai-image-provider-radio:checked' ).val() || 'openai';
 		var $msg = $( '#picment-ai-image-byok-msg' );
 		var $btn = $( this );
+		var postData = { provider: provider };
 
-		if ( ! key ) {
-			$msg.html( '<span style="color:#dc3232;">Please enter an API key.</span>' );
-			return;
+		if ( provider === 'openai' ) {
+			var key = $.trim( $( '#picment-ai-image-byok-key' ).val() );
+			if ( ! key ) {
+				$msg.html( '<span style="color:#dc3232;">Please enter an OpenAI API key.</span>' );
+				return;
+			}
+			postData.api_key = key;
+		} else {
+			var falKey = $.trim( $( '#picment-ai-image-fal-key' ).val() );
+			if ( ! falKey ) {
+				$msg.html( '<span style="color:#dc3232;">Please enter a fal.ai API key.</span>' );
+				return;
+			}
+			postData.fal_api_key = falKey;
+			postData.fal_model = $( '#picment-ai-image-fal-model' ).val();
 		}
 
 		$btn.prop( 'disabled', true );
@@ -131,11 +158,10 @@
 
 		billingAjax(
 			'picment_ai_image_save_byok',
-			{ api_key: key },
+			postData,
 			function ( data ) {
 				$msg.html( '<span style="color:#46b450;">\u2713 ' + escHtml( data.message ) + '</span>' );
 				$btn.prop( 'disabled', false );
-				// Reload after short delay so the mode badge updates
 				setTimeout( function () { window.location.reload(); }, 1400 );
 			},
 			function ( msg ) {

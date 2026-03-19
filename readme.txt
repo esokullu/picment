@@ -4,7 +4,7 @@ Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        1.1.1
+Stable tag:        2.0.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,15 @@ Used to process subscription payments securely. Payment details are handled enti
 * **Privacy policy:** https://stripe.com/privacy
 
 == Changelog ==
+
+= 2.0.0 =
+* Added fal.ai Flux Pro as an alternative image generation provider
+* Significantly improved prompt engineering for higher quality images
+* New provider selection in Settings (OpenAI DALL-E 3 or fal.ai Flux Pro)
+* New fal.ai model selection: Flux Pro Ultra (2K), Flux Pro v1.1, Flux Dev
+* BYOK support for fal.ai API keys
+* Enhanced style modifiers with professional-grade prompts
+* Better default prompt with editorial quality focus
 
 = 1.1.1 =
 * Housekeeping: removed stray development files from plugin package.
