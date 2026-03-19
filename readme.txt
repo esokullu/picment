@@ -4,7 +4,7 @@ Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        1.1.0
+Stable tag:        1.1.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -151,6 +151,9 @@ Used to process subscription payments securely. Payment details are handled enti
 
 == Changelog ==
 
+= 1.1.1 =
+* Housekeeping: removed stray development files from plugin package.
+
 = 1.1.0 =
 * Added expanded image look styles: Photorealistic, Anime / Manga, Cinematic, Watercolor painting, and 3D render.
 * Added a new Custom look option with custom prompting instructions for user-defined visual style guidance.
@@ -176,6 +179,9 @@ Used to process subscription payments securely. Payment details are handled enti
 * Initial release with DALL-E 3 image generation, bulk generate, per-post control, BYOK mode, trial credit, and Starter/Pro/Agency subscription plans
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Minor housekeeping release.
 
 = 1.1.0 =
 Adds expanded style options and custom prompting controls.
