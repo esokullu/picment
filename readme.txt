@@ -4,7 +4,7 @@ Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        2.0.0
+Stable tag:        2.0.1
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -150,6 +150,12 @@ Used to process subscription payments securely. Payment details are handled enti
 * **Privacy policy:** https://stripe.com/privacy
 
 == Changelog ==
+
+= 2.0.1 =
+* Fixed site registration to use install_id as primary identity (prevents localhost collision)
+* Removed class-stripe.php — all Stripe handling is server-side
+* Removed stale wp-config.php constant references
+* Moved provider/fal.ai settings to Billing page
 
 = 2.0.0 =
 * Added fal.ai Flux Pro as an alternative image generation provider

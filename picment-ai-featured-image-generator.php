@@ -3,7 +3,7 @@
  * Plugin Name:       Picment AI Featured Image Generator
  * Plugin URI:        https://picment.xyz
  * Description:       Auto-generate stunning AI featured images using DALL-E 3 or fal.ai Flux Pro. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           2.0.0
+ * Version:           2.0.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PICMENT_AI_IMAGE_VERSION', '2.0.0' );
+define( 'PICMENT_AI_IMAGE_VERSION', '2.0.1' );
 define( 'PICMENT_AI_IMAGE_PLUGIN_FILE', __FILE__ );
 define( 'PICMENT_AI_IMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PICMENT_AI_IMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -1060,10 +1060,10 @@ class Picment_AI_Image {
 		$look    = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
 		$custom_look_prompt = get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' );
 		$allow   = (int) get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
-		$provider = get_option( self::OPTION_PROVIDER, 'openai' );
-		$fal_model = get_option( self::OPTION_FAL_MODEL, 'fal-ai/flux-pro/v1.1' );
 		$prompt  = $this->build_prompt( $post_title, $post_content );
 
+		// Don't send provider/model — let the server auto-route based on style.
+		// Provider is only relevant for BYOK mode (handled in run_generation).
 		$payload = array(
 			'install_id' => (string) get_option( Picment_AI_Image_Billing::OPT_INSTALL_ID, '' ),
 			'prompt'     => $prompt,
@@ -1073,8 +1073,6 @@ class Picment_AI_Image {
 			'look'       => $look,
 			'custom_look_prompt' => $custom_look_prompt,
 			'allow_text_logos' => $allow,
-			'provider'   => $provider,
-			'fal_model'  => $fal_model,
 		);
 
 		$response = wp_remote_post(
