@@ -3,7 +3,7 @@
  * Plugin Name:       Picment AI Featured Image Generator
  * Plugin URI:        https://picment.xyz
  * Description:       Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           1.0.5
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PICMENT_AI_IMAGE_VERSION', '1.0.5' );
+define( 'PICMENT_AI_IMAGE_VERSION', '1.1.0' );
 define( 'PICMENT_AI_IMAGE_PLUGIN_FILE', __FILE__ );
 define( 'PICMENT_AI_IMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PICMENT_AI_IMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -49,6 +49,7 @@ class Picment_AI_Image {
 	const OPTION_IMAGE_QUALITY   = 'picment_ai_image_image_quality';
 	const OPTION_IMAGE_STYLE     = 'picment_ai_image_image_style';
 	const OPTION_IMAGE_LOOK      = 'picment_ai_image_image_look';
+	const OPTION_IMAGE_LOOK_CUSTOM_PROMPT = 'picment_ai_image_image_look_custom_prompt';
 	const OPTION_ALLOW_TEXT_LOGOS = 'picment_ai_image_allow_text_logos';
 	const OPTION_AUTO_GENERATE   = 'picment_ai_image_auto_generate';
 	const OPTION_OVERWRITE       = 'picment_ai_image_overwrite_existing';
@@ -117,6 +118,9 @@ class Picment_AI_Image {
 		}
 		if ( false === get_option( self::OPTION_IMAGE_LOOK ) ) {
 			add_option( self::OPTION_IMAGE_LOOK, 'illustration' );
+		}
+		if ( false === get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT ) ) {
+			add_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' );
 		}
 		if ( false === get_option( self::OPTION_ALLOW_TEXT_LOGOS ) ) {
 			add_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
@@ -188,6 +192,7 @@ class Picment_AI_Image {
 			self::OPTION_IMAGE_QUALITY   => array( $this, 'sanitize_image_quality' ),
 			self::OPTION_IMAGE_STYLE     => array( $this, 'sanitize_image_style' ),
 			self::OPTION_IMAGE_LOOK      => array( $this, 'sanitize_image_look' ),
+			self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT => 'sanitize_textarea_field',
 			self::OPTION_ALLOW_TEXT_LOGOS => 'absint',
 			self::OPTION_AUTO_GENERATE   => 'absint',
 			self::OPTION_OVERWRITE       => 'absint',
@@ -207,6 +212,7 @@ class Picment_AI_Image {
 		add_settings_field( self::OPTION_IMAGE_QUALITY,   __( 'Image Quality', 'picment-ai-featured-image-generator' ),           array( $this, 'field_image_quality' ),   'picment-ai-image-settings', 'picment_ai_image_image' );
 		add_settings_field( self::OPTION_IMAGE_STYLE,     __( 'Image Style', 'picment-ai-featured-image-generator' ),             array( $this, 'field_image_style' ),     'picment-ai-image-settings', 'picment_ai_image_image' );
 		add_settings_field( self::OPTION_IMAGE_LOOK,      __( 'Image Look', 'picment-ai-featured-image-generator' ),              array( $this, 'field_image_look' ),      'picment-ai-image-settings', 'picment_ai_image_image' );
+		add_settings_field( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, __( 'Custom Look Instructions', 'picment-ai-featured-image-generator' ), array( $this, 'field_image_look_custom_prompt' ), 'picment-ai-image-settings', 'picment_ai_image_image' );
 		add_settings_field( self::OPTION_ALLOW_TEXT_LOGOS, __( 'Allow Text/Logos', 'picment-ai-featured-image-generator' ),       array( $this, 'field_allow_text_logos' ), 'picment-ai-image-settings', 'picment_ai_image_image' );
 		add_settings_field( self::OPTION_PROMPT_TEMPLATE, __( 'Custom Prompt Template', 'picment-ai-featured-image-generator' ),  array( $this, 'field_prompt_template' ), 'picment-ai-image-settings', 'picment_ai_image_image' );
 
@@ -228,7 +234,8 @@ class Picment_AI_Image {
 		return in_array( $v, array( 'vivid', 'natural' ), true ) ? $v : 'vivid';
 	}
 	public function sanitize_image_look( $v ) {
-		return in_array( $v, array( 'illustration', 'photorealistic' ), true ) ? $v : 'illustration';
+		$allowed = array_keys( $this->get_image_look_options() );
+		return in_array( $v, $allowed, true ) ? $v : 'illustration';
 	}
 
 	// Field renderers ----------------------------------------------------------
@@ -289,11 +296,39 @@ class Picment_AI_Image {
 
 	public function field_image_look() {
 		$val = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
+		$options = $this->get_image_look_options();
 		?>
-		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_LOOK ); ?>" value="illustration" <?php checked( $val, 'illustration' ); ?> />
-			<?php esc_html_e( 'Illustration (default)', 'picment-ai-featured-image-generator' ); ?></label><br>
-		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_LOOK ); ?>" value="photorealistic" <?php checked( $val, 'photorealistic' ); ?> />
-			<?php esc_html_e( 'Photorealistic', 'picment-ai-featured-image-generator' ); ?></label>
+		<?php foreach ( $options as $key => $label ) : ?>
+		<label>
+			<input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_LOOK ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $val, $key ); ?> />
+			<?php echo esc_html( $label ); ?>
+		</label><br>
+		<?php endforeach; ?>
+		<?php
+	}
+
+	private function get_image_look_options() {
+		return array(
+			'illustration'  => __( 'Illustration (default)', 'picment-ai-featured-image-generator' ),
+			'photorealistic' => __( 'Photorealistic', 'picment-ai-featured-image-generator' ),
+			'anime'         => __( 'Anime / Manga', 'picment-ai-featured-image-generator' ),
+			'cinematic'     => __( 'Cinematic', 'picment-ai-featured-image-generator' ),
+			'watercolor'    => __( 'Watercolor painting', 'picment-ai-featured-image-generator' ),
+			'three_d'       => __( '3D render', 'picment-ai-featured-image-generator' ),
+			'custom'        => __( 'Custom (use instructions below)', 'picment-ai-featured-image-generator' ),
+		);
+	}
+
+	public function field_image_look_custom_prompt() {
+		$val = get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' );
+		?>
+		<textarea name="<?php echo esc_attr( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT ); ?>"
+			  rows="3"
+			  class="large-text"
+			  placeholder="<?php echo esc_attr__( 'Example: semi-realistic editorial illustration, pastel palette, subtle grain', 'picment-ai-featured-image-generator' ); ?>"><?php echo esc_textarea( $val ); ?></textarea>
+		<p class="description">
+			<?php esc_html_e( 'Used only when Image Look is set to "Custom". This lets you define your own style direction.', 'picment-ai-featured-image-generator' ); ?>
+		</p>
 		<?php
 	}
 
@@ -810,8 +845,6 @@ class Picment_AI_Image {
 		$size    = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
 		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
 		$style   = get_option( self::OPTION_IMAGE_STYLE, 'natural' );
-		$look    = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
-		$allow   = (int) get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
 		$prompt  = $this->build_prompt( $post_title, $post_content );
 
 		$payload = wp_json_encode( array(
@@ -871,6 +904,7 @@ class Picment_AI_Image {
 		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
 		$style   = get_option( self::OPTION_IMAGE_STYLE, 'natural' );
 		$look    = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
+		$custom_look_prompt = get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' );
 		$allow   = (int) get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
 		$prompt  = $this->build_prompt( $post_title, $post_content );
 
@@ -881,6 +915,7 @@ class Picment_AI_Image {
 			'quality'    => $quality,
 			'style'      => $style,
 			'look'       => $look,
+			'custom_look_prompt' => $custom_look_prompt,
 			'allow_text_logos' => $allow,
 		);
 
@@ -1011,14 +1046,37 @@ class Picment_AI_Image {
 
 	private function apply_prompt_options( $prompt ) {
 		$look  = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
-		$look  = in_array( $look, array( 'illustration', 'photorealistic' ), true ) ? $look : 'illustration';
+		$custom_look_prompt = trim( (string) get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' ) );
+		$look_options = array_keys( $this->get_image_look_options() );
+		$look  = in_array( $look, $look_options, true ) ? $look : 'illustration';
 		$allow = (int) get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
 		$addon = '';
 
-		if ( 'photorealistic' === $look ) {
-			$addon .= ' Use a photorealistic editorial photography style with realistic lighting and a clean minimal background.';
-		} else {
-			$addon .= ' Use a clean, modern digital illustration style with soft lighting and a minimal background.';
+		switch ( $look ) {
+			case 'photorealistic':
+				$addon .= ' Use a photorealistic editorial photography style with realistic lighting and a clean minimal background.';
+				break;
+			case 'anime':
+				$addon .= ' Use a polished anime and manga-inspired style, expressive linework, vibrant color grading, and dynamic composition.';
+				break;
+			case 'cinematic':
+				$addon .= ' Use a cinematic visual style with dramatic lighting, rich depth, and a film-like color palette.';
+				break;
+			case 'watercolor':
+				$addon .= ' Use a hand-painted watercolor style with organic textures, soft brush blending, and subtle paper grain.';
+				break;
+			case 'three_d':
+				$addon .= ' Use a high-quality 3D render style with realistic materials, global illumination, and depth.';
+				break;
+			case 'custom':
+				if ( '' !== $custom_look_prompt ) {
+					$addon .= ' Use this custom visual style guidance: ' . $custom_look_prompt . '.';
+				}
+				break;
+			case 'illustration':
+			default:
+				$addon .= ' Use a clean, modern digital illustration style with soft lighting and a minimal background.';
+				break;
 		}
 
 		if ( $allow ) {

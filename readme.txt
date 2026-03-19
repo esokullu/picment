@@ -4,7 +4,7 @@ Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        1.0.5
+Stable tag:        1.1.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -151,6 +151,10 @@ Used to process subscription payments securely. Payment details are handled enti
 
 == Changelog ==
 
+= 1.1.0 =
+* Added expanded image look styles: Photorealistic, Anime / Manga, Cinematic, Watercolor painting, and 3D render.
+* Added a new Custom look option with custom prompting instructions for user-defined visual style guidance.
+
 = 1.0.5 =
 * Minor improvements and compatibility updates
 
@@ -173,5 +177,12 @@ Used to process subscription payments securely. Payment details are handled enti
 
 == Upgrade Notice ==
 
+= 1.1.0 =
+Adds expanded style options and custom prompting controls.
+
 = 1.0.5 =
 Minor improvements and compatibility updates.
+
+
+= 1.0.3 =
+Recommended update with security and stability improvements.
