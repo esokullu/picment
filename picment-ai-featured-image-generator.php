@@ -3,7 +3,7 @@
  * Plugin Name:       Picment AI Featured Image Generator
  * Plugin URI:        https://picment.xyz
  * Description:       Auto-generate stunning AI featured images using DALL-E 3 or fal.ai Flux Pro. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           2.0.1
+ * Version:           2.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PICMENT_AI_IMAGE_VERSION', '2.0.1' );
+define( 'PICMENT_AI_IMAGE_VERSION', '2.0.2' );
 define( 'PICMENT_AI_IMAGE_PLUGIN_FILE', __FILE__ );
 define( 'PICMENT_AI_IMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PICMENT_AI_IMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -932,6 +932,7 @@ class Picment_AI_Image {
 		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
 		$style   = get_option( self::OPTION_IMAGE_STYLE, 'natural' );
 		$prompt  = $this->build_prompt( $post_title, $post_content );
+		$prompt  = $this->apply_prompt_options( $prompt );
 
 		$payload = wp_json_encode( array(
 			'model'   => 'dall-e-3',
@@ -1189,8 +1190,6 @@ class Picment_AI_Image {
 			$prompt = $this->default_prompt( $post_title, $content );
 		}
 
-		$prompt = $this->apply_prompt_options( $prompt );
-
 		if ( function_exists( 'mb_substr' ) ) {
 			$prompt = (string) mb_substr( $prompt, 0, 4000 );
 		} else {
@@ -1205,7 +1204,6 @@ class Picment_AI_Image {
 		$custom_look_prompt = trim( (string) get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' ) );
 		$look_options = array_keys( $this->get_image_look_options() );
 		$look  = in_array( $look, $look_options, true ) ? $look : 'illustration';
-		$allow = (int) get_option( self::OPTION_ALLOW_TEXT_LOGOS, 0 );
 		$addon = '';
 
 		switch ( $look ) {
@@ -1235,11 +1233,9 @@ class Picment_AI_Image {
 				break;
 		}
 
-		if ( $allow ) {
-			$addon .= ' Text and logos are allowed.';
-		} else {
-			$addon .= ' CRITICAL: The image must contain absolutely NO text, NO letters, NO words, NO numbers, NO watermarks, NO logos, NO labels, NO captions, NO signatures, and NO written characters of any kind. The image should be purely visual with zero textual elements.';
-		}
+		// OpenAI DALL-E 3 always prohibits text regardless of the allow_text_logos setting,
+		// because it produces poor/garbled text. Text-in-image is handled by fal.ai via the server.
+		$addon .= ' CRITICAL: The image must contain absolutely NO text, NO letters, NO words, NO numbers, NO watermarks, NO logos, NO labels, NO captions, NO signatures, and NO written characters of any kind. The image should be purely visual with zero textual elements.';
 
 		return rtrim( (string) $prompt ) . $addon;
 	}

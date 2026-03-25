@@ -151,6 +151,12 @@ Used to process subscription payments securely. Payment details are handled enti
 
 == Changelog ==
 
+= 2.0.2 =
+* Fixed text/logo prohibition to apply to fal.ai in subscription mode (was previously ignored)
+* Fixed OpenAI BYOK mode to always prohibit text regardless of the "Allow text/logos" setting
+* When "Allow text/logos" is enabled, fal.ai now actively encourages clear text rendering; OpenAI always prohibits (poor text quality)
+* Fixed potential double-application of prompt modifiers in subscription mode
+
 = 2.0.1 =
 * Fixed site registration to use install_id as primary identity (prevents localhost collision)
 * Removed class-stripe.php — all Stripe handling is server-side
