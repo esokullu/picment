@@ -4,7 +4,7 @@ Tags:              ai, featured image, image generator, openai, dall-e
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        2.0.1
+Stable tag:        2.0.5
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Every time you publish a post, the plugin automatically generates a high-quality
 * **Bulk generate** — generate images for all existing posts from one admin page, with a real-time progress bar
 * **Per-post control** — enable or disable auto-generation per post via the sidebar metabox, and trigger generation manually with one click
 * **DALL-E 3 quality** — uses OpenAI's latest and most capable image generation model
-* **Configurable image settings** — choose size (landscape, square, portrait), quality (HD or standard), and style (vivid or natural)
+* **Performance-optimized image settings** — defaults use landscape output with standard quality for better featured-image fit and reasonable load speed
 * **Custom prompt template** — override the built-in prompt with your own using `{title}` and `{content}` placeholders
 * **Images saved to Media Library** — generated images are downloaded and stored in your WordPress media library
 * **Block & FSE theme compatible** — works with all modern WordPress themes
@@ -150,6 +150,19 @@ Used to process subscription payments securely. Payment details are handled enti
 * **Privacy policy:** https://stripe.com/privacy
 
 == Changelog ==
+
+= 2.0.5 =
+* Adjusted default size to 1792 × 1024 (landscape) for better WordPress featured-image placement
+* Kept default quality at standard for faster generation and lighter image payloads
+* Reduced size choices to two practical options: landscape (best fit) and square (faster fallback)
+
+= 2.0.4 =
+* Reduced default output size to 1024 × 1024 to improve front-end image load performance
+* Reduced default quality to standard for better generation speed and lower payload size
+* Simplified image size/quality choices to prioritize performance-focused output
+
+= 2.0.3 =
+* Fix stable tag mismatch that prevented WordPress.org from displaying the correct version
 
 = 2.0.2 =
 * Fixed text/logo prohibition to apply to fal.ai in subscription mode (was previously ignored)

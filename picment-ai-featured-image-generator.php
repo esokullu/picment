@@ -3,7 +3,7 @@
  * Plugin Name:       Picment AI Featured Image Generator
  * Plugin URI:        https://picment.xyz
  * Description:       Auto-generate stunning AI featured images using DALL-E 3 or fal.ai Flux Pro. Bulk generation, per-post control, BYOK mode, and subscription plans.
- * Version:           2.0.2
+ * Version:           2.0.5
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Barack Sokullu
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PICMENT_AI_IMAGE_VERSION', '2.0.2' );
+define( 'PICMENT_AI_IMAGE_VERSION', '2.0.5' );
 define( 'PICMENT_AI_IMAGE_PLUGIN_FILE', __FILE__ );
 define( 'PICMENT_AI_IMAGE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PICMENT_AI_IMAGE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -114,7 +114,7 @@ class Picment_AI_Image {
 			add_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
 		}
 		if ( false === get_option( self::OPTION_IMAGE_QUALITY ) ) {
-			add_option( self::OPTION_IMAGE_QUALITY, 'hd' );
+			add_option( self::OPTION_IMAGE_QUALITY, 'standard' );
 		}
 		if ( false === get_option( self::OPTION_IMAGE_STYLE ) ) {
 			add_option( self::OPTION_IMAGE_STYLE, 'natural' );
@@ -240,10 +240,10 @@ class Picment_AI_Image {
 	// Sanitizers ---------------------------------------------------------------
 
 	public function sanitize_image_size( $v ) {
-		return in_array( $v, array( '1024x1024', '1792x1024', '1024x1792' ), true ) ? $v : '1792x1024';
+		return in_array( $v, array( '1792x1024', '1024x1024' ), true ) ? $v : '1792x1024';
 	}
 	public function sanitize_image_quality( $v ) {
-		return in_array( $v, array( 'standard', 'hd' ), true ) ? $v : 'hd';
+		return in_array( $v, array( 'standard' ), true ) ? $v : 'standard';
 	}
 	public function sanitize_image_style( $v ) {
 		return in_array( $v, array( 'vivid', 'natural' ), true ) ? $v : 'vivid';
@@ -285,9 +285,8 @@ class Picment_AI_Image {
 	public function field_image_size() {
 		$val = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
 		$opts = array(
-			'1792x1024' => __( '1792 × 1024 — Landscape (recommended for blog posts)', 'picment-ai-featured-image-generator' ),
-			'1024x1024' => __( '1024 × 1024 — Square', 'picment-ai-featured-image-generator' ),
-			'1024x1792' => __( '1024 × 1792 — Portrait', 'picment-ai-featured-image-generator' ),
+			'1792x1024' => __( '1792 × 1024 — Landscape (recommended for featured images)', 'picment-ai-featured-image-generator' ),
+			'1024x1024' => __( '1024 × 1024 — Square (faster, but may crop awkwardly in some themes)', 'picment-ai-featured-image-generator' ),
 		);
 		echo '<select name="' . esc_attr( self::OPTION_IMAGE_SIZE ) . '">';
 		foreach ( $opts as $k => $label ) {
@@ -297,12 +296,10 @@ class Picment_AI_Image {
 	}
 
 	public function field_image_quality() {
-		$val = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
+		$val = get_option( self::OPTION_IMAGE_QUALITY, 'standard' );
 		?>
-		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_QUALITY ); ?>" value="hd" <?php checked( $val, 'hd' ); ?> />
-			<?php esc_html_e( 'HD — higher detail, higher cost', 'picment-ai-featured-image-generator' ); ?></label><br>
 		<label><input type="radio" name="<?php echo esc_attr( self::OPTION_IMAGE_QUALITY ); ?>" value="standard" <?php checked( $val, 'standard' ); ?> />
-			<?php esc_html_e( 'Standard', 'picment-ai-featured-image-generator' ); ?></label>
+			<?php esc_html_e( 'Standard — optimized for performance and faster page load', 'picment-ai-featured-image-generator' ); ?></label>
 		<?php
 	}
 
@@ -929,7 +926,7 @@ class Picment_AI_Image {
 		}
 
 		$size    = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
-		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
+		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'standard' );
 		$style   = get_option( self::OPTION_IMAGE_STYLE, 'natural' );
 		$prompt  = $this->build_prompt( $post_title, $post_content );
 		$prompt  = $this->apply_prompt_options( $prompt );
@@ -996,7 +993,6 @@ class Picment_AI_Image {
 		$size_map = array(
 			'1792x1024' => 'landscape_16_9',
 			'1024x1024' => 'square_hd',
-			'1024x1792' => 'portrait_4_3',
 		);
 		$fal_size = isset( $size_map[ $size ] ) ? $size_map[ $size ] : 'landscape_16_9';
 
@@ -1056,7 +1052,7 @@ class Picment_AI_Image {
 		}
 
 		$size    = get_option( self::OPTION_IMAGE_SIZE, '1792x1024' );
-		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'hd' );
+		$quality = get_option( self::OPTION_IMAGE_QUALITY, 'standard' );
 		$style   = get_option( self::OPTION_IMAGE_STYLE, 'natural' );
 		$look    = get_option( self::OPTION_IMAGE_LOOK, 'illustration' );
 		$custom_look_prompt = get_option( self::OPTION_IMAGE_LOOK_CUSTOM_PROMPT, '' );
