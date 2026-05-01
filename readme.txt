@@ -1,18 +1,18 @@
 === Picment AI Featured Image Generator ===
 Contributors:      baracksokullu
-Tags:              ai, featured image, image generator, openai, dall-e
+Tags:              ai, featured image, image generator, openai dall-e, fal.ai flux
 Requires at least: 6.0
 Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        2.0.5
+Stable tag:        2.0.6
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Auto-generate stunning DALL-E 3 AI featured images for every WordPress post. Bulk generation, per-post control, BYOK mode, and subscription plans.
+Auto-generate stunning AI featured images with OpenAI DALL-E 3 or fal.ai Flux Pro. Bulk generation, per-post control, BYOK mode, and subscription plans.
 
 == Description ==
 
-**Picment AI Featured Image Generator** uses OpenAI's DALL-E 3 model to automatically create beautiful, relevant featured images for your blog posts — saving you time and keeping your content visually consistent.
+**Picment AI Featured Image Generator** uses OpenAI's DALL-E 3 *or* fal.ai's Flux Pro models to automatically create beautiful, relevant featured images for your blog posts — saving you time and keeping your content visually consistent. Pick the provider that best fits your style, budget, and quality needs.
 
 = How It Works =
 
@@ -23,17 +23,19 @@ Every time you publish a post, the plugin automatically generates a high-quality
 * **Auto-generate on publish** — a featured image is created automatically when you publish a new post
 * **Bulk generate** — generate images for all existing posts from one admin page, with a real-time progress bar
 * **Per-post control** — enable or disable auto-generation per post via the sidebar metabox, and trigger generation manually with one click
-* **DALL-E 3 quality** — uses OpenAI's latest and most capable image generation model
+* **Two AI providers to choose from** — OpenAI DALL-E 3 *or* fal.ai Flux Pro (Flux Pro v1.1 Ultra 2K, Flux Pro v1.1, or Flux Dev)
+* **DALL-E 3 quality** — OpenAI's flagship model for clean, on-prompt illustrations
+* **fal.ai Flux Pro** — photorealistic editorial-grade output, with optional sharp text rendering when "Allow text/logos" is enabled
 * **Performance-optimized image settings** — defaults use landscape output with standard quality for better featured-image fit and reasonable load speed
 * **Custom prompt template** — override the built-in prompt with your own using `{title}` and `{content}` placeholders
 * **Images saved to Media Library** — generated images are downloaded and stored in your WordPress media library
 * **Block & FSE theme compatible** — works with all modern WordPress themes
-* **BYOK mode** — use your own OpenAI API key (free, rate-limited to 10 requests/min)
+* **BYOK mode** — bring your own OpenAI *or* fal.ai API key (free, rate-limited to 10 requests/min)
 * **Subscription plans** — buy monthly credits (Starter, Pro, Agency) for high-volume use without managing your own API key
 
 = Billing Modes =
 
-**Bring Your Own Key (BYOK)** — Enter your own OpenAI API key. All API calls go directly from your server to OpenAI. You pay OpenAI directly. Rate-limited to 10 requests/minute.
+**Bring Your Own Key (BYOK)** — Enter your own OpenAI *or* fal.ai API key. All API calls go directly from your server to the chosen provider, who you pay directly. Rate-limited to 10 requests/minute.
 
 **Trial** — New installs get 1 free credit to test the plugin with zero configuration.
 
@@ -47,7 +49,7 @@ Every time you publish a post, the plugin automatically generates a high-quality
 
 * WordPress 6.0+ with PHP 7.4+
 * A server with outbound HTTPS access
-* For BYOK mode: an [OpenAI API key](https://platform.openai.com/api-keys) with access to the `dall-e-3` model
+* For BYOK mode: an [OpenAI API key](https://platform.openai.com/api-keys) with access to the `dall-e-3` model, *or* a [fal.ai API key](https://dashboard.fal.ai/keys) with access to a Flux Pro model
 
 = Getting Started =
 
@@ -57,10 +59,10 @@ Every time you publish a post, the plugin automatically generates a high-quality
 2. Go to **Picment → Billing** and subscribe to a plan
 3. Publish a post — a featured image will be generated automatically
 
-**Option B — Bring your own OpenAI key:**
+**Option B — Bring your own OpenAI or fal.ai key:**
 
 1. Install and activate the plugin
-2. Go to **Picment → Billing** and enter your OpenAI API key under "Bring Your Own Key"
+2. Go to **Picment → Billing**, choose your provider (OpenAI DALL-E 3 or fal.ai Flux Pro) and enter the matching API key under "Bring Your Own Key"
 3. Publish a post — a featured image will be generated automatically
 
 **Option C — Try it free:**
@@ -82,7 +84,18 @@ Yes. Featured image support is detected using the standard WordPress `current_th
 
 = What is BYOK mode? =
 
-BYOK stands for "Bring Your Own Key." In this mode, you enter your own OpenAI API key. All image generation requests go directly from your WordPress server to OpenAI — we never see your key or your images. You pay OpenAI directly at their standard DALL-E 3 pricing.
+BYOK stands for "Bring Your Own Key." In this mode, you enter your own OpenAI API key *or* your own fal.ai API key. All image generation requests go directly from your WordPress server to the chosen provider — we never see your key or your images. You pay the provider directly at their standard pricing.
+
+= Should I pick OpenAI DALL-E 3 or fal.ai Flux Pro? =
+
+Both are supported as first-class providers — pick whichever fits your taste, budget, and use case:
+
+* **OpenAI DALL-E 3** — strong at clean illustrations and stylized concepts. Text inside images is always prohibited (DALL-E 3 renders it poorly).
+* **fal.ai Flux Pro v1.1 Ultra** — best photorealistic output at 2K resolution.
+* **fal.ai Flux Pro v1.1** — fast, ~1MP, great quality-per-dollar.
+* **fal.ai Flux Dev** — budget-friendly fal.ai option for high volume.
+
+When the **Allow text/logos** setting is enabled, fal.ai actively renders crisp text on-image; OpenAI ignores this setting and stays text-free.
 
 = What is a credit? =
 
@@ -98,7 +111,7 @@ Yes — go to **Picment → Settings** and enter your own prompt template. Use `
 
 = Where are images stored? =
 
-Images are downloaded from OpenAI and saved to your WordPress Media Library. They are not hosted externally.
+Images are downloaded from the active provider (OpenAI or fal.ai) and saved to your WordPress Media Library. They are not hosted externally.
 
 = Will it overwrite my existing featured images? =
 
@@ -125,12 +138,21 @@ This plugin connects to the following external services:
 
 = OpenAI (DALL-E 3) =
 
-Used to generate featured images from your post title and content when BYOK (Bring Your Own Key) mode is active.
+Used to generate featured images from your post title and content when BYOK (Bring Your Own Key) mode is active *and* OpenAI is the selected provider.
 
 * **Data sent:** post title and a content excerpt derived from the post body
-* **When:** each time an image is generated in BYOK mode
+* **When:** each time an image is generated in BYOK mode with OpenAI selected
 * **Terms of use:** https://openai.com/policies/terms-of-use
 * **Privacy policy:** https://openai.com/policies/privacy-policy
+
+= fal.ai (Flux Pro) =
+
+Used to generate featured images from your post title and content when BYOK (Bring Your Own Key) mode is active *and* fal.ai is the selected provider.
+
+* **Data sent:** post title and a content excerpt derived from the post body
+* **When:** each time an image is generated in BYOK mode with fal.ai selected
+* **Terms of use:** https://fal.ai/terms
+* **Privacy policy:** https://fal.ai/privacy
 
 = Picment Image Service =
 
@@ -150,6 +172,10 @@ Used to process subscription payments securely. Payment details are handled enti
 * **Privacy policy:** https://stripe.com/privacy
 
 == Changelog ==
+
+= 2.0.6 =
+* Documentation: surfaced fal.ai Flux Pro support across the plugin listing — features, BYOK requirements, getting-started instructions, FAQ, and external services
+* No functional code changes
 
 = 2.0.5 =
 * Adjusted default size to 1792 × 1024 (landscape) for better WordPress featured-image placement
